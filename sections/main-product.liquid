@@ -262,6 +262,30 @@
             </div>
           {%- when 'tabs' -%}
             <div class="tab-customize">
+              {% style %}
+                .tabcontent-cus {
+                  display: none;
+                  padding: 6px 12px;
+                  {% if block.settings.border_on %}
+                  border: 1px solid #ccc;
+                  border-top: none;
+                  {% endif %}
+                }
+
+                .tab-customize button.active {
+                  background-color: {{ block.settings.btn_bk_active }};
+                }
+                .tab-button__image {
+                  width: 100%;
+                  height: 100%;
+                  max-width: {{ block.settings.tab_icon_size }}rem;
+                  max-height: {{ block.settings.tab_icon_size }}rem;  
+                }
+
+                .tablinks-cus:hover .tab-button__image {
+                  filter: opacity(0.4) drop-shadow(0 0 0 {{ block.settings.icon_color_hover }}); 
+                }
+              {% endstyle %}
               {% assign default_img = 'aya-pic.webp' | asset_url %}
               <button class="tablinks-cus" onclick="openTab(event, 'tab-1')" id="tab-cus-active" > <img class="tab-button__image" src="{% if block.settings.tab1_image != blank %} {{ block.settings.tab1_image | img_url: 'medium'}} {% else %} {{ default_img }} {% endif %}" alt=""> </button>
               <button class="tablinks-cus" onclick="openTab(event, 'tab-2')"> <img class="tab-button__image" src="{% if block.settings.tab1_image != blank %} {{ block.settings.tab2_image | img_url: 'medium'}} {% else %} {{ default_img }} {% endif %}" alt=""> </button>
@@ -269,20 +293,21 @@
             </div>
             <!-- Tab content -->
             <div id="tab-1" class="tabcontent-cus animate-opacity" style="display: block;">
-              {{ product.description }}
+              {{ block.settings.tab1_content }}
             </div>
             <div id="tab-2" class="tabcontent-cus animate-opacity">
-              {{ pages.shipping.content }}
+              {{ block.settings.tab2_content }}
             </div>
             <div id="tab-3" class="tabcontent-cus animate-opacity">
-              {{ pages.policy.content }}
+              {{ block.settings.tab3_content }}
             </div>
             <style>
             .tab-customize {
               display: flex;
               overflow: hidden;
-              border: 1px solid #ccc;
-              background-color: #f1f1f1;
+            }
+            .tablinks-cus {
+              border-radius: .4rem .4rem 0 0;
             }
             .tab-customize button {
               width: 100%;
@@ -291,20 +316,8 @@
               border: none;
               outline: none;
               cursor: pointer;
-              padding: 14px 16px;
+              padding: .5rem;
               transition: 0.3s;
-            }
-            .tab-customize button:hover {
-              background-color: #ddd;
-            }
-            .tab-customize button.active {
-              background-color: #ccc;
-            }
-            .tabcontent-cus {
-              display: none;
-              padding: 6px 12px;
-              border: 1px solid #ccc;
-              border-top: none;
             }
             </style>
           {%- when 'quantity_selector' -%}
@@ -726,11 +739,45 @@
       "limit": 1,
       "settings": [
         {
+          "type": "checkbox",
+          "id": "border_on",
+          "label": "Border on",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "tab_icon_size",
+          "min": 2,
+          "max": 5,
+          "step": 0.5,
+          "unit": "rem",
+          "label": "Icon size",
+          "default": 3
+        },      
+        {
+          "type": "color",
+          "id": "btn_bk_active",
+          "label": "Background color when active",
+          "default": "#F4F4F4"
+        },
+        {
+          "type": "color",
+          "id": "icon_color_hover",
+          "label": "Icon color on hover",
+          "default": "#1E90FF"
+        },
+        {
           "type": "image_picker",
           "id": "tab1_image",
           "label": "Tab 1 image",
           "info": "Image for tab button"
         },
+        {
+          "type": "richtext",
+          "id": "tab1_content",
+          "label": "tab1 content",
+          "default": "<p>tab1 content</p>"
+        },        
         {
           "type": "image_picker",
           "id": "tab2_image",
@@ -738,10 +785,22 @@
           "info": "Image for tab button"
         },
         {
+          "type": "richtext",
+          "id": "tab2_content",
+          "label": "tab2 content",
+          "default": "<p>tab2 content</p>"
+        }, 
+        {
           "type": "image_picker",
           "id": "tab3_image",
           "label": "Tab 3 image",
           "info": "Image for tab button"
+        },
+        {
+          "type": "richtext",
+          "id": "tab3_content",
+          "label": "tab3 content",
+          "default": "<p>tab3 content</p>"
         }
       ]
     },

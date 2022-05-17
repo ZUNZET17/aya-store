@@ -28,7 +28,8 @@
           "settings": { "show_dynamic_checkout": false }
         },
         "tabs": {
-          "type": "tabs"
+          "type": "tabs",
+          "settings": {}
         },
         "description": {
           "type": "description",
