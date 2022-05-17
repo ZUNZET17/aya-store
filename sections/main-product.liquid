@@ -266,6 +266,7 @@
                 .tabcontent-cus {
                   display: none;
                   padding: 6px 12px;
+                  font-size: {{ block.settings.tab_content_size }}rem;
                   {% if block.settings.border_on %}
                   border: 1px solid #ccc;
                   border-top: none;
@@ -293,12 +294,15 @@
             </div>
             <!-- Tab content -->
             <div id="tab-1" class="tabcontent-cus animate-opacity" style="display: block;">
+              <p class="tabcontent__title">{{ block.settings.tab1_title }}</p>
               {{ block.settings.tab1_content }}
             </div>
             <div id="tab-2" class="tabcontent-cus animate-opacity">
+              <p class="tabcontent__title">{{ block.settings.tab2_title }}</p>
               {{ block.settings.tab2_content }}
             </div>
             <div id="tab-3" class="tabcontent-cus animate-opacity">
+              <p class="tabcontent__title">{{ block.settings.tab3_title }}</p>
               {{ block.settings.tab3_content }}
             </div>
             <style>
@@ -318,6 +322,11 @@
               cursor: pointer;
               padding: .5rem;
               transition: 0.3s;
+            }
+            .tabcontent__title {
+              text-align: center;
+              width: 100%;
+              font-weight: bold;
             }
             </style>
           {%- when 'quantity_selector' -%}
@@ -753,7 +762,17 @@
           "unit": "rem",
           "label": "Icon size",
           "default": 3
-        },      
+        },
+        {
+          "type": "range",
+          "id": "tab_content_size",
+          "min": 1,
+          "max": 2,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab content font size",
+          "default": 1.6
+        },       
         {
           "type": "color",
           "id": "btn_bk_active",
@@ -773,6 +792,12 @@
           "info": "Image for tab button"
         },
         {
+          "type": "text",
+          "id": "tab1_title",
+          "label": "Tab 1 title",
+          "default": "Tab 1 title"
+        },
+        {
           "type": "richtext",
           "id": "tab1_content",
           "label": "tab1 content",
@@ -785,6 +810,12 @@
           "info": "Image for tab button"
         },
         {
+          "type": "text",
+          "id": "tab2_title",
+          "label": "Tab 2 title",
+          "default": "Tab 2 title"
+        },
+        {
           "type": "richtext",
           "id": "tab2_content",
           "label": "tab2 content",
@@ -795,6 +826,12 @@
           "id": "tab3_image",
           "label": "Tab 3 image",
           "info": "Image for tab button"
+        },
+        {
+          "type": "text",
+          "id": "tab3_title",
+          "label": "Tab 3 title",
+          "default": "Tab 3 title"
         },
         {
           "type": "richtext",
