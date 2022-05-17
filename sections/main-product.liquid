@@ -260,6 +260,53 @@
                 </div>
               </details>
             </div>
+          {%- when 'tabs' -%}
+            <div class="tab-customize">
+              {% assign default_img = 'aya-pic.webp' | asset_url %}
+              <button class="tablinks-cus" onclick="openTab(event, 'tab-1')" id="tab-cus-active" > <img class="tab-button__image" src="{% if block.settings.tab1_image != blank %} {{ block.settings.tab1_image | img_url: 'medium'}} {% else %} {{ default_img }} {% endif %}" alt=""> </button>
+              <button class="tablinks-cus" onclick="openTab(event, 'tab-2')"> <img class="tab-button__image" src="{% if block.settings.tab1_image != blank %} {{ block.settings.tab2_image | img_url: 'medium'}} {% else %} {{ default_img }} {% endif %}" alt=""> </button>
+              <button class="tablinks-cus" onclick="openTab(event, 'tab-3')"> <img class="tab-button__image" src="{% if block.settings.tab1_image != blank %} {{ block.settings.tab3_image | img_url: 'medium'}} {% else %} {{ default_img }} {% endif %}" alt=""> </button>
+            </div>
+            <!-- Tab content -->
+            <div id="tab-1" class="tabcontent-cus animate-opacity" style="display: block;">
+              {{ product.description }}
+            </div>
+            <div id="tab-2" class="tabcontent-cus animate-opacity">
+              {{ pages.shipping.content }}
+            </div>
+            <div id="tab-3" class="tabcontent-cus animate-opacity">
+              {{ pages.policy.content }}
+            </div>
+            <style>
+            .tab-customize {
+              display: flex;
+              overflow: hidden;
+              border: 1px solid #ccc;
+              background-color: #f1f1f1;
+            }
+            .tab-customize button {
+              width: 100%;
+              background-color: inherit;
+              float: left;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              padding: 14px 16px;
+              transition: 0.3s;
+            }
+            .tab-customize button:hover {
+              background-color: #ddd;
+            }
+            .tab-customize button.active {
+              background-color: #ccc;
+            }
+            .tabcontent-cus {
+              display: none;
+              padding: 6px 12px;
+              border: 1px solid #ccc;
+              border-top: none;
+            }
+            </style>
           {%- when 'quantity_selector' -%}
             <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
               <label class="form__label" for="Quantity-{{ section.id }}">
@@ -672,6 +719,31 @@
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
       "limit": 1
+    },
+    {
+      "type": "tabs",
+      "name": "tabs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "tab1_image",
+          "label": "Tab 1 image",
+          "info": "Image for tab button"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab2_image",
+          "label": "Tab 2 image",
+          "info": "Image for tab button"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab3_image",
+          "label": "Tab 3 image",
+          "info": "Image for tab button"
+        }
+      ]
     },
     {
       "type": "quantity_selector",
