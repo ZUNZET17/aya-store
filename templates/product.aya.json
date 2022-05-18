@@ -11,7 +11,7 @@
       }
     },
     "main": {
-      "type": "main-product",
+      "type": "main-product-aya",
       "blocks": {
         "title": {
           "type": "title",
@@ -302,4 +302,3 @@
     "shogun-below"
   ]
 }
-
