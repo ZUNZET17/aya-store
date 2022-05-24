@@ -48,6 +48,23 @@
             "show_dynamic_checkout": false
           }
         },
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061": {
+          "type": "tabs",
+          "disabled": true,
+          "settings": {
+            "border_on": false,
+            "tab_icon_size": 3,
+            "tab_content_size": 1.6,
+            "btn_bk_active": "#F4F4F4",
+            "icon_color_hover": "#1E90FF",
+            "tab1_title": "Tab 1 title",
+            "tab1_content": "<p>tab1 content<\/p>",
+            "tab2_title": "Tab 2 title",
+            "tab2_content": "<p>tab2 content<\/p>",
+            "tab3_title": "Tab 3 title",
+            "tab3_content": "<p>tab3 content<\/p>"
+          }
+        },
         "description": {
           "type": "description",
           "disabled": true,
@@ -98,6 +115,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061",
         "description",
         "collapsible-row-0",
         "collapsible-row-3",
