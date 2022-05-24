@@ -50,61 +50,18 @@
         },
         "9b5a5fe5-504d-4e9b-b678-db5e717ea061": {
           "type": "tabs",
-          "disabled": true,
           "settings": {
             "border_on": false,
             "tab_icon_size": 3,
             "tab_content_size": 1.6,
-            "btn_bk_active": "#F4F4F4",
-            "icon_color_hover": "#1E90FF",
+            "btn_bk_active": "#f4f4f4",
+            "icon_color_hover": "#1e90ff",
             "tab1_title": "Tab 1 title",
             "tab1_content": "<p>tab1 content<\/p>",
             "tab2_title": "Tab 2 title",
             "tab2_content": "<p>tab2 content<\/p>",
             "tab3_title": "Tab 3 title",
             "tab3_content": "<p>tab3 content<\/p>"
-          }
-        },
-        "description": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
-          }
-        },
-        "collapsible-row-0": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "<p>Soft & Breathable 100% Organic Cotton Panties.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Sustainable Materials & Care",
-            "icon": "none",
-            "content": "<p>Our {{ product.title }} is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread: <\/strong>100% Cotton<\/p><p><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes: <\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing: <\/strong>OEKO-TEX Certified<\/p><p><\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
-            "page": ""
-          }
-        },
-        "dd229e45-2bc5-4b2d-b844-2a1e7ec681a2": {
-          "type": "popup",
-          "disabled": true,
-          "settings": {
-            "text": "Free Returns",
-            "page": ""
           }
         }
       },
@@ -115,12 +72,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "9b5a5fe5-504d-4e9b-b678-db5e717ea061",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-3",
-        "collapsible-row-1",
-        "dd229e45-2bc5-4b2d-b844-2a1e7ec681a2"
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -243,52 +195,9 @@
         "padding_bottom": 36
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
-      "disabled": true,
-      "blocks": {
-        "column-0": {
-          "type": "column",
-          "settings": {
-            "title": "Free Shipping",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column-1": {
-          "type": "column",
-          "settings": {
-            "title": "Hassle-Free Exchanges",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column-0",
-        "column-1"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "background-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "shogun-below": {
       "type": "shogun-below",
+      "disabled": true,
       "settings": {
       }
     },
@@ -305,7 +214,6 @@
     "product-recommendations",
     "image-with-text",
     "1650557036d5bc88df",
-    "multicolumn",
     "shogun-below",
     "pf-ed64b932"
   ]
