@@ -93,12 +93,12 @@
                           {{ 'products.product.price.sale_price' | t }}
                         </span>
                         <strong class="cart-item__final-price product-option">
-                          <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_price" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.final_price | money }}
+                          {{ item.final_price | money }}
                         </strong>
                       </div>
                     {%- else -%}
                       <div class="product-option">
-                        <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_price" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.original_price | money }}
+                        {{ item.original_price | money }}
                       </div>
                     {%- endif -%}
 
@@ -161,19 +161,19 @@
                           </dt>
                           <dd>
                             <s class="cart-item__old-price price price--end">
-                              <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.original_line_price | money }}
+                              {{ item.original_line_price | money }}
                             </s>
                           </dd>
                           <dt class="visually-hidden">
                             {{ 'products.product.price.sale_price' | t }}
                           </dt>
                           <dd class="price price--end">
-                            <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.final_line_price | money }}
+                            {{ item.final_line_price | money }}
                           </dd>
                         </dl>
                       {%- else -%}
                         <span class="price price--end">
-                          <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.original_line_price | money }}
+                          {{ item.original_line_price | money }}
                         </span>
                       {%- endif -%}
 
@@ -251,19 +251,19 @@
                           </dt>
                           <dd>
                             <s class="cart-item__old-price price price--end">
-                              <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.original_line_price | money }}
+                              {{ item.original_line_price | money }}
                             </s>
                           </dd>
                           <dt class="visually-hidden">
                             {{ 'products.product.price.sale_price' | t }}
                           </dt>
                           <dd class="price price--end">
-                            <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.final_line_price | money }}
+                            {{ item.final_line_price | money }}
                           </dd>
                         </dl>
                       {%- else -%}
                         <span class="price price--end">
-                          <span class="Makebecool-theme-hook-DO-NOT-DELETE makebecool_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>{{ item.original_line_price | money }}
+                          {{ item.original_line_price | money }}
                         </span>
                       {%- endif -%}
 
