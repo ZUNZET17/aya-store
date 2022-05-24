@@ -131,25 +131,26 @@
               	  {% if configs.isOptionname %}
                   <label for="pa_{{ option | handleize }}" class="name-option" data-name="{{ option }}">{{ option }}<span class="name-variant"></span></label>
               	  {% endif %}
-                  <ul class="ul-swatches-list value g-variant-color {% if configs.carousel == "enable" %}gvowl-carousel owl-carousel{% endif %}">
+              {% if configs.carousel == "enable" %}<div class="glider-container">{% endif %}
+                  <ul class="ul-swatches-list value g-variant-color {% if configs.carousel == "enable" %}glider{% endif %}">
                     {% assign i = 0 %}
                     {% for variant in product.variants %}
                     {% assign value_available = variant.options[option_index] %}
-                    {% unless values_available contains value_available or variant.available == false %}
-                    {% assign values_available = values_available | append: "," | append: value_available %}
-                    {% assign values_available = values_available | split: "," %}
+                    {% assign value_available_text = "&_&" | append: value_available %}
+                    {% unless values_available contains value_available_text or variant.available == false %}
+                    {% assign values_available = values_available | append: "&_&" | append: value_available %}
                     {% endunless %}
                     {% endfor %}
                     
                     {% for variant in product.variants %}
                     {% assign value = variant.options[option_index] %}
+                    {% assign valuetext = "&_&" | append: value %}
                     {% assign option_value = option | append: "-" | append: value %}
-                    {% unless values contains value %}
+                    {% unless values contains valuetext %}
                     {% assign i = i | plus: 1 %}
-                    {% assign values = values | append: "," | append: value %}
-                    {% assign values = values | split: "," %}
+                    {% assign values = values | append: "&_&" | append: value %}
                     {% if i <= configs.limit_variant  or configs.show_limit_variant == false %}
-                    <li productId = "{{ product.id }}" {% if variant.featured_image.src %}productImage = {{ variant.featured_image.src | img_url: "grande" }}{% endif %} class="swatches-options {{ class_stylesoldout }} {% if values_available contains value %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
+                    <li productId = "{{ product.id }}" {% if variant.featured_image.src %}productImage = {{ variant.featured_image.src | img_url: "grande" }}{% endif %} class="swatches-options {{ class_stylesoldout }} {% if values_available contains valuetext %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
                       <input  id="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}-{{ product.id }}" value="{{ value | escape }}" {% if forloop.first %} checked{% endif %} />
                       <label for="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" class="swatch-anchor swatch-other
                               {% if configs.displaySelectType[option_value] == 3 or configs.displaySelectType[option_value] == 4 %}{{ class_hover_effects_zoom }}{% endif %}
@@ -159,8 +160,8 @@
                               {% if configs.displayColors[option_value] %}background-color: {{ configs.displayColors[option_value] }}; font-size: 0;
                               {% if configs.displaySelectType[option_value] == 2 %}{% if configs.displayColors2[option_value] %}background: linear-gradient( -45deg, {{ configs.displayColors2[option_value] }} 50%, {{ configs.displayColors[option_value] }} 50% );{% endif %}{% endif %}{% endif %}
                               {% if configs.displaySelectType[option_value] == 3 or configs.displaySelectType[option_value] == 4 %}{% if configs.displayColorsImage[option_value] or configs.displayColorsImageUrl[option_value] %}font-size: 0; background-size: contain; background-position: center; background-repeat: no-repeat;{% endif %}{% endif %}
-                              {% if configs.displaySelectType[option_value] == 3 %}{% if configs.displayColorsImage[option_value] %}background-image: url({{ configs.displayColorsImage[option_value] | asset_url  | img_url: "200x" }});{% endif %}{% endif %}
-                              {% if configs.displaySelectType[option_value] == 4 %}{% if configs.displayColorsImageUrl[option_value] %}background-image: url({{ configs.displayColorsImageUrl[option_value] | asset_url  | img_url: "200x" }});{% endif %}{% endif %}"
+                              {% if configs.displaySelectType[option_value] == 3 %}{% if configs.displayColorsImage[option_value] %}background-image: url({% if swatch_size == "small" %}{{ configs.displayColorsImage[option_value] | asset_url  | img_url: "28x" }}{% elsif swatch_size == "medium" %}{{ configs.displayColorsImage[option_value] | asset_url  | img_url: "35x" }}{% else %}{{ configs.displayColorsImage[option_value] | asset_url  | img_url: "50x" }}{% endif %});{% endif %}{% endif %}
+                              {% if configs.displaySelectType[option_value] == 4 %}{% if configs.displayColorsImageUrl[option_value] %}background-image: url({% if swatch_size == "small" %}{{ configs.displayColorsImageUrl[option_value] | asset_url  | img_url: "28x" }}{% elsif swatch_size == "medium" %}{{ configs.displayColorsImageUrl[option_value] | asset_url  | img_url: "35x" }}{% else %}{{ configs.displayColorsImageUrl[option_value] | asset_url  | img_url: "50x" }}{% endif%});{% endif %}{% endif %}"
                       >
                         <span class="attr-title-hover">{{ value | escape }}</span>
                         {{ value }}
@@ -177,30 +178,32 @@
                     </li>
                     {% endif %}
                   </ul>
+              {% if configs.carousel == "enable" %}</div>{% endif %}
                 {% elsif displayStyle == 2 %}
               	  {% if configs.isOptionname %}
                   <label for="pa_{{ option | handleize }}" class="name-option" data-name="{{ option }}">{{ option }}<span class="name-variant"></span></label>
                   {% endif %}
-                  <ul class="ul-swatches-list value g-variant-color {% if configs.carousel == "enable" %}gvowl-carousel owl-carousel{% endif %}">
+              {% if configs.carousel == "enable" %}<div class="glider-container">{% endif %}
+                  <ul class="ul-swatches-list value g-variant-color {% if configs.carousel == "enable" %}glider{% endif %}">
                     {% assign i = 0 %}
                     {% for variant in product.variants %}
                     {% assign value_available = variant.options[option_index] %}
-                    {% unless values_available contains value_available or variant.available == false %}
-                    {% assign values_available = values_available | append: "," | append: value_available %}
-                    {% assign values_available = values_available | split: "," %}
+                    {% assign value_available_text = "&_&" | append: value_available %}
+                    {% unless values_available contains value_available_text or variant.available == false %}
+                    {% assign values_available = values_available | append: "&_&" | append: value_available %}
                     {% endunless %}
                     {% endfor %}
                     
                     {% for variant in product.variants %}
                     {% assign value = variant.options[option_index] %}
-                    {% unless values contains value %}
+                    {% assign valuetext = "&_&" | append: value %}
+                    {% unless values contains valuetext %}
                     {% assign i = i | plus: 1 %}
-                    {% assign values = values | append: "," | append: value %}
-                    {% assign values = values | split: "," %}
+                    {% assign values = values | append: "&_&" | append: value %}
                     {% if i <= configs.limit_variant  or configs.show_limit_variant == false %}
-                    <li productId = "{{ product.id }}" {% if variant.featured_image.src %}productImage = {{ variant.featured_image.src | img_url: "grande" }}{% endif %} class="swatches-options {{ class_stylesoldout }} {% if values_available contains value %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
+                    <li productId = "{{ product.id }}" {% if variant.featured_image.src %}productImage = {{ variant.featured_image.src | img_url: "grande" }}{% endif %} class="swatches-options {{ class_stylesoldout }} {% if values_available contains valuetext %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
                       <input id="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}-{{ product.id }}" value="{{ value | escape }}" {% if forloop.first %} checked{% endif %} />
-                      <label title="{{ value | escape }}" for="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" class="swatch-anchor swatch-other globo-border-color-swatch {{ class_swatch_shape }} {{ class_swatch_size }} {{ class_border_style }} {{ class_hover_effects }} {{ class_hover_effects_zoom }} {{ class_size_change }}" {% if variant.featured_image.src %}style="display: block; background-size: contain; background-position: center; background-repeat: no-repeat; background-image: url({{ variant.featured_image.src | img_url:"200x" }});"{% endif %}>
+                      <label title="{{ value | escape }}" for="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" class="swatch-anchor swatch-other globo-border-color-swatch {{ class_swatch_shape }} {{ class_swatch_size }} {{ class_border_style }} {{ class_hover_effects }} {{ class_hover_effects_zoom }} {{ class_size_change }}" {% if variant.featured_image.src %}style="display: block; background-size: contain; background-position: center; background-repeat: no-repeat; background-image: url({% if swatch_size == "small" %}{{ variant.featured_image.src | img_url: "28x" }}{% elsif swatch_size == "medium" %}{{ variant.featured_image.src | img_url: "35x" }}{% else %}{{ variant.featured_image.src | img_url: "50x" }}{% endif %});"{% endif %}>
                         <span class="attr-title-hover">{{ value | escape }}</span>
                       </label>
                     </li>
@@ -216,28 +219,30 @@
                     </li>
                     {% endif %}
                   </ul>
+              {% if configs.carousel == "enable" %}</div>{% endif %}
                 {% elsif displayStyle == 3 %}
               	  {% if configs.isOptionname %}
                   <label for="pa_{{ option | handleize }}" class="name-option" data-name="{{ option }}">{{ option }}<span class="name-variant"></span></label>
                   {% endif %}
-                  <ul class="ul-swatches-list value {% if configs.carousel == "enable" %}gvowl-carousel owl-carousel{% endif %}">
+              {% if configs.carousel == "enable" %}<div class="glider-container">{% endif %}
+                  <ul class="ul-swatches-list value {% if configs.carousel == "enable" %}glider{% endif %}">
                     {% assign i = 0 %}
                     {% for variant in product.variants %}
                     {% assign value_available = variant.options[option_index] %}
-                    {% unless values_available contains value_available or variant.available == false %}
-                    {% assign values_available = values_available | append: "," | append: value_available %}
-                    {% assign values_available = values_available | split: "," %}
+                    {% assign value_available_text = "&_&" | append: value_available %}
+                    {% unless values_available contains value_available_text or variant.available == false %}
+                    {% assign values_available = values_available | append: "&_&" | append: value_available %}
                     {% endunless %}
                     {% endfor %}
                     
                     {% for variant in product.variants %}
                     {% assign value = variant.options[option_index] %}
-                    {% unless values contains value %}
+                    {% assign valuetext = "&_&" | append: value %}
+                    {% unless values contains valuetext %}
                     {% assign i = i | plus: 1 %}
-                    {% assign values = values | append: "," | append: value %}
-                    {% assign values = values | split: "," %}
+                    {% assign values = values | append: "&_&" | append: value %}
                     {% if i <= configs.limit_variant  or configs.show_limit_variant == false %}
-                    <li productId = "{{ product.id }}" class="swatches-options {{ class_stylesoldout }} {% if values_available contains value %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
+                    <li productId = "{{ product.id }}" class="swatches-options {{ class_stylesoldout }} {% if values_available contains valuetext %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
                       <input  id="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}-{{ product.id }}" value="{{ value | escape }}" {% if forloop.first %} checked{% endif %} />
                       <label title="{{ value | escape }}" for="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" class="swatch-anchor swatch-other globo-style--button {{ class_button_corner }} {{ class_button_size }} {{ class_text_style }} {{ class_hover_effects_button }}">
                         <span class="attr-title-hover">{{ value | escape }}</span>
@@ -256,6 +261,7 @@
                     </li>
                     {% endif %}
                   </ul>
+              {% if configs.carousel == "enable" %}</div>{% endif %}
               	{% elsif displayStyle == 4 %}
                   {% if configs.isOptionname %}
                   <label for="pa_{{ option | handleize }}" class="name-option" data-name="{{ option }}">{{ option }}<span class="name-variant"></span></label>
@@ -264,19 +270,18 @@
                   <ul class="ul-swatches-list value ul-globo-dropdown-option">
                     {% for variant in product.variants %}
                     {% assign value_available = variant.options[option_index] %}
-                    {% unless values_available contains value_available or variant.available == false %}
-                    {% assign values_available = values_available | append: "," | append: value_available %}
-                    {% assign values_available = values_available | split: "," %}
+                    {% assign value_available_text = "&_&" | append: value_available %}
+                    {% unless values_available contains value_available_text or variant.available == false %}
+                    {% assign values_available = values_available | append: "&_&" | append: value_available %}
                     {% endunless %}
                     {% endfor %}
                     
                     {% for variant in product.variants %}
                     {% assign value = variant.options[option_index] %}
-                    {% unless values contains value %}
-                    {% assign values = values | append: "," | append: value %}
-                    {% assign values = values | split: "," %}
-
-                    <li productId = "{{ product.id }}" class="select-option--dropdown swatches-options {% if values_available contains value %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
+                    {% assign valuetext = "&_&" | append: value %}
+                    {% unless values contains valuetext %}
+                    {% assign values = values | append: "&_&" | append: value %}
+                    <li productId = "{{ product.id }}" class="select-option--dropdown swatches-options {% if values_available contains valuetext %}available{% else %}globo-out-of-stock{% endif %}" data-attribute="pa_{{ value | handleize }}">
                       <input  id="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}-{{ product.id }}" value="{{ value | escape }}" {% if forloop.first %} checked{% endif %} />
                       <label title="{{ value | escape }}" for="swatch-{{ variant.id }}-{{ option_index }}-{{ value | handle }}" class="swatch-anchor swatch-other">
                         {{ value }}
@@ -304,7 +309,7 @@
                {% endfor %}
             </select>
           	{% if configs.showAddtocart %}
-            {% if product.variants[0].available %}
+            {% if product.available %}
           		 <button type="button" class="btn btn-globo globo--add-to-cart globo-ajax-form-cart">{{ configs.txtAddtocart }}</button>
             {% else %}
                  <button type="button" class="btn btn-globo globo--add-to-cart globo-ajax-form-cart" disabled="disabled">{% if stylesoldout == "hide" %}{{ configs.txtAddtocart }}{% else %}{{ configs.txtSoldout }}{% endif %}</button>
