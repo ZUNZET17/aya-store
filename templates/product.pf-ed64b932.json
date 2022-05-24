@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "main-product-aya",
       "blocks": {
         "title": {
           "type": "title",
@@ -38,38 +38,23 @@
             "show_dynamic_checkout": false
           }
         },
-        "description": {
-          "type": "description",
-          "disabled": true,
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061": {
+          "type": "tabs",
           "settings": {
-          }
-        },
-        "collapsible-row-0": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "<p>Long sleeve shirt is a great option for cooler, breezy days. Stay comfortable on your city strolls or in the office with soft and breathable pima cotton shirt, organically and ethically grown.<\/p><p>• Regular fit<\/p><p>• Model is 5'4\" (1.65m), has 3'4\" chest and 3'2\" hips<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Sustainable Materials & Care",
-            "icon": "none",
-            "content": "<p>Our {{ product.title }} is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread: <\/strong>100% Cotton<\/p><p><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes: <\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing: <\/strong>OEKO-TEX Certified<\/p><p><\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
-            "page": ""
+            "border_on": false,
+            "tab_icon_size": 3,
+            "tab_content_size": 1.6,
+            "btn_bk_active": "#f4f4f4",
+            "icon_color_hover": "#1e90ff",
+            "tab1_image": "shopify:\/\/shop_images\/Aya_Supply_Chain.png",
+            "tab1_title": "Microplastic-Free World",
+            "tab1_content": "<p>WE PUT A STOP TO PLASTIC POLLUTION.<br\/><br\/>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Organic Cotton.<br\/><br\/><strong>This is the first step in making our entire catalog plastic-free and biodegradable.<\/strong><\/p>",
+            "tab2_image": "shopify:\/\/shop_images\/2.png",
+            "tab2_title": "One-Country Supply Chain",
+            "tab2_content": "<p>WE PERFECTED THE SUPPLY CHAIN MODEL.<br\/><br\/><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<br\/><br\/>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed garment in our production studio - all sustainably and exclusively in Peru.<\/p>",
+            "tab3_image": "shopify:\/\/shop_images\/icon2.png",
+            "tab3_title": "100% Organic Pima",
+            "tab3_content": "<p>WE REDEFINED SUSTAINABILITY.<br\/><br\/>This is not just another organic clothing. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<br\/><br\/>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
           }
         }
       },
@@ -80,10 +65,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-3",
-        "collapsible-row-1"
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061"
       ],
       "settings": {
         "enable_sticky_info": true,
