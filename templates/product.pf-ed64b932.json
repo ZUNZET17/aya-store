@@ -38,6 +38,20 @@
             "show_dynamic_checkout": false
           }
         },
+        "0f4e261e-cfec-4513-8e31-b56c79a27b7d": {
+          "type": "text",
+          "settings": {
+            "text": "Be Part of the Change.",
+            "text_style": "uppercase"
+          }
+        },
+        "91c8da62-5106-4b66-a345-055631b6bee8": {
+          "type": "text",
+          "settings": {
+            "text": "Let's Redefine Sustainable Fashion Together.",
+            "text_style": "uppercase"
+          }
+        },
         "9b5a5fe5-504d-4e9b-b678-db5e717ea061": {
           "type": "tabs",
           "settings": {
@@ -65,6 +79,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "0f4e261e-cfec-4513-8e31-b56c79a27b7d",
+        "91c8da62-5106-4b66-a345-055631b6bee8",
         "9b5a5fe5-504d-4e9b-b678-db5e717ea061"
       ],
       "settings": {
