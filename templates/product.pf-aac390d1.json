@@ -83,6 +83,22 @@
             "content": "",
             "page": ""
           }
+        },
+        "2573d15e-edb6-4c61-8e85-0ddd602865fc": {
+          "type": "tabs",
+          "settings": {
+            "border_on": false,
+            "tab_icon_size": 3,
+            "tab_content_size": 1.6,
+            "btn_bk_active": "#F4F4F4",
+            "icon_color_hover": "#1E90FF",
+            "tab1_title": "Tab 1 title",
+            "tab1_content": "<p>tab1 content<\/p>",
+            "tab2_title": "Tab 2 title",
+            "tab2_content": "<p>tab2 content<\/p>",
+            "tab3_title": "Tab 3 title",
+            "tab3_content": "<p>tab3 content<\/p>"
+          }
         }
       },
       "block_order": [
@@ -95,7 +111,8 @@
         "description",
         "collapsible-row-0",
         "collapsible-row-3",
-        "collapsible-row-1"
+        "collapsible-row-1",
+        "2573d15e-edb6-4c61-8e85-0ddd602865fc"
       ],
       "settings": {
         "enable_sticky_info": true,
