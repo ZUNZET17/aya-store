@@ -48,6 +48,13 @@
             "show_dynamic_checkout": false
           }
         },
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1": {
+          "type": "text",
+          "settings": {
+            "text": "Be Part of the Change. Let's Redefine Sustainable Fashion Together.",
+            "text_style": "uppercase"
+          }
+        },
         "tabs": {
           "type": "tabs",
           "settings": {
@@ -75,6 +82,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs"
       ],
       "settings": {
