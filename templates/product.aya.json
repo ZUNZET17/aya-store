@@ -158,6 +158,12 @@
       "disabled": true,
       "settings": {
       }
+    },
+    "16534139119aa05873": {
+      "type": "pagefly-section",
+      "settings": {
+        "section_id": "pf-903e4edc"
+      }
     }
   },
   "order": [
@@ -165,6 +171,7 @@
     "shogun-above",
     "main",
     "product-recommendations",
-    "shogun-below"
+    "shogun-below",
+    "16534139119aa05873"
   ]
 }
