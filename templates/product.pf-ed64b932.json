@@ -56,6 +56,16 @@
             "tab3_title": "100% Organic Pima",
             "tab3_content": "<p>WE REDEFINED SUSTAINABILITY.<br\/><br\/>This is not just another organic clothing. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<br\/><br\/>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
           }
+        },
+        "bba74469-0a55-4a9f-ad3c-c2aa7452648a": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -65,7 +75,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "9b5a5fe5-504d-4e9b-b678-db5e717ea061"
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061",
+        "bba74469-0a55-4a9f-ad3c-c2aa7452648a"
       ],
       "settings": {
         "enable_sticky_info": true,
