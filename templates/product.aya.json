@@ -66,50 +66,6 @@
             "tab3_title": "100% Organic Pima",
             "tab3_content": "<p>WE REDEFINED SUSTAINABILITY.<\/p><p>This is not just another organic shirt. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
-        },
-        "description": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
-          }
-        },
-        "collapsible-row-0": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "<p>Soft & Breathable 100% Organic Cotton Panties.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Sustainable Materials & Care",
-            "icon": "none",
-            "content": "<p>Our {{ product.title }} is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread: <\/strong>100% Cotton<\/p><p><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes: <\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing: <\/strong>OEKO-TEX Certified<\/p><p><\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
-            "page": ""
-          }
-        },
-        "dd229e45-2bc5-4b2d-b844-2a1e7ec681a2": {
-          "type": "popup",
-          "disabled": true,
-          "settings": {
-            "text": "Free Returns",
-            "page": ""
-          }
         }
       },
       "block_order": [
@@ -119,12 +75,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "tabs",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-3",
-        "collapsible-row-1",
-        "dd229e45-2bc5-4b2d-b844-2a1e7ec681a2"
+        "tabs"
       ],
       "settings": {
         "enable_sticky_info": true,
