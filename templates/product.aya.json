@@ -1,15 +1,5 @@
 {
   "sections": {
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "settings": {
-      }
-    },
-    "shogun-above": {
-      "type": "shogun-above",
-      "settings": {
-      }
-    },
     "main": {
       "type": "main-product-aya",
       "blocks": {
@@ -21,7 +11,7 @@
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "Luxurious Pima. Unbelievably Soft. Perfectly Constructed.",
+            "text": "Luxurious Pima. Unbelievably Soft.",
             "text_style": "uppercase"
           }
         },
@@ -122,12 +112,6 @@
         "padding_bottom": 28
       }
     },
-    "shogun-below": {
-      "type": "shogun-below",
-      "disabled": true,
-      "settings": {
-      }
-    },
     "16534139119aa05873": {
       "type": "pagefly-section",
       "settings": {
@@ -166,11 +150,8 @@
     }
   },
   "order": [
-    "shogun-helper",
-    "shogun-above",
     "main",
     "product-recommendations",
-    "shogun-below",
     "16534139119aa05873",
     "16534147228d0472c2",
     "16534147326b49f09f",
