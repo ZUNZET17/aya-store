@@ -36,14 +36,7 @@
           "type": "text",
           "settings": {
             "text": "Be part of the change.",
-            "text_style": "uppercase"
-          }
-        },
-        "69b4a901-5b31-4a24-91eb-b99e2d5f597a": {
-          "type": "text",
-          "settings": {
-            "text": "Let's Redefine Sustainable Fashion Together.",
-            "text_style": "uppercase"
+            "text_style": "body"
           }
         },
         "9b5a5fe5-504d-4e9b-b678-db5e717ea061": {
@@ -64,6 +57,13 @@
             "tab3_title": "",
             "tab3_content": "<p><strong>100% Organic Pima<\/strong><\/p><p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
           }
+        },
+        "69b4a901-5b31-4a24-91eb-b99e2d5f597a": {
+          "type": "text",
+          "settings": {
+            "text": "Let's Redefine Sustainable Fashion Together.",
+            "text_style": "body"
+          }
         }
       },
       "block_order": [
@@ -73,8 +73,8 @@
         "variant_picker",
         "buy_buttons",
         "e9227b87-4682-4b1e-854e-8339d0ffa967",
-        "69b4a901-5b31-4a24-91eb-b99e2d5f597a",
-        "9b5a5fe5-504d-4e9b-b678-db5e717ea061"
+        "9b5a5fe5-504d-4e9b-b678-db5e717ea061",
+        "69b4a901-5b31-4a24-91eb-b99e2d5f597a"
       ],
       "settings": {
         "enable_sticky_info": true,
