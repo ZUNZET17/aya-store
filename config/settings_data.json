@@ -105,7 +105,7 @@
             "type": "announcement",
             "settings": {
               "text": "Free Shipping & Returns* | Compostable Packaging",
-              "color_scheme": "accent-1",
+              "color_scheme": "inverse",
               "link": "shopify:\/\/policies\/shipping-policy"
             }
           }
