@@ -26,10 +26,11 @@
             "picker_type": "button"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "disabled": true,
+        "1e0f3978-e9ef-4ce9-b6a6-e402ad58a736": {
+          "type": "popup",
           "settings": {
+            "text": "Size Guide",
+            "page": "size-chart-womens-tops"
           }
         },
         "buy_buttons": {
@@ -77,7 +78,7 @@
         "vendor",
         "price",
         "variant_picker",
-        "quantity_selector",
+        "1e0f3978-e9ef-4ce9-b6a6-e402ad58a736",
         "buy_buttons",
         "e9227b87-4682-4b1e-854e-8339d0ffa967",
         "69b4a901-5b31-4a24-91eb-b99e2d5f597a",
