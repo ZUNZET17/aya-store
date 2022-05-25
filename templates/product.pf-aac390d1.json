@@ -3,16 +3,16 @@
     "main": {
       "type": "main-product-aya",
       "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {
-          }
-        },
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "Luxurious Pima. Unbelievably Soft. Perfectly Constructed.",
+            "text": "Luxurious Pima. Unbelievably Soft.",
             "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
           }
         },
         "price": {
@@ -78,8 +78,8 @@
             "border_on": false,
             "tab_icon_size": 3,
             "tab_content_size": 1.6,
-            "btn_bk_active": "#F4F4F4",
-            "icon_color_hover": "#1E90FF",
+            "btn_bk_active": "#f4f4f4",
+            "icon_color_hover": "#1e90ff",
             "tab1_title": "Tab 1 title",
             "tab1_content": "<p>tab1 content<\/p>",
             "tab2_title": "Tab 2 title",
@@ -90,8 +90,8 @@
         }
       },
       "block_order": [
-        "title",
         "vendor",
+        "title",
         "price",
         "variant_picker",
         "quantity_selector",
