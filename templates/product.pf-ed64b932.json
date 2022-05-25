@@ -59,10 +59,10 @@
             "tab1_content": "<p>WE PUT A STOP TO PLASTIC POLLUTION.<br\/><br\/>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Organic Cotton.<br\/><br\/><strong>This is the first step in making our entire catalog plastic-free and biodegradable.<\/strong><\/p>",
             "tab2_image": "shopify:\/\/shop_images\/co2.png",
             "tab2_title": "One-Country Supply Chain",
-            "tab2_content": "<p>WE PERFECTED THE SUPPLY CHAIN MODEL.<br\/><br\/><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<br\/><br\/>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed garment in our production studio - all sustainably and exclusively in Peru.<\/p>",
+            "tab2_content": "<p>WE PERFECTED THE SUPPLY CHAIN MODEL.<br\/><br\/><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<br\/><br\/>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
             "tab3_image": "shopify:\/\/shop_images\/icon2.png",
             "tab3_title": "100% Organic Pima",
-            "tab3_content": "<p>WE REDEFINED SUSTAINABILITY.<br\/><br\/>This is not just another organic clothing. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<br\/><br\/>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
+            "tab3_content": "<p>WE REDEFINED SUSTAINABILITY.<br\/><br\/>This is not just another organic T-shirt. This is 100% Organic Pima Cotton. Pima Cotton is native to Peru and requires zero toxic chemicals.<br\/><br\/>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
           }
         }
       },
@@ -79,7 +79,7 @@
       "settings": {
         "enable_sticky_info": true,
         "gallery_layout": "stacked",
-        "media_size": "medium",
+        "media_size": "large",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": true,
