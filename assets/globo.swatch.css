@@ -767,15 +767,15 @@ form#product-form select#product-variants {
   
   /* Product Detail Page */
   .globo-swatch-product-detail .swatch--gl li .globo-style--button {
-    border-color: #e9e9e9;
-    color: #000000;
-    background-color: #e9e9e9;
+    border-color: #6e9075;
+    color: #ffffff;
+    background-color: #6e9075;
   }
 
   .globo-swatch-product-detail .swatch--gl li .globo-style--button:hover {
     border-color: #434442;
-    color: #000000;
-    background-color: #e9e9e9;
+    color: #ffffff;
+    background-color: #4a5736;
   }
 
   .globo-swatch-product-detail ul.value li.select-option input:checked + .globo-style--button {
@@ -785,7 +785,7 @@ form#product-form select#product-variants {
   }
 
   .globo-swatch-product-detail .swatch--gl li .globo-border-color-swatch:not(.globo-detail-border-style-none) {
-    border-color: #ecebeb;
+    border-color: #6e9075;
   }
 
   .globo-swatch-product-detail .swatch--gl li .globo-border-color-swatch:not(.globo-detail-border-style-none):hover {
