@@ -50,7 +50,7 @@
           "type": "tabs",
           "settings": {
             "border_on": false,
-            "tab_icon_size": 4,
+            "tab_icon_size": 5,
             "tab_content_size": 1.6,
             "btn_bk_active": "#f4f4f4",
             "icon_color_hover": "#1e90ff",
