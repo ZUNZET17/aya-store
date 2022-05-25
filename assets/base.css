@@ -2887,3 +2887,6 @@ details-disclosure > details {
 /* aoa styles */
 
 .animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+  .globo-swatch-product-detail .swatch--gl li .globo-border-color-swatch,.globo-swatch-product-detail .swatch--gl li .globo-border-color-swatch{
+    font-size: 0 !important;
+  }
