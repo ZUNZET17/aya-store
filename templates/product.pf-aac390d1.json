@@ -1,17 +1,5 @@
 {
   "sections": {
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "disabled": true,
-      "settings": {
-      }
-    },
-    "shogun-above": {
-      "type": "shogun-above",
-      "disabled": true,
-      "settings": {
-      }
-    },
     "main": {
       "type": "main-product-aya",
       "blocks": {
@@ -143,12 +131,6 @@
         "padding_bottom": 28
       }
     },
-    "shogun-below": {
-      "type": "shogun-below",
-      "disabled": true,
-      "settings": {
-      }
-    },
     "pf-aac390d1": {
       "type": "pf-aac390d1",
       "settings": {
@@ -156,11 +138,8 @@
     }
   },
   "order": [
-    "shogun-helper",
-    "shogun-above",
     "main",
     "product-recommendations",
-    "shogun-below",
     "pf-aac390d1"
   ]
 }
