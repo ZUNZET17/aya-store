@@ -38,40 +38,6 @@
             "show_dynamic_checkout": false
           }
         },
-        "description": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
-          }
-        },
-        "collapsible-row-0": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "<p>Comfortable tank top for women for relaxing, sleeping; Combines fashion, function and performance for everyday wear.<\/p><p>• Regular fit<\/p><p>• Model is 5'4\" (1.65m), has 3'4\" chest and 3'2\" hips<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Sustainable Materials & Care",
-            "icon": "none",
-            "content": "<p>Our {{ product.title }} is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread: <\/strong>100% Cotton<\/p><p><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes: <\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing: <\/strong>OEKO-TEX Certified<\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-1": {
-          "type": "collapsible_tab",
-          "disabled": true,
-          "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
-            "page": ""
-          }
-        },
         "2573d15e-edb6-4c61-8e85-0ddd602865fc": {
           "type": "tabs",
           "settings": {
@@ -79,13 +45,16 @@
             "tab_icon_size": 3,
             "tab_content_size": 1.6,
             "btn_bk_active": "#f4f4f4",
-            "icon_color_hover": "#1e90ff",
-            "tab1_title": "Tab 1 title",
-            "tab1_content": "<p>tab1 content<\/p>",
-            "tab2_title": "Tab 2 title",
-            "tab2_content": "<p>tab2 content<\/p>",
-            "tab3_title": "Tab 3 title",
-            "tab3_content": "<p>tab3 content<\/p>"
+            "icon_color_hover": "#4a5736",
+            "tab1_image": "shopify:\/\/shop_images\/AYA_World.png",
+            "tab1_title": "",
+            "tab1_content": "<p><strong>Change 1: Microplastic-Free World<\/strong><\/p><p>We put a stop on plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Organic Cotton.<br\/><br\/><strong>This is the first step in making our entire catalog plastic-free and biodegradable.<\/strong><\/p>",
+            "tab2_image": "shopify:\/\/shop_images\/co2.png",
+            "tab2_title": "",
+            "tab2_content": "<p><strong>Change 2: One-Country Supply Chain<\/strong><\/p><p>We perfected the supply chain model.<\/p><p><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
+            "tab3_image": "shopify:\/\/shop_images\/icon2.png",
+            "tab3_title": "",
+            "tab3_content": "<p><strong>Change 3: 100% Organic Pima<\/strong><\/p><p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that requires zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<br\/><br\/><strong>Your next purchase makes a difference. <\/strong>Wear what's best for the Earth.<\/p>"
           }
         }
       },
@@ -96,10 +65,6 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-3",
-        "collapsible-row-1",
         "2573d15e-edb6-4c61-8e85-0ddd602865fc"
       ],
       "settings": {
