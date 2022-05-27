@@ -201,7 +201,23 @@
           {%- when '@app' -%}
             {% render block %}
           {%- when 'text' -%}
-            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+          {% style %}
+            {% liquid
+              case block.settings.text_weight
+                when "medium"
+                  assign textWeight = 500
+                when "bold"
+                  assign text_weight = 700
+                else
+                  assign text_weight = 400
+            endcase %}
+            .text-block-{{-block.id-}} {
+              font-size: {{ block.settings.text_size -}}rem;
+              font-weight: {{- text_weight -}};
+              text-align: {{- block.settings.text_justify -}};
+            }
+          {% endstyle %}
+            <p class="text-block-{{-block.id}} product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
@@ -729,6 +745,54 @@
           ],
           "default": "body",
           "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "text_weight",
+          "label": "Text weight",
+          "options":[
+            {
+              "value": "regular",
+              "label": "regular"
+            },
+            {
+              "value": "medium",
+              "label":"Medium"
+            },
+            {
+              "value":"bold",
+              "label":"Bold"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "min": 1,
+          "max": 5,
+          "step": 0.1,
+          "default": 1,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "text_justify",
+          "label": "Text justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
         }
       ]
     },
