@@ -50,9 +50,9 @@
           "type": "tabs",
           "settings": {
             "border_on": false,
-            "tab_icon_size": 3,
-            "tab_content_size": 1.6,
-            "btn_bk_active": "#F4F4F4",
+            "tab_icon_size": 5,
+            "tab_content_size": 1.4,
+            "btn_bk_active": "#f4f4f4",
             "icon_color_hover": "#4a5736",
             "tab1_image": "shopify:\/\/shop_images\/AYA_World.png",
             "tab1_title": "",
