@@ -296,17 +296,33 @@
             </div>
           {%- when 'tabs' -%}
             <div class="tab-customize">
+              {% liquid
+                case block.settings.tab_title_weight
+                  when 'medium'
+                    assign tab_title_weight = 500
+                  when 'bold'
+                    assign tab_title_weight = 700
+                  else
+                    assign tab_title_weight = 400
+              endcase %}
               {% style %}
                 .tabcontent-cus {
                   display: none;
                   padding: 6px 12px;
-                  font-size: {{ block.settings.tab_content_size }}rem;
                   {% if block.settings.border_on %}
                   border: 1px solid #ccc;
                   border-top: none;
                   {% endif %}
                 }
-
+                .tabcontent__title {
+                  font-size: {{ block.settings.tab_title_size -}}rem;
+                  font-weight: {{- tab_title_weight -}};
+                  text-align: {{ block.settings.tab_title_justify -}};
+                }
+                .tab__content {
+                  font-size: {{ block.settings.tab_content_size -}}rem;
+                  text-align: {{ block.settings.tab_content_justify -}};
+                }
                 .tab-customize button.active {
                   background-color: {{ block.settings.btn_bk_active }};
                 }
@@ -329,15 +345,15 @@
             <!-- Tab content -->
             <div id="tab-1" class="tabcontent-cus animate-opacity" style="display: block;">
               <p class="tabcontent__title">{{ block.settings.tab1_title }}</p>
-              {{ block.settings.tab1_content }}
+              <div class="tab__content">{{ block.settings.tab1_content }}</div>
             </div>
             <div id="tab-2" class="tabcontent-cus animate-opacity">
               <p class="tabcontent__title">{{ block.settings.tab2_title }}</p>
-              {{ block.settings.tab2_content }}
+              <div class="tab__content">{{ block.settings.tab2_content }}</div>
             </div>
             <div id="tab-3" class="tabcontent-cus animate-opacity">
               <p class="tabcontent__title">{{ block.settings.tab3_title }}</p>
-              {{ block.settings.tab3_content }}
+              <div class="tab__content">{{ block.settings.tab3_content }}</div>
             </div>
             <style>
             .tab-customize {
@@ -358,9 +374,7 @@
               transition: 0.3s;
             }
             .tabcontent__title {
-              text-align: center;
               width: 100%;
-              font-weight: bold;
             }
             </style>
           {%- when 'quantity_selector' -%}
@@ -896,14 +910,94 @@
           "default": 3
         },
         {
+          "type": "header",
+          "content": "Tab title options",
+          "info": "Size, weight and justification"
+        },
+        {
+          "type": "range",
+          "id": "tab_title_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab title size",
+          "default": 1.5
+        },
+        {
+          "type": "select",
+          "id": "tab_title_weight",
+          "label": "Tab title weight",
+          "options": [
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "bold",
+              "label": "Bold"
+            }
+          ],
+          "default": "bold"
+        },
+        {
+          "type": "select",
+          "id": "tab_title_justify",
+          "label": "Tab title justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "header",
+          "content": "Tab content options",
+          "info": "Size, weight and justification"
+        },
+        {
           "type": "range",
           "id": "tab_content_size",
           "min": 1,
-          "max": 2,
+          "max": 3,
           "step": 0.1,
           "unit": "rem",
-          "label": "Tab content font size",
-          "default": 1.6
+          "label": "Tab content size",
+          "default": 1.5
+        },
+        {
+          "type": "select",
+          "id": "tab_content_justify",
+          "label": "Tab content justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
         },       
         {
           "type": "color",
