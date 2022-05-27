@@ -39,6 +39,15 @@
           <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
             {{ "accessibility.skip_to_product_info" | t }}
           </a>
+          {% style %}
+            {% unless section.settings.grid_display %}
+              .product__media-list .product__media-item:first-child,
+              .product__media-list .product__media-item--full {
+                width: 100%;
+                max-width: 100%;
+              }
+            {% endunless %}
+          {% endstyle %}
           <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
             {%- liquid
               assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
@@ -1416,6 +1425,12 @@
       ],
       "default": "stacked",
       "label": "t:sections.main-product.settings.gallery_layout.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "grid_display",
+      "label": "Grid display",
+      "default": false
     },
     {
       "type": "select",
