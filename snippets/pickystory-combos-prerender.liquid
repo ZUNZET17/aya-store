@@ -20,7 +20,7 @@
   }
   const isProductPage = /^.*\/products\/[A-Za-z0-9-_%]+\/?$/i.test(window.location.pathname)
   const productHandle = isProductPage && pageProductHandle()
-  const compoundProducts = []
+  const compoundProducts = ["new-combo"]
   if (!compoundProducts.includes(productHandle)) return
   // Override cart URL inside the selector with a localized version if necessary
   const selector = 'form[action="/cart/add"]'.replace('"/cart/add"', '"{{ routes.cart_add_url }}"')
