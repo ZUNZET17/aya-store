@@ -140,9 +140,9 @@
         "3ca89b8b-0696-4f39-bdc5-70895d2eca85": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Collapsible row",
+            "heading": "Description",
             "icon": "none",
-            "content": "",
+            "content": "<p>The forever must-have in every man's closet: basic black crew neck tee! Made from Organic Cotton, this tee will be your best friend in all situations for years. Soft next to skin, durable and sustainable - that's the perfect casual T-shirt for men.<br\/><br\/>Regular fit<br\/>Model is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips<\/p>",
             "page": ""
           }
         }
@@ -173,7 +173,6 @@
     },
     "product-recommendations": {
       "type": "product-recommendations",
-      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "heading_size": "h2",
@@ -188,52 +187,10 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
-    },
-    "16534139119aa05873": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-067f8626"
-      }
-    },
-    "16534147228d0472c2": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-6d4100b3"
-      }
-    },
-    "16534147326b49f09f": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-ab2b0adc"
-      }
-    },
-    "1653414745c023696f": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-cf3661ac"
-      }
-    },
-    "1653414762f8365fc3": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-c8339b1e"
-      }
-    },
-    "16534147806d592ce7": {
-      "type": "pagefly-section",
-      "settings": {
-        "section_id": "pf-d04b64e8"
-      }
     }
   },
   "order": [
     "main",
-    "product-recommendations",
-    "16534139119aa05873",
-    "16534147228d0472c2",
-    "16534147326b49f09f",
-    "1653414745c023696f",
-    "1653414762f8365fc3",
-    "16534147806d592ce7"
+    "product-recommendations"
   ]
 }
