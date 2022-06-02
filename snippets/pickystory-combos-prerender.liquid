@@ -20,7 +20,7 @@
   }
   const isProductPage = /^.*\/products\/[A-Za-z0-9-_%]+\/?$/i.test(window.location.pathname)
   const productHandle = isProductPage && pageProductHandle()
-  const compoundProducts = ["men-s-organic-pima-cotton-t-shirt-3-pack", "men-s-organic-pima-cotton-v-neck-t-shirt-3-pack", "men-s-organic-pima-cotton-long-sleeve-shirt-3-pack", "men-s-organic-pima-cotton-tank-top-3-pack", "women-s-organic-pima-cotton-t-shirt-3-pack", "women-s-organic-pima-cotton-v-neck-t-shirt-3-pack", "women-s-organic-pima-cotton-long-sleeve-shirt-3-pack", "women-s-organic-pima-cotton-tank-top-3-pack", "organic-pima-cotton-sports-bra-3-pack", "organic-pima-cotton-panties-3-pack", "organic-pima-cotton-boxer-briefs-3-pack", "men-s-organic-pima-cotton-t-shirt-6-pack", "men-s-organic-pima-cotton-v-neck-t-shirt-6-pack", "new-combo"]
+  const compoundProducts = ["men-s-organic-pima-cotton-t-shirt-3-pack", "men-s-organic-pima-cotton-v-neck-t-shirt-3-pack", "men-s-organic-pima-cotton-long-sleeve-shirt-3-pack", "men-s-organic-pima-cotton-tank-top-3-pack", "women-s-organic-pima-cotton-t-shirt-3-pack", "women-s-organic-pima-cotton-v-neck-t-shirt-3-pack", "women-s-organic-pima-cotton-long-sleeve-shirt-3-pack", "women-s-organic-pima-cotton-tank-top-3-pack", "organic-pima-cotton-sports-bra-3-pack", "organic-pima-cotton-panties-3-pack", "organic-pima-cotton-boxer-briefs-3-pack", "men-s-organic-pima-cotton-t-shirt-6-pack", "men-s-organic-pima-cotton-v-neck-t-shirt-6-pack", "men-s-organic-pima-cotton-long-sleeve-shirt-6-pack"]
   if (!compoundProducts.includes(productHandle)) return
   // Override cart URL inside the selector with a localized version if necessary
   const selector = 'form[action="/cart/add"]'.replace('"/cart/add"', '"{{ routes.cart_add_url }}"')
