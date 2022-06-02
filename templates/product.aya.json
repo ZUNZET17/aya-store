@@ -118,7 +118,7 @@
           "type": "tabs",
           "settings": {
             "border_on": false,
-            "tab_icon_size": 3,
+            "tab_icon_size": 4.5,
             "tab_title_size": 1.6,
             "tab_title_weight": "bold",
             "tab_title_justify": "center",
