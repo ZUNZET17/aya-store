@@ -50,7 +50,7 @@
             "text": "Be Part of the Change.",
             "text_style": "uppercase",
             "text_weight": "regular",
-            "text_size": 1.4,
+            "text_size": 1.2,
             "text_justify": "left"
           }
         },
@@ -60,7 +60,7 @@
             "text": "Let's Redefine Sustainable Fashion Together.",
             "text_style": "uppercase",
             "text_weight": "regular",
-            "text_size": 1.4,
+            "text_size": 1.2,
             "text_justify": "left"
           }
         },
@@ -100,7 +100,7 @@
       "settings": {
         "enable_sticky_info": true,
         "bc_size": 1,
-        "bc_weight": "400",
+        "bc_weight": "500",
         "on_picture_text": "Lorem ipsum dolorem sit ammet dignissimos.",
         "on_image_text_size": 1.2,
         "on_image_text_weight": "400",
