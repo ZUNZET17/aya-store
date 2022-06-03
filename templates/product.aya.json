@@ -5,7 +5,6 @@
       "blocks": {
         "vendor": {
           "type": "text",
-          "disabled": true,
           "settings": {
             "text": "Luxurious Pima. Unbelievably Soft.",
             "text_style": "uppercase",
