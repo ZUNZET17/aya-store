@@ -5,9 +5,10 @@
       "blocks": {
         "vendor": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "Luxurious Pima. Unbelievably Soft.",
-            "text_style": "subtitle",
+            "text_style": "uppercase",
             "text_weight": "regular",
             "text_size": 1.4,
             "text_justify": "left"
@@ -24,6 +25,24 @@
         "price": {
           "type": "price",
           "settings": {
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false
           }
         },
         "7432a9af-0705-4f40-92f1-2074055942ed": {
@@ -44,24 +63,6 @@
             "text_weight": "bold",
             "text_size": 1.9,
             "text_justify": "left"
-          }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "disabled": true,
-          "settings": {
-          }
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button"
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": false
           }
         },
         "tabs": {
@@ -92,11 +93,11 @@
         "vendor",
         "title",
         "price",
-        "7432a9af-0705-4f40-92f1-2074055942ed",
-        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "quantity_selector",
         "variant_picker",
         "buy_buttons",
+        "7432a9af-0705-4f40-92f1-2074055942ed",
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs"
       ],
       "settings": {
