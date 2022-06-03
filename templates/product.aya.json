@@ -59,7 +59,7 @@
           "type": "text",
           "settings": {
             "text": "Be Part of the Change",
-            "text_style": "uppercase",
+            "text_style": "subtitle",
             "text_weight": "bold",
             "text_size": 1.9,
             "text_justify": "center"
