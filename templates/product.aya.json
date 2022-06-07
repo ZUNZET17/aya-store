@@ -8,7 +8,7 @@
           "settings": {
             "text": "Luxurious Pima. Unbelievably Soft.",
             "padding_top": 0,
-            "padding_bottom": 0,
+            "padding_bottom": 0.9,
             "text_style": "uppercase",
             "text_weight": "regular",
             "text_size": 1.4,
@@ -53,7 +53,7 @@
           "settings": {
             "text": "Let's Redefine Fashion",
             "padding_top": 0,
-            "padding_bottom": 0,
+            "padding_bottom": 0.7,
             "text_style": "uppercase",
             "text_weight": "regular",
             "text_size": 1.5,
@@ -65,7 +65,7 @@
           "settings": {
             "text": "Be Part of the Change",
             "padding_top": 0,
-            "padding_bottom": 0,
+            "padding_bottom": 2.7,
             "text_style": "uppercase",
             "text_weight": "bold",
             "text_size": 1.9,
