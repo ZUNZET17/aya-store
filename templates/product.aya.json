@@ -7,6 +7,8 @@
           "type": "text",
           "settings": {
             "text": "Luxurious Pima. Unbelievably Soft.",
+            "padding_top": 0,
+            "padding_bottom": 0,
             "text_style": "uppercase",
             "text_weight": "regular",
             "text_size": 1.4,
@@ -41,13 +43,17 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": false
+            "show_dynamic_checkout": false,
+            "button_bk": "#434442",
+            "button_color": "#ffffff"
           }
         },
         "7432a9af-0705-4f40-92f1-2074055942ed": {
           "type": "text",
           "settings": {
             "text": "Let's Redefine Fashion",
+            "padding_top": 0,
+            "padding_bottom": 0,
             "text_style": "uppercase",
             "text_weight": "regular",
             "text_size": 1.5,
@@ -58,6 +64,8 @@
           "type": "text",
           "settings": {
             "text": "Be Part of the Change",
+            "padding_top": 0,
+            "padding_bottom": 0,
             "text_style": "uppercase",
             "text_weight": "bold",
             "text_size": 1.9,
@@ -77,12 +85,15 @@
             "btn_bk_active": "#434442",
             "icon_color_hover": "#434442",
             "tab1_image": "shopify:\/\/shop_images\/AYA_World.png",
+            "tab1_image_white": "shopify:\/\/shop_images\/worldicon2.png",
             "tab1_title": "Microplastic-Free World",
             "tab1_content": "<p>We put a stop to plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.<\/p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.<\/strong><\/p>",
             "tab2_image": "shopify:\/\/shop_images\/co2.png",
+            "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
             "tab2_title": "One-Country Supply Chain",
             "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
-            "tab3_image": "shopify:\/\/shop_images\/icon2.png",
+            "tab3_image": "shopify:\/\/shop_images\/cottonicon1.png",
+            "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
             "tab3_title": "100% Organic Pima",
             "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
@@ -109,7 +120,7 @@
         "on_picture_text_color": "#000000",
         "on_image_bk": "#dddddd40",
         "gallery_layout": "stacked",
-        "grid_display": true,
+        "grid_display": false,
         "media_size": "large",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
