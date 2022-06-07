@@ -47,6 +47,77 @@
                 max-width: 100%;
               }
             {% endunless %}
+            .on-picture-text-container {
+              width: 100%;
+              display: flex;
+              justify-content: {{ section.settings.on_image_text_align }};
+              position: absolute;
+              padding: 0 1.5rem;
+              bottom: 1.5rem;
+              z-index: 7;
+            }
+            .on-picture-text {
+              display: none;
+              width: max-content;
+              padding: .5rem;
+              color: {{ section.settings.on_picture_text_color }};
+              font-size: {{ section.settings.on_image_text_size }}rem;
+              font-weight: {{ section.settings.on_image_text_weight }};
+              word-break: break-all;
+              background: {{ section.settings.on_image_bk }};
+              line-height: normal;
+            }
+            .on-picture-text__close{
+              position: absolute;
+              content: 'X';
+              display: flex;
+              background: rgb(255 255 255);
+              color: #000000;
+              width: 1.8rem;
+              height: 1.8rem;
+              border-radius: 50%;
+              top: -0.75rem;
+              right: 0.75rem;
+              justify-content: center;
+              align-items: center;
+              line-height: 1;
+            }
+            .on-picture-text__mobile-trigger {
+              display: block;
+              color: {{ section.settings.on_picture_text_color }};
+              font-size: {{ section.settings.on_image_text_size }}rem;
+              font-weight: {{ section.settings.on_image_text_weight }};
+              background: {{ section.settings.on_image_bk }};
+              width: max-content;
+              padding: .5rem 1rem;
+              border-radius: 10rem;
+              text-align: center;
+            }
+            @media screen and (min-width: 750px) {
+              .on-picture-text {
+                display: block;
+              }
+              .on-picture-text__mobile-trigger {
+                display: none;
+              }
+              .on-picture-text-container {
+                bottom: 1.5rem;
+              }
+              .on-picture-text__close {
+                display: none;
+              }
+            }
+            .on-picture-text.active {
+              display: block;
+            }
+            .on-picture-text__mobile-trigger.active {
+              display: none;
+            }
+            {% if section.settings.grid_display %}
+            .on-picture-text--grid {
+              bottom: 4rem;
+            }
+            {% endif %}
           {% endstyle %}
           <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
             {%- liquid
@@ -69,13 +140,28 @@
               <li id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}">
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
+                <div class="on-picture-text-container">
+                  <div class="on-picture-text">{{ section.settings.on_picture_text }}</div>
+                  <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">{{ section.settings.on_picture_trigger_text }}zxc</div>
+                </div>
               </li>
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" {% if forloop.index == 1 %} style="position: relative;" {% endif %}>
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
+                  {% if forloop.index == 1 %}
+                  <div class="on-picture-text-container">
+                    <div class="on-picture-text">
+                      {{ section.settings.on_picture_text }}
+                      <span class="on-picture-text__close">X</span>
+                    </div>
+                    <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
+                      {{ section.settings.on_picture_trigger_text }}
+                    </div>
+                  </div>
+                  {% endif %}
                 </li>
               {%- endunless -%}
             {%- endfor -%}
@@ -855,6 +941,18 @@
         hiddenInput.value = event.currentTarget.value;
       });
     });
+  </script>
+  <script>
+    const triggerProductInfo = (ev) => {
+      const input = ev.currentTarget;
+      const onImageTextContent = document.querySelector('.on-picture-text');
+      const onImageTextTrigger = document.querySelector('.on-picture-text__mobile-trigger')
+
+      onImageTextContent.classList.toggle('active')
+      onImageTextTrigger.classList.toggle('active')
+    }
+    document.querySelector('.on-picture-text__mobile-trigger').addEventListener('click', triggerProductInfo, false)
+    document.querySelector('.on-picture-text__close').addEventListener('click', triggerProductInfo, false)
   </script>
 
   {%- liquid
@@ -1897,6 +1995,116 @@
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "range",
+      "id": "bc_size",
+      "label": "Breadcrumb text size",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1,
+      "unit": "rem"
+    },
+    {
+      "type": "select",
+      "id": "bc_weight",
+      "label": "Breadcrumb text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "regular"
+        },
+        {
+          "value": "500",
+          "label": "medium"
+        },
+        {
+          "value": "700",
+          "label": "bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "checkbox",
+      "id": "bc_is_uppercase",
+      "label": "Breadcrumbs uppercase",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "on_picture_text",
+      "label": "On picture text",
+      "default": "Lorem ipsum dolorem sit ammet dignissimos."
+    },
+    {
+      "type": "range",
+      "id": "on_image_text_size",
+      "label": "On image text size",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1.2,
+      "unit": "rem"
+    },
+    {
+      "type": "select",
+      "id": "on_image_text_weight",
+      "label": "On image text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "regular"
+        },
+        {
+          "value": "500",
+          "label": "medium"
+        },
+        {
+          "value": "700",
+          "label": "bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "on_image_text_align",
+      "label": "On image text alignment",
+      "options": [
+        {
+          "value": "flex-end",
+          "label": "right"
+        },
+        {
+          "value": "flex-start",
+          "label": "left"
+        },
+        {
+          "value": "center",
+          "label": "center"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "color",
+      "id": "on_picture_text_color",
+      "label": "On picture text color",
+      "default": "#000"
+    },
+    {
+      "type": "color_background",
+      "id": "on_image_bk",
+      "label": "On picture text background color",
+      "default": "#dddddd40"
+    },
+    {
+      "type": "text",
+      "id": "on_picture_trigger_text",
+      "label": "On picture mobile trigger button text",
+      "default": "Model Info"
     },
     {
       "type": "header",
