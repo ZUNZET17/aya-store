@@ -31,7 +31,9 @@
   .breadcrumbs__link {
     font-size: {{ bc_size }}rem;
     font-weight: {{ bc_weight }};
+    {% if is_uppercase %}
     text-transform: uppercase;
+    {% endif %}
     color: inherit;
     text-decoration: none;
   }
