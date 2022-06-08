@@ -3,6 +3,14 @@
     margin: 0.8rem 0 0.4rem 0;
   }
 
+  {% if hide_mobile %}
+    @media screen and (max-width: 750px) {
+      .breadcrumbs {
+        display: none;
+      }
+    }
+  {% endif %}
+
   .breadcrumbs__list {
     list-style-type: none;
     margin: 0;
