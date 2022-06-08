@@ -2911,7 +2911,7 @@ details-disclosure > details {
 
   /* Product media gallery */
   .slider-mobile-gutter {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   /* product price */
@@ -2992,9 +2992,10 @@ details-disclosure > details {
   }
 
   .variant-option-input:checked + .color-swatch__label:after {
-    border-color: rgb(116, 121, 124);
     transition-duration: 250ms;
-    inset: -.75rem;
+    border: 3px solid #ffffff; 
+    border-radius: 50%; 
+    box-shadow: 0 0 0 2pt rgb(116, 121, 124);
   }
   
   .color-swatch__pin {
@@ -3050,6 +3051,7 @@ details-disclosure > details {
     margin-top: 0;
     padding-bottom: 0;
     padding-right: 0!important;
+    padding-left: 0!important;
   }
 
   .product-size-label {

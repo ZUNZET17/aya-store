@@ -56,6 +56,14 @@
               bottom: 1.5rem;
               z-index: 7;
             }
+            @media screen and (min-width: 750px) {
+              .on-picture-text-container {
+                display: none;
+              }
+            }
+            .product__media-item.is-active .on-picture-text-container {
+              display: flex;
+            }
             .on-picture-text {
               display: none;
               width: max-content;
@@ -76,8 +84,8 @@
               width: 1.8rem;
               height: 1.8rem;
               border-radius: 50%;
-              top: -0.75rem;
-              right: 0.75rem;
+              top: -1rem;
+              right: 0.5rem;
               justify-content: center;
               align-items: center;
               line-height: 1;
@@ -107,6 +115,9 @@
                 display: none;
               }
             }
+            .on-picture-text__close > svg {
+              width: 1rem;
+            } 
             .on-picture-text.active {
               display: block;
             }
@@ -141,31 +152,35 @@
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
                 <div class="on-picture-text-container">
-                  <div class="on-picture-text">{{ section.settings.on_picture_text }}</div>
-                  <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">{{ section.settings.on_picture_trigger_text }}zxc</div>
+                  <div class="on-picture-text">
+                    {{ section.settings.on_picture_text }}
+                  </div>
                 </div>
               </li>
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" {% if forloop.index == 1 %} style="position: relative;" {% endif %}>
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative;">
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
-                  {% if forloop.index == 1 %}
                   <div class="on-picture-text-container">
                     <div class="on-picture-text">
                       {{ section.settings.on_picture_text }}
-                      <span class="on-picture-text__close">X</span>
-                    </div>
-                    <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
-                      {{ section.settings.on_picture_trigger_text }}
                     </div>
                   </div>
-                  {% endif %}
                 </li>
               {%- endunless -%}
             {%- endfor -%}
           </ul>
+          <div class="on-picture-text-container">
+            <div class="on-picture-text js-on-picture-text">
+              {{ section.settings.on_picture_text }}
+              <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+            </div>
+            <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
+              {{ section.settings.on_picture_trigger_text }}
+            </div>
+          </div>
           <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             {% comment %}
@@ -513,7 +528,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: max-content;
+                min-width: 4.7rem;
                 max-height: 4.7rem;
                 padding: 0;
                 background-color: inherit;
@@ -613,6 +628,10 @@
                     assign weight = 400
               endcase -%}
               font-weight: {{- weight -}};
+            }
+            .sizes-legend {
+              font-size: {{ block.settings.sizes_legend_size -}}rem;
+              font-weight: {{ block.settings.sizes_legend_weight }};
             }
             .color-swatch__label {
               min-width: {{- block.settings.swatch_size -}}rem;
@@ -1019,14 +1038,14 @@
   <script>
     const triggerProductInfo = (ev) => {
       const input = ev.currentTarget;
-      const onImageTextContent = document.querySelector('.on-picture-text');
-      const onImageTextTrigger = document.querySelector('.on-picture-text__mobile-trigger')
+      const onImageTextContent = document.querySelector('.js-on-picture-text');
+      const onImageTextTrigger = document.querySelector('.js-on-image-text-mobile-trigger')
 
       onImageTextContent.classList.toggle('active')
       onImageTextTrigger.classList.toggle('active')
     }
-    document.querySelector('.on-picture-text__mobile-trigger').addEventListener('click', triggerProductInfo, false)
-    document.querySelector('.on-picture-text__close').addEventListener('click', triggerProductInfo, false)
+    document.querySelector('.js-on-image-text-mobile-trigger').addEventListener('click', triggerProductInfo, false)
+    document.querySelector('.js-on-picture-close').addEventListener('click', triggerProductInfo, false)
   </script>
 
   {%- liquid
@@ -1600,7 +1619,37 @@
             }
           ],
           "default": "bold"
-        },      
+        },
+        {
+          "type": "range",
+          "id": "sizes_legend_size",
+          "label": "Sizes legend size",
+          "unit": "rem",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "default": 1.4
+        },
+        {
+          "type": "select",
+          "id": "sizes_legend_weight",
+          "label": "Sizes legend weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "regular"
+            },
+            {
+              "value": "500",
+              "label": "medium"
+            },
+            {
+              "value": "700",
+              "label": "bold"
+            }
+          ],
+          "default": "400"
+        },     
         {
           "type": "range",
           "id": "swatch_size",
