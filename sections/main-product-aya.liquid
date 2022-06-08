@@ -47,12 +47,18 @@
                 max-width: 100%;
               }
             {% endunless %}
+            .on-picture-text-container {
+              width: 100%;
+              display: flex;
+              justify-content: {{ section.settings.on_image_text_align }};
+              position: absolute;
+              padding: 0 1.5rem;
+              bottom: 1.5rem;
+              z-index: 7;
+            }
             .on-picture-text {
               display: none;
               width: max-content;
-              position: absolute;
-              right: 5%;
-              bottom: 2.8rem;
               padding: .5rem;
               color: {{ section.settings.on_picture_text_color }};
               font-size: {{ section.settings.on_image_text_size }}rem;
@@ -61,17 +67,51 @@
               background: {{ section.settings.on_image_bk }};
               line-height: normal;
             }
+            .on-picture-text__close{
+              position: absolute;
+              content: 'X';
+              display: flex;
+              background: rgb(255 255 255);
+              color: #000000;
+              width: 1.8rem;
+              height: 1.8rem;
+              border-radius: 50%;
+              top: -0.75rem;
+              right: 0.75rem;
+              justify-content: center;
+              align-items: center;
+              line-height: 1;
+            }
+            .on-picture-text__mobile-trigger {
+              display: block;
+              color: {{ section.settings.on_picture_text_color }};
+              font-size: {{ section.settings.on_image_text_size }}rem;
+              font-weight: {{ section.settings.on_image_text_weight }};
+              background: {{ section.settings.on_image_bk }};
+              width: max-content;
+              padding: .5rem 1rem;
+              border-radius: 10rem;
+              text-align: center;
+            }
             @media screen and (min-width: 750px) {
               .on-picture-text {
                 display: block;
               }
+              .on-picture-text__mobile-trigger {
+                display: none;
+              }
+              .on-picture-text-container {
+                bottom: 1.5rem;
+              }
+              .on-picture-text__close {
+                display: none;
+              }
             }
-            .on-picture-text__mobile {
-              color: {{ section.settings.on_picture_text_color }};
-              font-size: {{ section.settings.on_image_text_size }}rem;
-              font-weight: {{ section.settings.on_image_text_weight }};
-              width: 100%;
-              text-align: center;
+            .on-picture-text.active {
+              display: block;
+            }
+            .on-picture-text__mobile-trigger.active {
+              display: none;
             }
             {% if section.settings.grid_display %}
             .on-picture-text--grid {
@@ -100,29 +140,44 @@
               <li style="position: relative"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}">
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
-                <div class="on-picture-text">{{ section.settings.on_picture_text }}</div>
+                <div class="on-picture-text-container">
+                  <div class="on-picture-text">{{ section.settings.on_picture_text }}</div>
+                  <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">{{ section.settings.on_picture_trigger_text }}zxc</div>
+                </div>
               </li>
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" {% if forloop.index == 1 %} style="position: relative;" {% endif %}>
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
+                  {% if forloop.index == 1 %}
+                  <div class="on-picture-text-container">
+                    <div class="on-picture-text">
+                      {{ section.settings.on_picture_text }}
+                      <span class="on-picture-text__close">X</span>
+                    </div>
+                    <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
+                      {{ section.settings.on_picture_trigger_text }}
+                    </div>
+                  </div>
+                  {% endif %}
                 </li>
               {%- endunless -%}
             {%- endfor -%}
           </ul>
           <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+            {% comment %}
             <div class="slider-counter caption">
               <span class="slider-counter--current">1</span>
               <span aria-hidden="true"> / </span>
               <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
               <span class="slider-counter--total">{{ media_count }}</span>
             </div>
+            {% endcomment %}
             <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
           </div>
-          <div class="on-picture-text__mobile">{{ section.settings.on_picture_text }}</div>
         </slider-component>
         {%- if first_3d_model -%}
           <button
@@ -430,13 +485,17 @@
               border-radius: .6rem;
             }
             .tab-customize button {
+              display: flex;
+              justify-content: center;
+              align-items: center;
               width: max-content;
+              max-height: 4.7rem;
+              padding: 0;
               background-color: inherit;
               float: left;
               border: none;
               outline: none;
               cursor: pointer;
-              padding: 1rem;
               transition: 0.3s;
             }
             .tabcontent__title {
@@ -511,81 +570,237 @@
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
-          {%- unless product.has_only_default_variant -%}
-          {%- if block.settings.picker_type == 'button' -%}
-            <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-              {%- for option in product.options_with_values -%}
-                  <fieldset class="js product-form__input">
-                    <legend class="form__label">{{ option.name }}</legend>
-                    {%- for value in option.values -%}
-                      <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                            name="{{ option.name }}"
-                            value="{{ value | escape }}"
-                            form="{{ product_form_id }}"
-                            {% if option.selected_value == value %}checked{% endif %}
-                      >
-                      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                        {{ value }}
+          {% style %}
+          .color-swatches-block {
+            padding-top: {{ block.settings.swatches_padding_top -}}rem;
+            padding-bottom: {{ block.settings.swatches_padding_bottom -}}rem;
+          }
+            .color-group-legend {
+              font-size: {{- block.settings.legend_size -}}rem;
+              {%- liquid
+                case block.settings.legend_weight
+                  when "medium"
+                    assign weight = 500
+                  when "bold"
+                    assign weight = 700
+                  else
+                    assign weight = 400
+              endcase -%}
+              font-weight: {{- weight -}};
+            }
+            .color-swatch__label {
+              min-width: {{- block.settings.swatch_size -}}rem;
+              min-height: {{- block.settings.swatch_size -}}rem;
+              {% if block.settings.swatch_display == "rectangle" %}
+              min-width: {{- block.settings.swatch_size | times: 1.35 -}}rem;
+              {% endif %}
+              {% if block.settings.swatch_display == "circle" %}
+              border-radius: 50%;
+              {% endif %}
+            }
+            {% if block.settings.swatch_display == "rectangle" or block.settings.swatch_display == "square" %}
+            .color-swatch__label:after {
+              border-radius: 0;
+            }
+            {% endif %}            
+          {% endstyle %}
+          <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
+            {%- unless product.has_only_default_variant -%}
+              {%- if block.settings.picker_type == 'button' -%}
+                <variant-radios class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    {% if option.name == 'Color' %}
+                      <fieldset class="js product-form__input color-swatches">
+                        <div class="color-group">
+                          <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" {{ block.shopify_attributes }}>
+                            {% assign pageId = block.settings.color_group1_page.template_suffix %}
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
+                              <legend class="form__label color-group-legend" style="margin-bottom: 1rem;" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                            </button>
+                          </modal-opener>
+                          <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                            <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                              <button id="ModalClose-{{- block.settings.group_1_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                              <div class="product-popup-modal__content-info {% unless block.settings.color_group1_page.content != blank %}js-page-{{-pageId}} js-page-content{% endunless %}">
+                                {% if block.settings.color_group1_page.content != blank %}
+                                  {{ block.settings.color_group1_page.content }}
+                                {% else %}
+                                  {% capture pageStyle %}'pagefly.{{- pageId -}}.css' | asset_url{% endcapture%}
+                                  {% render 'pagefly-settings' %} 
+                                  <link rel="stylesheet" href="{{pageStyle}}">
+                                {% endif %}
+                              </div>
+                            </div>
+                          </modal-dialog>
+                          <div class="color-options">
+                            {%- for value in option.values -%}
+                              {% capture swatch_idx %}swatch1{{-forloop.index-}}{% endcapture %}
+                              {% style %}
+                                .{{-swatch_idx-}} {
+                                  background-color: {{- block.settings[swatch_idx] -}};
+                                }
+                              {% endstyle %}
+                              {%- capture colorop1 -%}color-1{{-forloop.index-}}{%- endcapture -%}
+                              {% comment %}<p>{{colorop1}}</p>{% endcomment %}
+                              {%- if block.settings[colorop1] -%}
+                                <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                      name="{{ option.name }}"
+                                      value="{{ value | escape }}"
+                                      form="{{ product_form_id }}"
+                                      {% if option.selected_value == value %}checked{% endif %}
+                                >
+                                <label class="color-swatch__label swatch1{{-forloop.index}} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value}}" group-number="1">
+                                  <span class="color-swatch__pin">{{value}}</span>
+                                </label>
+                              {% endif %}
+                            {%- endfor -%}
+                          </div>
+                        </div>
+                        <div class="color-group">
+                          <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
+                            {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
+                              <legend class="form__label color-group-legend" style="margin-bottom: 1rem;">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                            </button>
+                          </modal-opener>
+                          <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                            <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                              <button id="ModalClose-{{- block.settings.group_2_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                              <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page.content != blank %}js-page-{{-pageId2}} js-page-content{% endunless %}">
+                                {% if block.settings.color_group2_page.content != blank %}
+                                  {{ block.settings.color_group2_page.content }}
+                                {% else %}
+                                  {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture%}
+                                  
+                                  <link rel="stylesheet" href="{{pageStyle2}}">
+                                {% endif %}
+                              </div>
+                            </div>
+                          </modal-dialog>
+                          <div class="color-options">
+                            {%- for value in option.values -%}
+                              {% capture swatch_idx %}swatch2{{-forloop.index-}}{% endcapture %}
+                              {% style %}
+                                .{{-swatch_idx-}} {
+                                  background-color: {{- block.settings[swatch_idx] -}};
+                                  {% if block.settings.circle_on %}
+                                  border-radius: 50%;
+                                  {% endif %}
+                                }
+                              {% endstyle %}
+                              {%- capture colorop2 -%}color-2{{-forloop.index-}}{%- endcapture -%}
+                              {% comment %}<p>{{colorop2}}</p>{% endcomment %}
+                              {%- if block.settings[colorop2] -%}
+                                <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                      name="{{ option.name }}"
+                                      value="{{ value | escape }}"
+                                      form="{{ product_form_id }}"
+                                      {% if option.selected_value == value %}checked{% endif %}
+                                >
+                                <label class="color-swatch__label swatch2{{-forloop.index}} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="2">
+                                  <span class="color-swatch__pin">{{value}}</span>
+                                </label>
+                              {% endif %}
+                            {%- endfor -%}
+                          </div>
+                        </div>                      
+                      </fieldset>
+                    {% endif %}
+                  {%- endfor -%}   
+                  {%- for option in product.options_with_values -%}
+                    {% if option.name == 'Size' %}
+                      <fieldset class="js product-form__input size-options">
+                        <div class="sizes-options__header">
+                          <legend class="form__label">{{ option.name }}</legend>
+                          {% assign pageId3 = block.settings.size_guide_page.template_suffix %}
+                          <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden " data-modal="#PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" {{ block.shopify_attributes }}>
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</button>
+                          </modal-opener>
+                          <modal-dialog id="PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                            <div role="dialog" aria-label="{{ block.settings.size_guide_text | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                              <button id="ModalClose-{{ block.settings.size_guide_text | replace: " ", "" }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                              <div class="product-popup-modal__content-info {% unless block.settings.size_guide_page.content != blank %}js-page-{{-pageId3}} js-page-content{% endunless %}">
+                                {% if block.settings.size_guide_page.content != blank %}
+                                {{ block.settings.size_guide_page.content }}
+                              {% else %}
+                                {% capture pageStyle3 %}'pagefly.{{- pageId3 -}}.css' | asset_url{% endcapture%}
+                                <link rel="stylesheet" href="{{pageStyle3}}">
+                              {% endif %}
+                              </div>
+                            </div>
+                          </modal-dialog>
+                        </div>
+                        {%- for value in option.values -%}
+                          <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                name="{{ option.name }}"
+                                value="{{ value | escape }}"
+                                form="{{ product_form_id }}"
+                                {% if option.selected_value == value %}checked{% endif %}
+                          >
+                          <label class="product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                            {{ value }}
+                            <span class="color-swatch__pin">{{value}}</span>
+                          </label>
+                        {%- endfor -%}
+                      </fieldset>
+                    {% endif %}
+                  {%- endfor -%}                                
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-radios>
+              {%- else -%}
+                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    <div class="product-form__input product-form__input--dropdown">
+                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                        {{ option.name }}
                       </label>
+                      <div class="select">
+                        <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          class="select__select"
+                          name="options[{{ option.name | escape }}]"
+                          form="{{ product_form_id }}"
+                        >
+                          {%- for value in option.values -%}
+                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                              {{ value }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                        {% render 'icon-caret' %}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-selects>
+              {%- endif -%}
+            {%- endunless -%}
+
+            <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+              <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                <div class="select">
+                  <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
                     {%- endfor -%}
-                  </fieldset>
-              {%- endfor -%}
-              <script type="application/json">
-                {{ product.variants | json }}
-              </script>
-            </variant-radios>
-          {%- else -%}
-            <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-              {%- for option in product.options_with_values -%}
-                <div class="product-form__input product-form__input--dropdown">
-                  <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-                    {{ option.name }}
-                  </label>
-                  <div class="select">
-                    <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                      class="select__select"
-                      name="options[{{ option.name | escape }}]"
-                      form="{{ product_form_id }}"
-                    >
-                      {%- for value in option.values -%}
-                        <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-                          {{ value }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                    {% render 'icon-caret' %}
-                  </div>
+                  </select>
+                  {% render 'icon-caret' %}
                 </div>
-              {%- endfor -%}
-
-              <script type="application/json">
-                {{ product.variants | json }}
-              </script>
-            </variant-selects>
-          {%- endif -%}
-        {%- endunless -%}
-
-        <noscript class="product-form__noscript-wrapper-{{ section.id }}">
-          <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
-            <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
-            <div class="select">
-              <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
-                {%- for variant in product.variants -%}
-                  <option
-                    {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
-                    {% if variant.available == false %}disabled{% endif %}
-                    value="{{ variant.id }}"
-                  >
-                    {{ variant.title }}
-                    {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
-                    - {{ variant.price | money | strip_html }}
-                  </option>
-                {%- endfor -%}
-              </select>
-              {% render 'icon-caret' %}
-            </div>
-          </div>
-        </noscript>
+              </div>
+            </noscript>
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -766,6 +981,18 @@
         hiddenInput.value = event.currentTarget.value;
       });
     });
+  </script>
+  <script>
+    const triggerProductInfo = (ev) => {
+      const input = ev.currentTarget;
+      const onImageTextContent = document.querySelector('.on-picture-text');
+      const onImageTextTrigger = document.querySelector('.on-picture-text__mobile-trigger')
+
+      onImageTextContent.classList.toggle('active')
+      onImageTextTrigger.classList.toggle('active')
+    }
+    document.querySelector('.on-picture-text__mobile-trigger').addEventListener('click', triggerProductInfo, false)
+    document.querySelector('.on-picture-text__close').addEventListener('click', triggerProductInfo, false)
   </script>
 
   {%- liquid
@@ -997,8 +1224,8 @@
           "type": "range",
           "id": "tab_icon_size",
           "min": 2,
-          "max": 5,
-          "step": 0.5,
+          "max": 4,
+          "step": 0.1,
           "unit": "rem",
           "label": "Icon size",
           "default": 3
@@ -1189,6 +1416,371 @@
       "name": "t:sections.main-product.blocks.variant_picker.name",
       "limit": 1,
       "settings": [
+        {
+          "type": "range",
+          "id": "swatches_padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "swatches_padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Pop-up Pages"
+        },
+        {
+          "type": "page",
+          "id": "color_group1_page",
+          "label": "color-group-page"
+        }, 
+        {
+          "type": "page",
+          "id": "color_group2_page",
+          "label": "color-group-page"
+        }, 
+        {
+          "type": "text",
+          "id": "size_guide_text",
+          "default": "Size Guide",
+          "label": "Pop-up link text"
+        },
+        {
+          "type": "page",
+          "id": "size_guide_page",
+          "label": "Page"
+        },      
+        {
+          "type": "select",
+          "id": "swatch_display",
+          "label": "Swatch display type",
+          "options": [
+            {
+              "value": "circle",
+              "label": "Circle"
+            },
+            {
+              "value": "square",
+              "label": "Square"
+            },
+            {
+              "value": "rectangle",
+              "label": "Rectangle"
+            }
+          ],
+          "default": "circle"
+        },
+        {
+          "type": "range",
+          "id": "legend_size",
+          "label": "Color options legend size",
+          "unit": "rem",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "default": 1.4
+        },
+        {
+          "type": "select",
+          "id": "legend_weight",
+          "label": "Color options legend weight",
+          "options": [
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "bold",
+              "label": "Bold"
+            }
+          ],
+          "default": "bold"
+        },      
+        {
+          "type": "range",
+          "id": "swatch_size",
+          "label": "Swatch size",
+          "unit": "rem",
+          "min": 1,
+          "max": 6,
+          "step": 0.5,
+          "default": 3.5
+        },
+        {
+          "type": "header",
+          "content": "Color group 1"
+        },
+        {
+          "type": "text",
+          "id": "group_1_title",
+          "label": "Color group 1 title",
+          "default": "Color group 1 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "color-11",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "swatch11",
+          "label": "Swatch 11 color",
+          "default": "#000000"
+        },  
+        {
+          "type": "checkbox",
+          "id": "color-12",
+          "label": "Color option 2",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch12",
+          "label": "Swatch 12 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-13",
+          "label": "Color option 3",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch13",
+          "label": "Swatch 13 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-14",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "swatch14",
+          "label": "Swatch 14 color",
+          "default": "#000000"
+        },  
+        {
+          "type": "checkbox",
+          "id": "color-15",
+          "label": "Color option 5",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch15",
+          "label": "Swatch 15 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-16",
+          "label": "Color option 6",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch16",
+          "label": "Swatch 16 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-17",
+          "label": "Color option 7",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch17",
+          "label": "Swatch 17 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-18",
+          "label": "Color option 8",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch18",
+          "label": "Swatch 18 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-19",
+          "label": "Color option 9",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch19",
+          "label": "Swatch 19 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-110",
+          "label": "Color option 10",
+          "default": true
+        },   
+        {
+          "type": "color",
+          "id": "swatch110",
+          "label": "Swatch 110 color",
+          "default": "#000000"
+        },  
+        {
+          "type": "header",
+          "content": "Color group 2"
+        },
+        {
+          "type": "text",
+          "id": "group_2_title",
+          "label": "Color group 2 title",
+          "default": "Color group 2 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "color-21",
+          "label": "Color option 1",
+          "default": true
+        },  
+        {
+          "type": "color",
+          "id": "swatch21",
+          "label": "Swatch 21 color",
+          "default": "#000000"
+        },  
+        {
+          "type": "checkbox",
+          "id": "color-22",
+          "label": "Color option 2",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch22",
+          "label": "Swatch 22 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-23",
+          "label": "Color option 3",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch23",
+          "label": "Swatch 23 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-24",
+          "label": "Color option 4",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch24",
+          "label": "Swatch 24 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-25",
+          "label": "Color option 5",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch25",
+          "label": "Swatch 25 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-26",
+          "label": "Color option 6",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch26",
+          "label": "Swatch 26 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-27",
+          "label": "Color option 7",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch27",
+          "label": "Swatch 27 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-28",
+          "label": "Color option 8",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch28",
+          "label": "Swatch 28 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-29",
+          "label": "Color option 9",
+          "default": true
+        }, 
+        {
+          "type": "color",
+          "id": "swatch29",
+          "label": "Swatch 29 color",
+          "default": "#000000"
+        }, 
+        {
+          "type": "checkbox",
+          "id": "color-210",
+          "label": "Color option 10",
+          "default": true
+        },  
+        {
+          "type": "color",
+          "id": "swatch210",
+          "label": "Swatch 210 color",
+          "default": "#000000"
+        }, 
         {
           "type": "select",
           "id": "picker_type",
@@ -1548,7 +2140,7 @@
       "type": "checkbox",
       "id": "bc_is_uppercase",
       "label": "Breadcrumbs uppercase",
-      "default": "false"
+      "default": false
     },
     {
       "type": "text",
@@ -1587,6 +2179,26 @@
       "default": "400"
     },
     {
+      "type": "select",
+      "id": "on_image_text_align",
+      "label": "On image text alignment",
+      "options": [
+        {
+          "value": "flex-end",
+          "label": "right"
+        },
+        {
+          "value": "flex-start",
+          "label": "left"
+        },
+        {
+          "value": "center",
+          "label": "center"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
       "type": "color",
       "id": "on_picture_text_color",
       "label": "On picture text color",
@@ -1597,6 +2209,12 @@
       "id": "on_image_bk",
       "label": "On picture text background color",
       "default": "#dddddd40"
+    },
+    {
+      "type": "text",
+      "id": "on_picture_trigger_text",
+      "label": "On picture mobile trigger button text",
+      "default": "Model Info"
     },
     {
       "type": "header",

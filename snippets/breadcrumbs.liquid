@@ -1,12 +1,13 @@
 <style>
   .breadcrumbs {
-    margin: 0 0 1em;
+    margin: 0.8rem 0 0.4rem 0;
   }
 
   .breadcrumbs__list {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 1.2rem 0 0.4rem 0;
+    line-height: 1.9rem;
   }
 
   .breadcrumbs__item {
@@ -14,28 +15,41 @@
   }
 
   .breadcrumbs__item:not(:last-child):after {
-    /* border-style: solid;
-    border-width: .10em .10em 0 0; */
-    content: '> ';
-    display: inline-block;
-    font-size: {{ bc_size }}rem;
-    font-weight: {{ bc_weight }};
-    /* height: .20em;
-    margin: 0 .20em; */
-    position: relative;
-    /* transform: rotate(45deg);
-    vertical-align: middle;
-    width: .20em; */
-  }
+      content: '> ';
+      display: inline-block;
+      font-size: 1.3rem;
+      font-weight: 400;
+      position: relative;
+    }
 
-  .breadcrumbs__link {
-    font-size: {{ bc_size }}rem;
-    font-weight: {{ bc_weight }};
-    {% if is_uppercase %}
-    text-transform: uppercase;
-    {% endif %}
-    color: inherit;
-    text-decoration: none;
+    .breadcrumbs__link {
+      font-size: 1.3rem;
+      font-weight: 400;
+      {% if is_uppercase %}
+      text-transform: uppercase;
+      {% endif %}
+      color: inherit;
+      text-decoration: none;
+    }
+
+  @media screen and (min-width: 750px) {
+    .breadcrumbs__item:not(:last-child):after {
+      content: '> ';
+      display: inline-block;
+      font-size: {{ bc_size }}rem;
+      font-weight: {{ bc_weight }};
+      position: relative;
+    }
+
+    .breadcrumbs__link {
+      font-size: {{ bc_size }}rem;
+      font-weight: {{ bc_weight }};
+      {% if is_uppercase %}
+      text-transform: uppercase;
+      {% endif %}
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   .breadcrumbs__link[aria-current="page"] {
@@ -69,8 +83,11 @@
           </li>
         {%- endif -%}
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">&nbsp;{{ product.title }}</a>
+          <a class="breadcrumbs__link" href="{{ product.collections[0].url }}" aria-current="page">&nbsp;{{ product.collections[0].title }}</a>
         </li>
+        <!-- <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">&nbsp;{{ product.title }}</a>
+        </li> -->
       {%- when 'collection' and collection.handle -%}
         {%- if current_tags -%}
           <li class="breadcrumbs__item">
@@ -113,5 +130,4 @@
     {%- endcase -%}
   </ol>
 </nav>
-
 {%- endunless -%}

@@ -76,7 +76,7 @@
           "type": "tabs",
           "settings": {
             "border_on": false,
-            "tab_icon_size": 5,
+            "tab_icon_size": 4,
             "tab_title_size": 1.6,
             "tab_title_weight": "bold",
             "tab_title_justify": "center",
@@ -125,7 +125,7 @@
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": true,
-        "padding_top": 36,
+        "padding_top": 8,
         "padding_bottom": 12
       }
     },
