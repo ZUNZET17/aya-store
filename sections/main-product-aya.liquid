@@ -706,7 +706,7 @@
                                 .{{-swatch_idx-}} {
                                   background-color: {{- block.settings[swatch_idx] -}};
                                 }
-                                .unavailable-swatch {
+                                .{{-swatch_idx-}}.unavailable-swatch {
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
                                   border-color: #dddddd40!important;
                                 }
@@ -766,6 +766,10 @@
                                   {% if block.settings.circle_on %}
                                   border-radius: 50%;
                                   {% endif %}
+                                }
+                                .{{-swatch_idx-}}.unavailable-swatch {
+                                  background-color: {{- block.settings[swatch_idx] -}}75!important;
+                                  border-color: #dddddd40!important;
                                 }
                               {% endstyle %}
                               {%- capture colorop2 -%}color-2{{-forloop.index-}}{%- endcapture -%}

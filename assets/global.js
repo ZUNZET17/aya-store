@@ -995,7 +995,7 @@ const sortVariantPictures = function (ev) {
   selectedColor = value;
 
   const picturesArray = Array.from(document.querySelectorAll('.product__media-item'));
-  const filteredArray = picturesArray.filter( x => x.querySelector('img').getAttribute('alt').toLowerCase().includes(value))
+  const filteredArray = picturesArray.filter( x => x.getAttribute('media-alt').toLowerCase() === value)
 
   if(filteredArray.length > 0 ) {
     picturesArray.map(x => {
