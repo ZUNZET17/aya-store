@@ -709,7 +709,15 @@
                                 .unavailable-swatch {
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
                                   border-color: #dddddd40!important;
-                                  pointer-events: none;
+                                }
+                                .unavailable-swatch:after {
+                                  content: "X";
+                                  font-size: {{- block.settings.swatch_size -}}rem;
+                                  position: absolute;
+                                  display: flex;
+                                  justify-content: center;
+                                  align-items: center;
+                                  color: #dddddd40;
                                 }
                               {% endstyle %}
                               {%- capture colorop1 -%}color-1{{-forloop.index-}}{%- endcapture -%}
