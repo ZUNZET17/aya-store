@@ -3090,6 +3090,12 @@ details-disclosure > details {
     margin-bottom: 1.5rem;
   }
 
+  .sizes-list {
+    width: max-content;
+    display: flex;
+    column-gap: .5rem
+  }
+
   .product-size-label:hover {
     border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
   }

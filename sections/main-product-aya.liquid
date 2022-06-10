@@ -814,18 +814,20 @@
                             </div>
                           </modal-dialog>
                         </div>
-                        {%- for value in option.values -%}
-                          <input class="variant-option-input js-variant-option-size" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                                name="{{ option.name }}"
-                                value="{{ value | escape }}"
-                                form="{{ product_form_id }}"
-                                {% if option.selected_value == value %}checked{% endif %}
-                          >
-                          <label class="product-size-label js-product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                            {{ value }}
-                            <span class="color-swatch__pin">{{value}}</span>
-                          </label>
-                        {%- endfor -%}
+                        <div class="sizes-list">
+                          {%- for value in option.values -%}
+                            <input class="variant-option-input js-variant-option-size" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                  name="{{ option.name }}"
+                                  value="{{ value | escape }}"
+                                  form="{{ product_form_id }}"
+                                  {% if option.selected_value == value %}checked{% endif %}
+                            >
+                            <label class="product-size-label js-product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                              {{ value }}
+                              <span class="color-swatch__pin">{{value}}</span>
+                            </label>
+                          {%- endfor -%}
+                        </div>
                       </fieldset>
                     {% endif %}
                   {%- endfor -%}                                
