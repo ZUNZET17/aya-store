@@ -148,7 +148,7 @@
             -%}
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
               {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-              <li style="position: relative"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}">
+              <li style="position: relative; display:block"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}" media-alt="{{ featured_media.alt }}">
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
                 <div class="on-picture-text-container">
@@ -160,7 +160,7 @@
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative;">
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative; display: none" media-alt="{{ media.alt }}">
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
                   <div class="on-picture-text-container">
@@ -528,8 +528,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                min-width: 4.7rem;
-                max-height: 4.7rem;
+                min-width: 4.5rem;
+                min-height: 4.5rem;
                 padding: 0;
                 background-color: inherit;
                 float: left;
@@ -653,6 +653,20 @@
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  <!-- variants list -->
+                  {%- capture variants_list -%}
+                    {
+                    {%- for variant in product.variants -%}
+                        &quot;{%- for option in variant.options -%}
+                        {{- option | strip | downcase | replace: " ", "-" -}}
+                        {%- if forloop.last == false -%}-{%- endif -%}
+                      {%- endfor -%}&quot;:
+                      {{ variant.available -}}
+                      {%- if forloop.last == false -%},{% endif %}
+                    {%- endfor -%}
+                    }
+                  {%- endcapture -%}
+                  <input class="js-variant-list" value="{{variants_list}}" type="hidden">
                   {%- for option in product.options_with_values -%}
                     {% capture idx_top %}color_group_{{- forloop.index -}}_padding_top{% endcapture %}
                     {% capture idx_bottom %}color_group_{{- forloop.index -}}_padding_bottom{% endcapture %}
@@ -692,17 +706,22 @@
                                 .{{-swatch_idx-}} {
                                   background-color: {{- block.settings[swatch_idx] -}};
                                 }
+                                .unavailable-swatch {
+                                  background-color: {{- block.settings[swatch_idx] -}}75!important;
+                                  border-color: #dddddd40!important;
+                                  pointer-events: none;
+                                }
                               {% endstyle %}
                               {%- capture colorop1 -%}color-1{{-forloop.index-}}{%- endcapture -%}
                               {% comment %}<p>{{colorop1}}</p>{% endcomment %}
                               {%- if block.settings[colorop1] -%}
-                                <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                <input class="variant-option-input js-variant-option-color" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                       name="{{ option.name }}"
                                       value="{{ value | escape }}"
                                       form="{{ product_form_id }}"
                                       {% if option.selected_value == value %}checked{% endif %}
                                 >
-                                <label class="color-swatch__label swatch1{{-forloop.index}} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value}}" group-number="1">
+                                <label class="color-swatch__label swatch1{{-forloop.index}} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value}}" group-number="1">
                                   <span class="color-swatch__pin">{{value}}</span>
                                 </label>
                               {% endif %}
@@ -744,7 +763,7 @@
                               {%- capture colorop2 -%}color-2{{-forloop.index-}}{%- endcapture -%}
                               {% comment %}<p>{{colorop2}}</p>{% endcomment %}
                               {%- if block.settings[colorop2] -%}
-                                <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                <input class="variant-option-input js-variant-option-color" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                       name="{{ option.name }}"
                                       value="{{ value | escape }}"
                                       form="{{ product_form_id }}"
@@ -784,13 +803,13 @@
                           </modal-dialog>
                         </div>
                         {%- for value in option.values -%}
-                          <input class="variant-option-input" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                          <input class="variant-option-input js-variant-option-size" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
                                 value="{{ value | escape }}"
                                 form="{{ product_form_id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
-                          <label class="product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                          <label class="product-size-label js-product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                             {{ value }}
                             <span class="color-swatch__pin">{{value}}</span>
                           </label>

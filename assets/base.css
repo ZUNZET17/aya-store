@@ -2943,6 +2943,15 @@ details-disclosure > details {
     margin-bottom: 0!important;
   }
 
+  /* swatches */
+
+  .unavailable {
+    background-color: transparent!important;
+    color: #ddd!important;
+    border-color: #ddd!important;
+    pointer-events: none;
+  }
+
   .color-swatches-block {
     padding: 3rem 0;
   }
