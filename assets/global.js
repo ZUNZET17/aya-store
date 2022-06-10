@@ -966,7 +966,7 @@ const sizesAvailability = function (option) {
 const colorLabels = document.querySelectorAll('.js-color-label');
 
 const displaySwatchColor = function (ev) {
-  const input = ev.target;
+  const input = ev.target == document ? document.querySelector('.js-variant-option-color:checked + .js-color-label') : ev.target;
   const value = input.getAttribute("swatch-color")
   const size = document.querySelector('.js-variant-option-size:checked').value
   const groupNumber = input.getAttribute("group-number")
@@ -1010,6 +1010,7 @@ const sortVariantPictures = function (ev) {
 
 document.addEventListener("DOMContentLoaded", sortVariantPictures)
 document.addEventListener("DOMContentLoaded", optionsAvailability)
+document.addEventListener("DOMContentLoaded", displaySwatchColor)
 
 colorLabels.forEach(label => {
   label.addEventListener('click', sortVariantPictures, false)
