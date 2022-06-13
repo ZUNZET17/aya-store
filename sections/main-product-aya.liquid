@@ -1117,7 +1117,34 @@
     </script>
     <script src="{{ 'product-model.js' | asset_url }}" defer></script>
   {%- endif -%}
-
+  <script>
+    const requestPageSection = function (ev) { 
+      const input = ev.currentTarget;
+      const pageId = input.getAttribute('page-id');
+      let pageContent;  
+      console.log('requested')
+      function handleResponse() {
+        pageContent = JSON.parse(this.responseText);
+        console.log('afterload', pageContent[pageId])
+        let container = document.createElement( 'html' );
+        container.innerHTML = pageContent[pageId]
+        document.querySelector(`.js-page-${pageId}`).appendChild(container)
+      }
+      if ( document.querySelector(`.js-page-${pageId} > html`) ) return
+      const request = new XMLHttpRequest();
+      
+      request.addEventListener('load', handleResponse);
+      request.open('GET', `/?sections=${pageId}`, true);
+      request.send()
+    }
+  
+    if ( document.querySelector('.js-page-content') ) {
+      const popUpButtons = document.querySelectorAll('.js-pop-up-button');
+      popUpButtons.forEach(btn => {
+        btn.addEventListener('click', requestPageSection, false)
+      });
+    }
+    </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function isIE() {
