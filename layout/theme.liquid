@@ -30,7 +30,7 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    {{ content_for_header }}{% include 'globo.swatch.script' %}
+    {{ content_for_header }}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -267,13 +267,16 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+    
+  
+{% render 'mbc-bundles' %}  
+  
+  <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
     {% render 'pickystory-combos-prerender' %}
   {% endif %}
   <!-- PickyStory code end -->
   
-{% render 'mbc-bundles' %}  
   <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
     <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
