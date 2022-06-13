@@ -115,6 +115,7 @@
         },
         "7432a9af-0705-4f40-92f1-2074055942ed": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "text": "<p>Let's Redefine Fashion<\/p>",
@@ -128,6 +129,7 @@
         },
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "text": "<p>Be Part of the Change<\/p>",
@@ -147,7 +149,7 @@
             "padding_top": 1.3,
             "padding_bottom": 0,
             "tab_icon_size": 4,
-            "tab_title_size": 1.7,
+            "tab_title_size": 1.5,
             "tab_title_weight": "regular",
             "tab_title_justify": "center",
             "tab_content_size": 1.4,
