@@ -165,15 +165,15 @@
             "tab2_image": "shopify:\/\/shop_images\/Co2_2.png",
             "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
             "tab2_title": "<p>Change 2: One-Country Supply Chain<\/p>",
-            "tab2_title2": "<p>Tab 2 title 2<\/p>",
+            "tab2_title2": "<p><em>Be Part of the Change<\/em><\/p>",
             "tab2_title2_hide_mobile": false,
-            "tab2_content": "<p><strong>Be Part of the Change<\/strong><\/p><p>We perfected the supply chain model.<\/p><p><strong>No more multinational supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
+            "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more multinational supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
             "tab3_image": "shopify:\/\/shop_images\/Cotton_Product_Page_1.png",
             "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
             "tab3_title": "<p>Change 3: 100% Organic Pima<\/p>",
-            "tab3_title2": "<p>Tab 3 title 2<\/p>",
+            "tab3_title2": "<p><em>Be Part of the Change<\/em><\/p>",
             "tab3_title2_hide_mobile": false,
-            "tab3_content": "<p><strong>Be Part of the Change<\/strong><\/p><p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
+            "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
         },
         "60bff899-4b1d-4fc3-9dca-73dd8958d050": {
@@ -274,7 +274,6 @@
         "image-with-text-1"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/1.png",
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -320,7 +319,6 @@
         "165055703693697682-1"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/3.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
