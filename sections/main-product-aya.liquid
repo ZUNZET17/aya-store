@@ -753,11 +753,16 @@
                                 .{{-swatch_idx-}} {
                                   background-color: {{- block.settings[swatch_idx] -}};
                                 }
+<<<<<<< Updated upstream
                                 {% comment %}
                                 .{{-swatch_idx-}}.unavailable-swatch {
                                   {% unless request.design_mode %}
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
                                   {% endunless %}
+=======
+                                .unavailable-swatch {
+                                  background-color: unavailable_bk;
+>>>>>>> Stashed changes
                                   border-color: #dddddd40!important;
                                 }
                                 {% endcomment %}
