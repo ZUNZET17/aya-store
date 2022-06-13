@@ -2968,6 +2968,10 @@ details-disclosure > details {
     gap: 1rem;
   }
 
+  .color-group-legend {
+    margin-bottom: 0!important;
+  }
+
   .color-group-legend-btn {
     text-decoration: none;
   }

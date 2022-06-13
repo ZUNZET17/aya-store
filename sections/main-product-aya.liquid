@@ -338,9 +338,9 @@
               }
             {% endif %}
           {% endstyle %}
-            <p class="text-block-{{-block.id}} product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+            <div class="text-block-{{-block.id}} product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
-            </p>
+            </div>
           {%- when 'title' -%}
             <div class="product__title" {{ block.shopify_attributes }}>
               {% liquid
@@ -721,7 +721,7 @@
                               }
                             {% endstyle %}
                             <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
-                              <legend class="form__label color-group-legend color-group-legend-1" style="margin-bottom: 1rem;" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                              <legend class="form__label color-group-legend color-group-legend-1" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -786,7 +786,7 @@
                               }
                             {% endstyle %}
                             <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
-                              <legend class="form__label color-group-legend color-group-legend-2" style="margin-bottom: 1rem;">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                              <legend class="form__label color-group-legend color-group-legend-2">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
