@@ -428,6 +428,10 @@
             </div>
           {%- when 'tabs' -%}
           {% style %}
+          .tabs-block {
+            padding-top: {{ block.settings.padding_top -}}rem;
+            padding-bottom: {{ block.settings.padding_bottom -}}rem;
+          }
           {% if block.settings.hide_mobile %}
             @media screen and (max-width: 750px) {
               .tabs-block {
@@ -504,15 +508,45 @@
               </div>
               <!-- Tab content -->
               <div id="tab-1" class="tabcontent-cus animate-opacity" style="display: block;">
-                <p class="tabcontent__title">{{ block.settings.tab1_title }}</p>
+                {% style %}
+                {% if block.settings.tab1_title2_hide_mobile %}
+                @media screen and (max-width: 750px) {
+                  .tab1_title2 {
+                    display: none;
+                  }
+                }
+                {% endif %}
+                {% endstyle %}
+                <div class="tabcontent__title">{{ block.settings.tab1_title }}</div>
+                <div class="tabcontent__title tab1_title2">{{ block.settings.tab1_title2 }}</div>
                 <div class="tab__content">{{ block.settings.tab1_content }}</div>
               </div>
               <div id="tab-2" class="tabcontent-cus animate-opacity">
-                <p class="tabcontent__title">{{ block.settings.tab2_title }}</p>
+                {% style %}
+                {% if block.settings.tab2_title2_hide_mobile %}
+                @media screen and (max-width: 750px) {
+                  .tab2_title2 {
+                    display: none;
+                  }
+                }
+                {% endif %}
+                {% endstyle %}
+                <div class="tabcontent__title">{{ block.settings.tab2_title }}</div>
+                <div class="tabcontent__title tab2_title2 ">{{ block.settings.tab2_title2 }}</div>
                 <div class="tab__content">{{ block.settings.tab2_content }}</div>
               </div>
               <div id="tab-3" class="tabcontent-cus animate-opacity">
-                <p class="tabcontent__title">{{ block.settings.tab3_title }}</p>
+                {% style %}
+                {% if block.settings.tab3_title2_hide_mobile %}
+                @media screen and (max-width: 750px) {
+                  .tab3_title2 {
+                    display: none;
+                  }
+                }
+                {% endif %}
+                {% endstyle %}
+                <div class="tabcontent__title">{{ block.settings.tab3_title }}</div>div>
+                <div class="tabcontent__title tab3_title2">{{ block.settings.tab3_title2 }}</div>
                 <div class="tab__content">{{ block.settings.tab3_content }}</div>
               </div>
               <style>
@@ -681,8 +715,13 @@
                         <div class="color-group color-group--1">
                           <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" {{ block.shopify_attributes }}>
                             {% assign pageId = block.settings.color_group1_page.template_suffix %}
+                            {% style %}
+                              .color-group-legend-1{
+                                padding-bottom: {{ block.settings.color_group_1_legend_padding_bottom -}}rem;
+                              }
+                            {% endstyle %}
                             <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
-                              <legend class="form__label color-group-legend" style="margin-bottom: 1rem;" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                              <legend class="form__label color-group-legend color-group-legend-1" style="margin-bottom: 1rem;" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -707,7 +746,9 @@
                                   background-color: {{- block.settings[swatch_idx] -}};
                                 }
                                 .{{-swatch_idx-}}.unavailable-swatch {
+                                  {% unless request.design_mode %}
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
+                                  {% endunless %}
                                   border-color: #dddddd40!important;
                                 }
                                 .unavailable-swatch:after {
@@ -739,8 +780,13 @@
                         <div class="color-group color-group--2">
                           <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
                             {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
+                            {% style %}
+                              .color-group-legend-2 {
+                                padding-bottom: {{ block.settings.color_group_2_legend_padding_bottom -}}rem;
+                              }
+                            {% endstyle %}
                             <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
-                              <legend class="form__label color-group-legend" style="margin-bottom: 1rem;">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                              <legend class="form__label color-group-legend color-group-legend-2" style="margin-bottom: 1rem;">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -793,12 +839,26 @@
                   {%- endfor -%}   
                   {%- for option in product.options_with_values -%}
                     {% if option.name == 'Size' %}
+                      {% style %}
+                        .sizes-guide {
+                          font-size: {{ block.settings.sizes_guide_size -}}rem;
+                          font-weight: {{ block.settings.sizes_guide_weight -}};
+                          {% if block.settings.sizes_guide_underline %}
+                          text-decoration: underline;
+                          {% else %}
+                          text-decoration: none!Important;
+                          {% endif %}
+                        }
+                        .sizes-options__header {
+                          padding-bottom: {{ block.settings.sizes_options_header_padding_bottom -}}rem;
+                        }
+                      {% endstyle %}
                       <fieldset class="js product-form__input size-options">
                         <div class="sizes-options__header">
                           <legend class="form__label sizes-legend">{{ option.name }}</legend>
                           {% assign pageId3 = block.settings.size_guide_page.template_suffix %}
                           <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" {{ block.shopify_attributes }}>
-                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</button>
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button sizes-guide" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
                             <div role="dialog" aria-label="{{ block.settings.size_guide_text | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
@@ -1146,9 +1206,8 @@
           "default": false
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "text",
-          "default": "Text block",
           "label": "t:sections.main-product.blocks.text.settings.text.label"
         },
         {
@@ -1320,9 +1379,29 @@
         },
         {
           "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
+          "type": "range",
           "id": "tab_icon_size",
           "min": 2,
-          "max": 4,
+          "max": 5,
           "step": 0.1,
           "unit": "rem",
           "label": "Icon size",
@@ -1443,10 +1522,22 @@
           "info": "White image for tab button"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "tab1_title",
           "label": "Tab 1 title",
-          "default": "Tab 1 title"
+          "default": "<p>Tab 1 title</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "tab1_title2",
+          "label": "Tab 1 title 2",
+          "default": "<p>Tab 1 title 2</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "tab1_title2_hide_mobile",
+          "label": "Hide mobile",
+          "default": false
         },
         {
           "type": "richtext",
@@ -1467,10 +1558,22 @@
           "info": "White image for tab button"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "tab2_title",
           "label": "Tab 2 title",
-          "default": "Tab 2 title"
+          "default": "<p>Tab 2 title</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "tab2_title2",
+          "label": "Tab 2 title 2",
+          "default": "<p>Tab 2 title 2</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "tab2_title2_hide_mobile",
+          "label": "Hide mobile",
+          "default": false
         },
         {
           "type": "richtext",
@@ -1491,10 +1594,22 @@
           "info": "White image for tab button"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "tab3_title",
           "label": "Tab 3 title",
-          "default": "Tab 3 title"
+          "default": "<p>Tab 3 title</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "tab3_title2",
+          "label": "Tab 3 title 2",
+          "default": "<p>Tab 3 title 2</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "tab3_title2_hide_mobile",
+          "label": "Hide Mobile",
+          "default": false
         },
         {
           "type": "richtext",
@@ -1539,6 +1654,20 @@
           "default": 1
         },
         {
+          "type": "header",
+          "content": "Color group 1"
+        },
+        {
+          "type": "range",
+          "id": "color_group_1_legend_padding_bottom",
+          "label": "Color group 1 legend padding bottom",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 0
+        },
+        {
           "type": "range",
           "id": "color_group_1_padding_top",
           "label": "Color group 1 padding top",
@@ -1557,6 +1686,20 @@
           "step": 0.1,
           "unit": "rem",
           "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Color group 2"
+        },
+        {
+          "type": "range",
+          "id": "color_group_2_legend_padding_bottom",
+          "label": "Color group 2 legend padding bottom",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 1
         },
         {
           "type": "range",
@@ -1581,6 +1724,52 @@
         {
           "type": "header",
           "content": "Pop-up Pages"
+        },
+        {
+          "type": "range",
+          "id": "sizes_options_header_padding_bottom",
+          "label": "sizes options header padding bottom",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "sizes_guide_size",
+          "label": "Sizes Guide size",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 1.6
+        },
+        {
+          "type": "select",
+          "id": "sizes_guide_weight",
+          "label": "Sizes guide weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "regular"
+            },
+            {
+              "value": "500",
+              "label": "medium"
+            },
+            {
+              "value": "700",
+              "label": "bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "checkbox",
+          "id": "sizes_guide_underline",
+          "label": "Sizes Guide underline",
+          "default": true
         },
         {
           "type": "page",
