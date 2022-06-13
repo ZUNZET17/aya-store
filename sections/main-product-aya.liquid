@@ -744,14 +744,20 @@
                           <div class="color-options">
                             {%- for value in option.values -%}
                               {% capture swatch_idx %}swatch1{{-forloop.index-}}{% endcapture %}
+                              {% capture unavailable_bk %}{{- block.settings[swatch_idx] -}}{{- block.settings[swatch_idx] -}}75!important{% endcapture %}
                               {% style %}
                                 .{{-swatch_idx-}} {
                                   background-color: {{- block.settings[swatch_idx] -}};
                                 }
+<<<<<<< Updated upstream
                                 .{{-swatch_idx-}}.unavailable-swatch {
                                   {% unless request.design_mode %}
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
                                   {% endunless %}
+=======
+                                .unavailable-swatch {
+                                  background-color: unavailable_bk;
+>>>>>>> Stashed changes
                                   border-color: #dddddd40!important;
                                 }
                                 .unavailable-swatch:after {
