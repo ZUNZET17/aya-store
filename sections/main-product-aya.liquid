@@ -823,10 +823,12 @@
                                   border-radius: 50%;
                                   {% endif %}
                                 }
+                                {% comment %}
                                 .{{-swatch_idx-}}.unavailable-swatch {
                                   background-color: {{- block.settings[swatch_idx] -}}75!important;
                                   border-color: #dddddd40!important;
                                 }
+                                {% endcomment %}
                               {% endstyle %}
                               {%- capture colorop2 -%}color-2{{-forloop.index-}}{%- endcapture -%}
                               {% comment %}<p>{{colorop2}}</p>{% endcomment %}
