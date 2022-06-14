@@ -896,7 +896,6 @@
                             >
                             <label class="product-size-label js-product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                               {{ value }}
-                              <span class="color-swatch__pin">{{value}}</span>
                             </label>
                           {%- endfor -%}
                         </div>
@@ -1144,7 +1143,7 @@
         btn.addEventListener('click', requestPageSection, false)
       });
     }
-    
+
     </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
