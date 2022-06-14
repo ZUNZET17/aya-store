@@ -972,12 +972,12 @@ const displaySwatchColor = function (ev) {
   const groupNumber = input.getAttribute("group-number")
   const allTitleContainers = document.querySelectorAll(".js-color-group-title")
 
-  allTitleContainers.forEach((container, idx) => {
-    container.innerText = "";
-    if (container.id == `js-color-group-title${groupNumber}`) {
-      container.innerText = value;
-    }
-  })
+  // allTitleContainers.forEach((container, idx) => {
+  //   container.innerText = "";
+  //   if (container.id == `js-color-group-title${groupNumber}`) {
+  //     container.innerText = value;
+  //   }
+  // })
 
   sizesAvailability(input)
 }

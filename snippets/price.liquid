@@ -29,7 +29,11 @@
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
   endif
 -%}
-
+{% style %}
+  .price__container {
+    color: {{ price_color }};
+  }
+{% endstyle %}
 <div class="price
   {%- if price_class %} {{ price_class }}{% endif -%}
   {%- if available == false %} price--sold-out {% endif -%}
@@ -81,6 +85,7 @@
       </span>
     </small>
   </div>
+  {% comment %}
   {%- if show_badges -%}
     <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
       {{ 'products.product.on_sale' | t }}
@@ -90,4 +95,5 @@
       {{ 'products.product.sold_out' | t }}
     </span>
   {%- endif -%}
+  {% endcomment %}
 </div>

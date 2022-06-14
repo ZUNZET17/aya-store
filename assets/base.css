@@ -3101,3 +3101,7 @@ details-disclosure > details {
   .text-block p {
     margin: 0!Important;
   }
+
+  .no-events {
+    pointer-events: none;
+  }

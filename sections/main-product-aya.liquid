@@ -49,20 +49,30 @@
             {% endunless %}
             .on-picture-text-container {
               width: 100%;
-              display: flex;
+              display: none;
               justify-content: {{ section.settings.on_image_text_align }};
               position: absolute;
               padding: 0 1.5rem;
               bottom: 1.5rem;
               z-index: 7;
             }
-            @media screen and (min-width: 750px) {
-              .on-picture-text-container {
-                display: none;
-              }
-            }
             .product__media-item.is-active .on-picture-text-container {
               display: flex;
+            }
+            .product__media-item.natural.is-active > .on-picture-text-container {
+              display: none;
+            }
+            .on-picture-text-container--natural {
+              width: 100%;
+              display: none!important;
+              justify-content: {{ section.settings.on_image_text_align_natural }};
+              position: absolute;
+              padding: 0 1.5rem;
+              bottom: 1.5rem;
+              z-index: 7;
+            }
+            .product__media-item.natural.is-active > .on-picture-text-container--natural {
+              display: flex!important;
             }
             .on-picture-text {
               display: none;
@@ -71,13 +81,24 @@
               color: {{ section.settings.on_picture_text_color }};
               font-size: {{ section.settings.on_image_text_size }}rem;
               font-weight: {{ section.settings.on_image_text_weight }};
-              word-break: break-all;
+              word-break: break-word;
               background: {{ section.settings.on_image_bk }};
+              line-height: normal;
+            }
+            .on-picture-text--natural {
+              display: none;
+              width: max-content;
+              padding: .5rem;
+              color: {{ section.settings.on_picture_text_color_natural }};
+              font-size: {{ section.settings.on_image_text_size_natural }}rem;
+              font-weight: {{ section.settings.on_image_text_weight_natural }};
+              word-break: break-word;
+              background: {{ section.settings.on_image_bk_natural }};
               line-height: normal;
             }
             .on-picture-text__close{
               position: absolute;
-              content: 'X';
+              content: '';
               display: flex;
               background: rgb(255 255 255);
               color: #000000;
@@ -89,6 +110,7 @@
               justify-content: center;
               align-items: center;
               line-height: 1;
+              cursor: pointer;
             }
             .on-picture-text__mobile-trigger {
               display: block;
@@ -100,19 +122,23 @@
               padding: .5rem 1rem;
               border-radius: 10rem;
               text-align: center;
+              cursor: pointer;
+            }
+            .on-picture-text__mobile-trigger--natural {
+              display: block;
+              color: {{ section.settings.on_picture_text_color_natural }};
+              font-size: {{ section.settings.on_image_text_size_natural }}rem;
+              font-weight: {{ section.settings.on_image_text_weight_natural }};
+              background: {{ section.settings.on_image_bk_natural }};
+              width: max-content;
+              padding: .5rem 1rem;
+              border-radius: 10rem;
+              text-align: center;
+              cursor: pointer;
             }
             @media screen and (min-width: 750px) {
-              .on-picture-text {
-                display: block;
-              }
-              .on-picture-text__mobile-trigger {
-                display: none;
-              }
               .on-picture-text-container {
                 bottom: 1.5rem;
-              }
-              .on-picture-text__close {
-                display: none;
               }
             }
             .on-picture-text__close > svg {
@@ -148,31 +174,57 @@
             -%}
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
               {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-              <li style="position: relative; display:block"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}" media-alt="{{ featured_media.alt }}">
+              <li style="position: relative; display:block"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="{% if featured_media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}" media-alt="{{ featured_media.alt }}">
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
                 <div class="on-picture-text-container">
-                  <div class="on-picture-text">
-                    {{ section.settings.on_picture_text }}
+                  <div class="on-picture-text js-on-picture-text">
+                    {{ section.settings.on_picture_text | newline_to_br }}
+                    <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+                  </div>
+                  <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
+                    {{ section.settings.on_picture_trigger_text | newline_to_br }}
+                  </div>
+                </div>
+                <div class="on-picture-text-container on-picture-text-container--natural">
+                  <div class="on-picture-text on-picture-text--natural js-on-picture-text">
+                    {{ section.settings.on_picture_text_natural | newline_to_br }}
+                    <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+                  </div>
+                  <div class="on-picture-text__mobile-trigger on-picture-text__mobile-trigger--natural js-on-image-text-mobile-trigger">
+                    {{ section.settings.on_picture_trigger_text_natural | newline_to_br }}
                   </div>
                 </div>
               </li>
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative; display: none" media-alt="{{ media.alt }}">
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="{% if media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative; display: none" media-alt="{{ media.alt }}">
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
                   <div class="on-picture-text-container">
-                    <div class="on-picture-text">
+                    <div class="on-picture-text js-on-picture-text">
                       {{ section.settings.on_picture_text }}
+                      <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+                    </div>
+                    <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
+                      {{ section.settings.on_picture_trigger_text }}
+                    </div>
+                  </div>
+                  <div class="on-picture-text-container on-picture-text-container--natural">
+                    <div class="on-picture-text on-picture-text--natural js-on-picture-text">
+                      {{ section.settings.on_picture_text_natural | newline_to_br }}
+                      <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+                    </div>
+                    <div class="on-picture-text__mobile-trigger on-picture-text__mobile-trigger--natural js-on-image-text-mobile-trigger">
+                      {{ section.settings.on_picture_trigger_text_natural | newline_to_br }}
                     </div>
                   </div>
                 </li>
               {%- endunless -%}
             {%- endfor -%}
           </ul>
-          <div class="on-picture-text-container">
+          <!-- <div class="on-picture-text-container">
             <div class="on-picture-text js-on-picture-text">
               {{ section.settings.on_picture_text }}
               <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
@@ -181,6 +233,15 @@
               {{ section.settings.on_picture_trigger_text }}
             </div>
           </div>
+          <div class="on-picture-text-container on-picture-text-container--natural">
+            <div class="on-picture-text on-picture-text--natural js-on-picture-text">
+              {{ section.settings.on_picture_text_natural | newline_to_br }}
+              <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
+            </div>
+            <div class="on-picture-text__mobile-trigger on-picture-text__mobile-trigger--natural js-on-image-text-mobile-trigger">
+              {{ section.settings.on_picture_trigger_text_natural | newline_to_br }}
+            </div>
+          </div> -->
           <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             {% comment %}
@@ -324,6 +385,7 @@
                   assign text_weight = 400
             endcase %}
             .text-block-{{-block.id-}} {
+              color: {{ block.settings.text_color }};
               font-size: {{ block.settings.text_size -}}rem;
               font-weight: {{- text_weight -}};
               text-align: {{- block.settings.text_justify -}};
@@ -354,6 +416,7 @@
               endcase %}
               {% style %}
                 .product__title h1 {
+                  color: {{ block.settings.title_color }};
                   font-size: {{ block.settings.title_size -}}rem;
                   font-weight: {{ title_weight -}};
                   text-align: {{ block.settings.title_justify }};
@@ -368,7 +431,7 @@
             </div>
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large', price_color: {{ block.settings.price_color }} -%}
             </div>
             {% comment %}
             {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
@@ -451,28 +514,62 @@
                     border-top: none;
                     {% endif %}
                   }
-                  .tab1-title-1,
-                  .tab1-title-2 {
+
+                  .tab1-title-1{
+                    color: {{ block.settings.tab1_title_color }};
                     font-size: {{ block.settings.tab_title1_size -}}rem;
                     font-weight: {{- block.settings.tab_title1_weight -}};
                     text-align: {{ block.settings.tab_title1_justify -}};
                   }
-                  .tab2-title-1,
-                  .tab2-title-2 {
+                  .tab1-title-2 {
+                    color: {{ block.settings.tab1_title2_color }};
+                    font-size: {{ block.settings.tab_title12_size -}}rem;
+                    font-weight: {{- block.settings.tab_title12_weight -}};
+                    text-align: {{ block.settings.tab_title12_justify -}};
+                  }
+
+                  .tab2-title-1 {
+                    color: {{ block.settings.tab2_title_color }};
                     font-size: {{ block.settings.tab_title2_size -}}rem;
                     font-weight: {{- block.settings.tab_title2_weight -}};
                     text-align: {{ block.settings.tab_title2_justify -}};
                   }
-                  .tab3-title-1,
-                  .tab3-title-2 {
+                  .tab2-title-2 {
+                    color: {{ block.settings.tab2_title2_color }};
+                    font-size: {{ block.settings.tab_title22_size -}}rem;
+                    font-weight: {{- block.settings.tab_title22_weight -}};
+                    text-align: {{ block.settings.tab_title22_justify -}};
+                  }
+
+                  .tab3-title-1 {
+                    color: {{ block.settings.tab3_title_color }};
                     font-size: {{ block.settings.tab_title3_size -}}rem;
                     font-weight: {{- block.settings.tab_title3_weight -}};
                     text-align: {{ block.settings.tab_title3_justify -}};
                   }
-                  .tab__content {
-                    font-size: {{ block.settings.tab_content_size -}}rem;
-                    text-align: {{ block.settings.tab_content_justify -}};
+                  .tab3-title-2 {
+                    color: {{ block.settings.tab3_title2_color }};
+                    font-size: {{ block.settings.tab_title32_size -}}rem;
+                    font-weight: {{- block.settings.tab_title32_weight -}};
+                    text-align: {{ block.settings.tab_title32_justify -}};
                   }
+                  
+                  .tab1__content {
+                    color: {{ block.settings.tab1_content_color }};
+                    font-size: {{ block.settings.tab1_content_size -}}rem;
+                    text-align: {{ block.settings.tab1_content_justify -}};
+                  }
+                  .tab2__content {
+                    color: {{ block.settings.tab2_content_color }};
+                    font-size: {{ block.settings.tab2_content_size -}}rem;
+                    text-align: {{ block.settings.tab2_content_justify -}};
+                  }
+                  .tab3__content {
+                    color: {{ block.settings.tab3_content_color }};
+                    font-size: {{ block.settings.tab3_content_size -}}rem;
+                    text-align: {{ block.settings.tab3_content_justify -}};
+                  }
+
                   .tab-customize button.active {
                     background-color: {{ block.settings.btn_bk_active }};
                   }
@@ -523,7 +620,7 @@
                 {% endstyle %}
                 <div class="tabcontent__title tab1-title-1">{{ block.settings.tab1_title }}</div>
                 <div class="tabcontent__title tab1-title-2">{{ block.settings.tab1_title2 }}</div>
-                <div class="tab__content">{{ block.settings.tab1_content }}</div>
+                <div class="tab1__content">{{ block.settings.tab1_content }}</div>
               </div>
               <div id="tab-2" class="tabcontent-cus animate-opacity">
                 {% style %}
@@ -537,7 +634,7 @@
                 {% endstyle %}
                 <div class="tabcontent__title tab2-title-1">{{ block.settings.tab2_title }}</div>
                 <div class="tabcontent__title tab2-title-2 ">{{ block.settings.tab2_title2 }}</div>
-                <div class="tab__content">{{ block.settings.tab2_content }}</div>
+                <div class="tab2__content">{{ block.settings.tab2_content }}</div>
               </div>
               <div id="tab-3" class="tabcontent-cus animate-opacity">
                 {% style %}
@@ -551,7 +648,7 @@
                 {% endstyle %}
                 <div class="tabcontent__title tab3-title-1">{{ block.settings.tab3_title }}</div>
                 <div class="tabcontent__title tab3-title-2">{{ block.settings.tab3_title2 }}</div>
-                <div class="tab__content">{{ block.settings.tab3_content }}</div>
+                <div class="tab3__content">{{ block.settings.tab3_content }}</div>
               </div>
               <style>
               .tab-customize {
@@ -674,6 +771,11 @@
               font-size: {{ block.settings.sizes_legend_size -}}rem;
               font-weight: {{ block.settings.sizes_legend_weight }};
             }
+            .color-group2-page2-legend {
+              color: {{ block.settings.group22_legend_color }};
+              font-size: {{ block.settings.color_group2_page2_legend_size -}}rem;
+              font-weight: {{ block.settings.color_group2_page2_weight }};
+            }
             .color-swatch__label {
               min-width: {{- block.settings.swatch_size -}}rem;
               min-height: {{- block.settings.swatch_size -}}rem;
@@ -724,11 +826,12 @@
                             {% assign pageId = block.settings.color_group1_page.template_suffix %}
                             {% style %}
                               .color-group-legend-1{
+                                color: {{ block.settings.group1_legend_color}};
                                 padding-bottom: {{ block.settings.color_group_1_legend_padding_bottom -}}rem;
                               }
                             {% endstyle %}
-                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
-                              <legend class="form__label color-group-legend color-group-legend-1" >{{ block.settings.group_1_title }}: <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button {% unless pageId %} no-events {% endunless %}" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
+                              <legend class="form__label color-group-legend color-group-legend-1" >{{ block.settings.group_1_title }} <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -788,31 +891,57 @@
                           </div>
                         </div>
                         <div class="color-group color-group--2">
-                          <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
-                            {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
-                            {% style %}
-                              .color-group-legend-2 {
-                                padding-bottom: {{ block.settings.color_group_2_legend_padding_bottom -}}rem;
-                              }
-                            {% endstyle %}
-                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
-                              <legend class="form__label color-group-legend color-group-legend-2">{{ block.settings.group_2_title }}: <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
-                            </button>
-                          </modal-opener>
-                          <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
-                            <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                              <button id="ModalClose-{{- block.settings.group_2_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                              <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page.content != blank %}js-page-{{-pageId2}} js-page-content{% endunless %}">
-                                {% if block.settings.color_group2_page.content != blank %}
-                                  {{ block.settings.color_group2_page.content }}
-                                {% else %}
-                                  {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture%}
-                                  
-                                  <link rel="stylesheet" href="{{pageStyle2}}">
-                                {% endif %}
+                          {% style %}
+                            .color-options-2__header {
+                              display: flex;
+                              {% if block.settings.pop_up_alignment %}
+                              justify-content: space-between;
+                              {% endif %}
+                              align-items: center;
+                            }
+                            .color-group-legend-2 {
+                              color: {{ block.settings.group2_legend_color}};
+                              padding-bottom: {{ block.settings.color_group_2_legend_padding_bottom -}}rem;
+                            }
+                          {% endstyle %}
+                          <div class="color-options-2__header">
+                            <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
+                              {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
+                              <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button {% unless pageId2 %} no-events {% endunless %}" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
+                                <legend class="form__label color-group-legend color-group-legend-2">{{ block.settings.group_2_title }} <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                              </button>
+                            </modal-opener>
+                            <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                              <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                <button id="ModalClose-{{- block.settings.group_2_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page.content != blank %}js-page-{{-pageId2}} js-page-content{% endunless %}">
+                                  {% if block.settings.color_group2_page.content != blank %}
+                                    {{ block.settings.color_group2_page.content }}
+                                  {% else %}
+                                    {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture%}
+                                    <link rel="stylesheet" href="{{pageStyle2}}">
+                                  {% endif %}
+                                </div>
                               </div>
-                            </div>
-                          </modal-dialog>
+                            </modal-dialog>
+                            <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" {{ block.shopify_attributes }}>
+                              {% assign pageId22 = block.settings.color_group2_page2.template_suffix %}
+                              <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button color-group2-page2-legend {% unless pageId22 %} no-events {% endunless %} sizes-guide" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings.color_group_2_popup_title | default: block.settings.page.title }}</button>
+                            </modal-opener>
+                            <modal-dialog id="PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                              <div role="dialog" aria-label="{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                <button id="ModalClose-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page2.content != blank %}js-page-{{-color_group_2_page2}} js-page-content{% endunless %}">
+                                  {% if block.settings.color_group2_page2.content != blank %}
+                                  {{ block.settings.color_group2_page2.content }}
+                                {% else %}
+                                  {% capture color_group2_page2_style %}'pagefly.{{- pageId22-}}.css' | asset_url{% endcapture%}
+                                  <link rel="stylesheet" href="{{color_group2_page2_style}}">
+                                {% endif %}
+                                </div>
+                              </div>
+                            </modal-dialog>
+                          </div>
                           <div class="color-options">
                             {%- for value in option.values -%}
                               {% capture swatch_idx %}swatch2{{-forloop.index-}}{% endcapture %}
@@ -853,6 +982,7 @@
                     {% if option.name == 'Size' %}
                       {% style %}
                         .sizes-guide {
+                          color: {{ block.settings.sizes_guide_color }};
                           font-size: {{ block.settings.sizes_guide_size -}}rem;
                           font-weight: {{ block.settings.sizes_guide_weight -}};
                           {% if block.settings.sizes_guide_underline %}
@@ -1121,10 +1251,8 @@
       const input = ev.currentTarget;
       const pageId = input.getAttribute('page-id');
       let pageContent;  
-      console.log('requested')
       function handleResponse() {
         pageContent = JSON.parse(this.responseText);
-        console.log('afterload', pageContent[pageId])
         let container = document.createElement( 'html' );
         container.innerHTML = pageContent[pageId]
         document.querySelector(`.js-page-${pageId}`).appendChild(container)
@@ -1169,15 +1297,20 @@
   </script>
   <script>
     const triggerProductInfo = (ev) => {
-      const input = ev.currentTarget;
-      const onImageTextContent = document.querySelector('.js-on-picture-text');
-      const onImageTextTrigger = document.querySelector('.js-on-image-text-mobile-trigger')
+      const input = ev.currentTarget.classList.contains('js-on-image-text-mobile-trigger') ? ev.currentTarget : ev.currentTarget.parentElement.nextElementSibling ;
+      const onImageTextContent = input.classList.contains('js-on-picture-close') ? input.closest('div') : input.previousElementSibling;
 
       onImageTextContent.classList.toggle('active')
-      onImageTextTrigger.classList.toggle('active')
+      input.classList.toggle('active')
     }
-    document.querySelector('.js-on-image-text-mobile-trigger').addEventListener('click', triggerProductInfo, false)
-    document.querySelector('.js-on-picture-close').addEventListener('click', triggerProductInfo, false)
+    const triggers = document.querySelectorAll('.js-on-image-text-mobile-trigger')
+    const xs = document.querySelectorAll('.js-on-picture-close')
+    triggers.forEach(t => {
+      t.addEventListener('click', triggerProductInfo, false)
+    })
+    xs.forEach(x => {
+      x.addEventListener('click', triggerProductInfo, false)
+    })
   </script>
 
   {%- liquid
@@ -1248,6 +1381,11 @@
           "type": "richtext",
           "id": "text",
           "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color"
         },
         {
           "type": "range",
@@ -1364,6 +1502,11 @@
           ]
         },
         {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color"
+        },
+        {
           "type": "range",
           "id": "title_size",
           "label": "Title_size",
@@ -1397,7 +1540,14 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings":[
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Color"
+        }
+      ]
     },
     {
       "type": "tabs",
@@ -1501,6 +1651,56 @@
           ],
           "default": "center"
         },
+      {
+        "type": "range",
+        "id": "tab_title12_size",
+        "min": 1,
+        "max": 3,
+        "step": 0.1,
+        "unit": "rem",
+        "label": "Tab title size",
+        "default": 1.5
+      },
+      {
+        "type": "select",
+        "id": "tab_title12_weight",
+        "label": "Tab title weight",
+        "options": [
+          {
+            "value": "400",
+            "label": "Regular"
+          },
+          {
+            "value": "500",
+            "label": "Medium"
+          },
+          {
+            "value": "700",
+            "label": "Bold"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "select",
+        "id": "tab_title12_justify",
+        "label": "Tab title justify",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
         {
           "type": "header",
           "content": "Tab 2 title options",
@@ -1539,6 +1739,56 @@
         {
           "type": "select",
           "id": "tab_title2_justify",
+          "label": "Tab title justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "tab_title22_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab title size",
+          "default": 1.5
+        },
+        {
+          "type": "select",
+          "id": "tab_title22_weight",
+          "label": "Tab title weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "tab_title22_justify",
           "label": "Tab title justify",
           "options": [
             {
@@ -1612,24 +1862,39 @@
           "default": "center"
         },
         {
-          "type": "header",
-          "content": "Tab content options",
-          "info": "Size, weight and justification"
-        },
-        {
           "type": "range",
-          "id": "tab_content_size",
+          "id": "tab_title32_size",
           "min": 1,
           "max": 3,
           "step": 0.1,
           "unit": "rem",
-          "label": "Tab content size",
+          "label": "Tab title size",
           "default": 1.5
         },
         {
           "type": "select",
-          "id": "tab_content_justify",
-          "label": "Tab content justify",
+          "id": "tab_title32_weight",
+          "label": "Tab title weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "tab_title32_justify",
+          "label": "Tab title justify",
           "options": [
             {
               "value": "left",
@@ -1645,7 +1910,117 @@
             }
           ],
           "default": "center"
-        },       
+        },
+        {
+          "type": "header",
+          "content": "Tab content options",
+          "info": "Size, weight and justification"
+        },
+        {
+          "type": "range",
+          "id": "tab1_content_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab 1 content size",
+          "default": 1.5
+        },
+        {
+          "type": "color",
+          "id": "tab1_content_color",
+          "label": "Tab 1 content color"
+        },
+        {
+          "type": "select",
+          "id": "tab1_content_justify",
+          "label": "Tab 1 content justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        }, 
+        {
+          "type": "range",
+          "id": "tab2_content_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab 2 content size",
+          "default": 1.5
+        },
+        {
+          "type": "color",
+          "id": "tab2_content_color",
+          "label": "Tab 2 content color"
+        },
+        {
+          "type": "select",
+          "id": "tab2_content_justify",
+          "label": "Tab 2 content justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "tab3_content_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Tab 3 content size",
+          "default": 1.5
+        },
+        {
+          "type": "color",
+          "id": "tab3_content_color",
+          "label": "Tab 3 content color"
+        },
+        {
+          "type": "select",
+          "id": "tab3_content_justify",
+          "label": "Tab 3 content justify",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },   
         {
           "type": "color",
           "id": "btn_bk_active",
@@ -1677,10 +2052,20 @@
           "default": "<p>Tab 1 title</p>"
         },
         {
+          "type": "color",
+          "id": "tab1_title_color",
+          "label": "Tab 1 title color"
+        },
+        {
           "type": "richtext",
           "id": "tab1_title2",
           "label": "Tab 1 title 2",
           "default": "<p>Tab 1 title 2</p>"
+        },
+        {
+          "type": "color",
+          "id": "tab1_title2_color",
+          "label": "Tab 1 title 2 color"
         },
         {
           "type": "checkbox",
@@ -1713,10 +2098,20 @@
           "default": "<p>Tab 2 title</p>"
         },
         {
+          "type": "color",
+          "id": "tab2_title_color",
+          "label": "Tab 2 title color"
+        },
+        {
           "type": "richtext",
           "id": "tab2_title2",
           "label": "Tab 2 title 2",
           "default": "<p>Tab 2 title 2</p>"
+        },
+        {
+          "type": "color",
+          "id": "tab2_title2_color",
+          "label": "Tab 2 title 2 color"
         },
         {
           "type": "checkbox",
@@ -1749,10 +2144,20 @@
           "default": "<p>Tab 3 title</p>"
         },
         {
+          "type": "color",
+          "id": "tab3_title_color",
+          "label": "Tab 3 title color"
+        },
+        {
           "type": "richtext",
           "id": "tab3_title2",
           "label": "Tab 3 title 2",
           "default": "<p>Tab 3 title 2</p>"
+        },
+        {
+          "type": "color",
+          "id": "tab3_title2_color",
+          "label": "Tab 3 title 2 color"
         },
         {
           "type": "checkbox",
@@ -1895,6 +2300,11 @@
           "default": 1.6
         },
         {
+          "type": "color",
+          "id": "sizes_guide_color",
+          "label": "Sizes guide color"
+        },
+        {
           "type": "select",
           "id": "sizes_guide_weight",
           "label": "Sizes guide weight",
@@ -1929,6 +2339,27 @@
           "type": "page",
           "id": "color_group2_page",
           "label": "color-group-page"
+        },
+        {
+          "type": "header",
+          "content": "Second page for color group"
+        },
+        {
+          "type": "checkbox",
+          "id": "pop_up_alignment",
+          "label": "Pop up alignment",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "color_group_2_popup_title",
+          "default": "pop-up",
+          "label": "Pop-up link text"
+        },
+        {
+          "type": "page",
+          "id": "color_group2_page2",
+          "label": "color-group-page 2"
         }, 
         {
           "type": "text",
@@ -1993,6 +2424,36 @@
         },
         {
           "type": "range",
+          "id": "color_group2_page2_size",
+          "label": "Color group 2 page 2 text size",
+          "unit": "rem",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "default": 1.4
+        },
+        {
+          "type": "select",
+          "id": "color_group2_page2_weight",
+          "label": "Color group 2 page 2 text weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "regular"
+            },
+            {
+              "value": "500",
+              "label": "medium"
+            },
+            {
+              "value": "700",
+              "label": "bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "range",
           "id": "sizes_legend_size",
           "label": "Sizes legend size",
           "unit": "rem",
@@ -2040,6 +2501,11 @@
           "id": "group_1_title",
           "label": "Color group 1 title",
           "default": "Color group 1 title"
+        },
+        {
+          "type": "color",
+          "id": "group1_legend_color",
+          "label": "Color group 1 legend color"
         },
         {
           "type": "checkbox",
@@ -2170,6 +2636,11 @@
           "id": "group_2_title",
           "label": "Color group 2 title",
           "default": "Color group 2 title"
+        },
+        {
+          "type": "color",
+          "id": "group2_legend_color",
+          "label": "Color group 2 legend color"
         },
         {
           "type": "checkbox",
@@ -2665,7 +3136,11 @@
       "default": false
     },
     {
-      "type": "text",
+      "type": "header",
+      "content": "On picture text options"
+    },
+    {
+      "type": "textarea",
       "id": "on_picture_text",
       "label": "On picture text",
       "default": "Lorem ipsum dolorem sit ammet dignissimos."
@@ -2721,6 +3196,26 @@
       "default": "flex-end"
     },
     {
+      "type": "select",
+      "id": "on_image_text_content_align",
+      "label": "On image text content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Right"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
       "type": "color",
       "id": "on_picture_text_color",
       "label": "On picture text color",
@@ -2733,10 +3228,104 @@
       "default": "#dddddd40"
     },
     {
-      "type": "text",
+      "type": "textarea",
+      "id": "on_picture_text_natural",
+      "label": "On picture text",
+      "default": "Lorem ipsum dolorem sit ammet dignissimos."
+    },
+    {
+      "type": "range",
+      "id": "on_image_text_size_natural",
+      "label": "On image text size",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1.2,
+      "unit": "rem"
+    },
+    {
+      "type": "select",
+      "id": "on_image_text_weight_natural",
+      "label": "On image text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "regular"
+        },
+        {
+          "value": "500",
+          "label": "medium"
+        },
+        {
+          "value": "700",
+          "label": "bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "on_image_text_align_natural",
+      "label": "On image text alignment",
+      "options": [
+        {
+          "value": "flex-end",
+          "label": "right"
+        },
+        {
+          "value": "flex-start",
+          "label": "left"
+        },
+        {
+          "value": "center",
+          "label": "center"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "on_image_text_content_align_natural",
+      "label": "On image text content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Right"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "on_picture_text_color_natural",
+      "label": "On picture text color",
+      "default": "#000"
+    },
+    {
+      "type": "color_background",
+      "id": "on_image_bk_natural",
+      "label": "On picture text background color",
+      "default": "#dddddd40"
+    },    
+    {
+      "type": "textarea",
       "id": "on_picture_trigger_text",
       "label": "On picture mobile trigger button text",
       "default": "Model Info"
+    },
+    {
+      "type": "textarea",
+      "id": "on_picture_trigger_text_natural",
+      "label": "On picture mobile trigger button text for natural colors",
+      "default": "Model Info Natural"
     },
     {
       "type": "header",
