@@ -1,18 +1,26 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "main-product-aya",
       "blocks": {
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "Luxurious Pima. Unbelievably Soft.",
-            "text_style": "uppercase"
+            "text": "<p>Luxurious Pima. Unbelievably Soft.<\/p>",
+            "padding_top": 0,
+            "padding_bottom": 0.9,
+            "text_style": "uppercase",
+            "text_weight": "regular",
+            "text_size": 1.4,
+            "text_justify": "left"
           }
         },
         "title": {
           "type": "title",
           "settings": {
+            "title_weight": "medium",
+            "title_size": 1.7,
+            "title_justify": "left"
           }
         },
         "price": {
@@ -22,34 +30,69 @@
         },
         "variant_picker": {
           "type": "variant_picker",
-          "disabled": true,
           "settings": {
             "picker_type": "button"
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "quantity_selector": {
+          "type": "quantity_selector",
           "disabled": true,
           "settings": {
-            "show_dynamic_checkout": false
           }
         },
-        "collapsible-row-0": {
-          "type": "collapsible_tab",
+        "buy_buttons": {
+          "type": "buy_buttons",
           "settings": {
-            "heading": "Description",
-            "icon": "none",
-            "content": "<p>Soft & Breathable 100% Organic Cotton Panties.<\/p>",
-            "page": ""
+            "show_dynamic_checkout": false,
+            "button_bk": "#434442",
+            "button_color": "#ffffff"
           }
         },
-        "collapsible-row-3": {
-          "type": "collapsible_tab",
+        "7432a9af-0705-4f40-92f1-2074055942ed": {
+          "type": "text",
           "settings": {
-            "heading": "Sustainable Materials & Care",
-            "icon": "none",
-            "content": "<p>Our {{ product.title }} is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread: <\/strong>100% Cotton<\/p><p><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes: <\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing: <\/strong>OEKO-TEX Certified<\/p><p><\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-            "page": ""
+            "text": "<p>Let's Redefine Fashion<\/p>",
+            "padding_top": 0,
+            "padding_bottom": 0.7,
+            "text_style": "uppercase",
+            "text_weight": "regular",
+            "text_size": 1.5,
+            "text_justify": "left"
+          }
+        },
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Be Part of the Change<\/p>",
+            "padding_top": 0,
+            "padding_bottom": 2.7,
+            "text_style": "uppercase",
+            "text_weight": "bold",
+            "text_size": 1.9,
+            "text_justify": "left"
+          }
+        },
+        "tabs": {
+          "type": "tabs",
+          "settings": {
+            "border_on": false,
+            "tab_icon_size": 4,
+            "tab_content_size": 1.4,
+            "tab_content_justify": "left",
+            "btn_bk_active": "#434442",
+            "icon_color_hover": "#434442",
+            "tab1_image": "shopify:\/\/shop_images\/Microplastics_Free_1.png",
+            "tab1_image_white": "shopify:\/\/shop_images\/worldicon2.png",
+            "tab1_title": "<p>Microplastic-Free World<\/p>",
+            "tab1_content": "<p>We put a stop to plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.<\/p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.<\/strong><\/p>",
+            "tab2_image": "shopify:\/\/shop_images\/Co2_2.png",
+            "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
+            "tab2_title": "<p>One-Country Supply Chain<\/p>",
+            "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
+            "tab3_image": "shopify:\/\/shop_images\/Cotton_Product_Page_1.png",
+            "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
+            "tab3_title": "<p>100% Organic Pima<\/p>",
+            "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
         }
       },
@@ -58,18 +101,28 @@
         "title",
         "price",
         "variant_picker",
+        "quantity_selector",
         "buy_buttons",
-        "collapsible-row-0",
-        "collapsible-row-3"
+        "7432a9af-0705-4f40-92f1-2074055942ed",
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
+        "tabs"
       ],
       "settings": {
         "enable_sticky_info": true,
+        "bc_size": 1.4,
+        "bc_weight": "500",
+        "on_picture_text": "<p>Luxurious Pima. Unbelievably Soft<\/p>",
+        "on_image_text_size": 1.2,
+        "on_image_text_weight": "500",
+        "on_picture_text_color": "#ffffff",
+        "on_image_bk": "rgba(67,68,66,1)",
         "gallery_layout": "stacked",
+        "grid_display": true,
         "media_size": "large",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": true,
-        "padding_top": 36,
+        "padding_top": 8,
         "padding_bottom": 12
       }
     },
