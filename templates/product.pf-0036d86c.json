@@ -193,6 +193,16 @@
             "page": ""
           }
         },
+        "cfc210a0-36f5-4517-891e-9c01b4e16acc": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Materials & Ingredients",
+            "icon": "none",
+            "content": "<p>• 100% Organic Pima Cotton Fabric<br\/>• 100% Cotton Threads<br\/>• 100% Organic Cotton Labels<br\/>• 100% Natural Dyes or OEKO-TEX Certified Dyes<br\/>• OEKO-TEX Certified Silicone Fabric Finishing<br\/>• GOTS Certified Ink (for the labels)<\/p>",
+            "page": ""
+          }
+        },
         "63f6eb92-bbfc-492e-8d5c-9f22629af743": {
           "type": "collapsible_tab",
           "settings": {
@@ -225,6 +235,7 @@
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
         "60bff899-4b1d-4fc3-9dca-73dd8958d050",
+        "cfc210a0-36f5-4517-891e-9c01b4e16acc",
         "63f6eb92-bbfc-492e-8d5c-9f22629af743",
         "10806ffd-8239-4df9-b473-86e833e5404c"
       ],
