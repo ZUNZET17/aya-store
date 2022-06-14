@@ -197,8 +197,8 @@
           "type": "collapsible_tab",
           "settings": {
             "hide_mobile": false,
-            "heading": "Collapsible row",
-            "icon": "check_mark",
+            "heading": "Description",
+            "icon": "none",
             "content": "",
             "page": ""
           }
@@ -207,8 +207,8 @@
           "type": "collapsible_tab",
           "settings": {
             "hide_mobile": false,
-            "heading": "Collapsible row",
-            "icon": "check_mark",
+            "heading": "Fabric Care",
+            "icon": "none",
             "content": "",
             "page": ""
           }
