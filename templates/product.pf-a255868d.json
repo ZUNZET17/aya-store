@@ -184,22 +184,11 @@
         },
         "60bff899-4b1d-4fc3-9dca-73dd8958d050": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "heading": "Description",
             "icon": "none",
             "content": "<p>This organic cotton v-neck delivers both style and sustainability. Great for travel and casual wear.<\/p><p>Regular fitModel is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips<\/p>",
-            "page": ""
-          }
-        },
-        "4b306336-8527-49a0-a5b4-eb96a169ed43": {
-          "type": "collapsible_tab",
-          "settings": {
-            "hide_mobile": false,
-            "heading": "Description",
-            "icon": "none",
-            "content": "",
             "page": ""
           }
         },
@@ -225,7 +214,6 @@
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
         "60bff899-4b1d-4fc3-9dca-73dd8958d050",
-        "4b306336-8527-49a0-a5b4-eb96a169ed43",
         "73a524bf-8085-4594-b919-802d6df166e4"
       ],
       "settings": {
