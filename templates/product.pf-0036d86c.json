@@ -149,6 +149,15 @@
             "padding_top": 0,
             "padding_bottom": 0,
             "tab_icon_size": 4,
+            "tab_title1_size": 1.5,
+            "tab_title1_weight": "400",
+            "tab_title1_justify": "center",
+            "tab_title2_size": 1.5,
+            "tab_title2_weight": "400",
+            "tab_title2_justify": "center",
+            "tab_title3_size": 1.5,
+            "tab_title3_weight": "400",
+            "tab_title3_justify": "center",
             "tab_content_size": 1.4,
             "tab_content_justify": "left",
             "btn_bk_active": "#434442",
@@ -183,6 +192,26 @@
             "content": "<p>This organic cotton v-neck delivers both style and sustainability. Great for travel and casual wear.<\/p><p>Regular fitModel is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips<\/p>",
             "page": ""
           }
+        },
+        "63f6eb92-bbfc-492e-8d5c-9f22629af743": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Product Details",
+            "icon": "none",
+            "content": "<p>Regular Fit<br\/>Model is 6'1\", has 34\" chest and 32\" hips<\/p>",
+            "page": ""
+          }
+        },
+        "10806ffd-8239-4df9-b473-86e833e5404c": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Fabric Care",
+            "icon": "none",
+            "content": "<p>Machine wash cold<br\/>Tumble dry low<\/p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -195,7 +224,9 @@
         "7432a9af-0705-4f40-92f1-2074055942ed",
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
-        "60bff899-4b1d-4fc3-9dca-73dd8958d050"
+        "60bff899-4b1d-4fc3-9dca-73dd8958d050",
+        "63f6eb92-bbfc-492e-8d5c-9f22629af743",
+        "10806ffd-8239-4df9-b473-86e833e5404c"
       ],
       "settings": {
         "enable_sticky_info": true,
