@@ -261,7 +261,7 @@
         "on_image_text_size": 1.2,
         "on_image_text_weight": "500",
         "on_image_text_align": "flex-end",
-        "on_image_text_content_align": "center",
+        "on_image_text_content_align": "right",
         "on_picture_text_color": "#434442",
         "on_image_bk": "rgba(255,255,255,0.6)",
         "on_picture_text_natural": "Fiber: 100% Organic Pima Cotton\nThread: 100% Cotton\nLabel : 100% Organic Cotton + GOTS Certified Ink\nDyes: Low Impact Dyes (GOTS) & 100% Natural Dyes\nFinishing: OEKO-TEX Certified\nCare: Tumble dry low. Machine wash cold.",
