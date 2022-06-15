@@ -1,1 +1,55 @@
-{"sections":{"shogun-helper":{"type":"shogun-helper","disabled":true,"settings":{}},"shogun-above":{"type":"shogun-above","disabled":true,"settings":{}},"banner":{"type":"main-collection-banner","settings":{"show_collection_description":false,"show_collection_image":false,"color_scheme":"background-1"}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":16,"columns_desktop":3,"image_ratio":"adapt","show_secondary_image":false,"show_vendor":false,"show_rating":false,"enable_quick_add":false,"enable_filtering":true,"filter_type":"vertical","enable_sorting":true,"columns_mobile":"2","padding_top":36,"padding_bottom":36}},"shogun-below":{"type":"shogun-below","disabled":true,"settings":{}},"1652372343158d359d":{"type":"rich-text","blocks":{"16523723432660a41e-1":{"type":"text","settings":{"text":"<p>Eco friendly men's clothing made with 100% Organic Pima Cotton. Pima cotton combines luxurious softness with durability and performance, while demanding far less resources to produce than conventional cotton. Tread lightly on the earth with functional and stylish organic pima cotton apparel.<\/p>"}}},"block_order":["16523723432660a41e-1"],"settings":{"color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}}},"order":["shogun-helper","shogun-above","banner","product-grid","shogun-below","1652372343158d359d"]}
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": false,
+        "show_collection_image": false,
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1652372343158d359d": {
+      "type": "rich-text",
+      "blocks": {
+        "16523723432660a41e-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Eco friendly men's clothing made with 100% Organic Pima Cotton. Pima cotton combines luxurious softness with durability and performance, while demanding far less resources to produce than conventional cotton. Tread lightly on the earth with functional and stylish organic pima cotton apparel.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "16523723432660a41e-1"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "1652372343158d359d"
+  ]
+}
