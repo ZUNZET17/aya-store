@@ -216,6 +216,26 @@
             "tab3_title2_hide_mobile": false,
             "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
+        },
+        "8cb1b144-d047-4453-9184-59446ed8e9f7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Description",
+            "icon": "none",
+            "content": "<p>The forever must-have in every man's closet: basic black crew neck tee! Made from Organic Cotton, this tee will be your best friend in all situations for years. Soft next to skin, durable and sustainable - that's the perfect casual T-shirt for men.<\/p>",
+            "page": ""
+          }
+        },
+        "f5560f9d-89a0-4ec4-aa6c-19512d115e33": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Sustainable Materials",
+            "icon": "none",
+            "content": "<p>Our Men's Organic Pima Cotton Long Sleeve Shirt is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread:<\/strong>100% Cotton<\/p><p><strong>Label:<\/strong>100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes:<\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing:<\/strong>OEKO-TEX Certified<\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -227,7 +247,9 @@
         "buy_buttons",
         "7432a9af-0705-4f40-92f1-2074055942ed",
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
-        "tabs"
+        "tabs",
+        "8cb1b144-d047-4453-9184-59446ed8e9f7",
+        "f5560f9d-89a0-4ec4-aa6c-19512d115e33"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -247,7 +269,7 @@
         "on_image_text_weight_natural": "400",
         "on_image_text_align_natural": "flex-end",
         "on_image_text_content_align_natural": "left",
-        "on_picture_text_color_natural": "#000",
+        "on_picture_text_color_natural": "#000000",
         "on_image_bk_natural": "#dddddd40",
         "on_picture_trigger_text": "Model Info",
         "on_picture_trigger_text_natural": "Model Info Natural",
