@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap');
+
 /* Color custom properties */
 
 :root,
@@ -2954,6 +2956,7 @@ details-disclosure > details {
   }
 
   .color-swatches {
+    max-width: 100%!important;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -3104,4 +3107,10 @@ details-disclosure > details {
 
   .no-events {
     pointer-events: none;
+  }
+
+  /* custom Font Families */
+
+  .hind {
+    font-family: 'Hind', sans-serif;
   }

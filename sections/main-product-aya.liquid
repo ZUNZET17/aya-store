@@ -81,6 +81,7 @@
               color: {{ section.settings.on_picture_text_color }};
               font-size: {{ section.settings.on_image_text_size }}rem;
               font-weight: {{ section.settings.on_image_text_weight }};
+              text-align: {{ section.settings.on_image_text_content_align }};
               word-break: break-word;
               background: {{ section.settings.on_image_bk }};
               line-height: normal;
@@ -92,6 +93,7 @@
               color: {{ section.settings.on_picture_text_color_natural }};
               font-size: {{ section.settings.on_image_text_size_natural }}rem;
               font-weight: {{ section.settings.on_image_text_weight_natural }};
+              text-align: {{ section.settings.on_image_text_content_align_natural }};
               word-break: break-word;
               background: {{ section.settings.on_image_bk_natural }};
               line-height: normal;
@@ -400,7 +402,7 @@
               }
             {% endif %}
           {% endstyle %}
-            <div class="text-block text-block-{{-block.id}} product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+            <div class="text-block text-block-{{-block.id}} product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %} {{ block.settings.text_family }}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </div>
           {%- when 'title' -%}
@@ -520,12 +522,16 @@
                     font-size: {{ block.settings.tab_title1_size -}}rem;
                     font-weight: {{- block.settings.tab_title1_weight -}};
                     text-align: {{ block.settings.tab_title1_justify -}};
+                    padding-top: {{ block.settings.tab1_title_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab1_title_padding_bottom -}}rem;
                   }
                   .tab1-title-2 {
                     color: {{ block.settings.tab1_title2_color }};
                     font-size: {{ block.settings.tab_title12_size -}}rem;
                     font-weight: {{- block.settings.tab_title12_weight -}};
                     text-align: {{ block.settings.tab_title12_justify -}};
+                    padding-top: {{ block.settings.tab1_title2_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab1_title2_padding_bottom -}}rem;
                   }
 
                   .tab2-title-1 {
@@ -533,12 +539,16 @@
                     font-size: {{ block.settings.tab_title2_size -}}rem;
                     font-weight: {{- block.settings.tab_title2_weight -}};
                     text-align: {{ block.settings.tab_title2_justify -}};
+                    padding-top: {{ block.settings.tab2_title_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab2_title_padding_bottom -}}rem;
                   }
                   .tab2-title-2 {
                     color: {{ block.settings.tab2_title2_color }};
                     font-size: {{ block.settings.tab_title22_size -}}rem;
                     font-weight: {{- block.settings.tab_title22_weight -}};
                     text-align: {{ block.settings.tab_title22_justify -}};
+                    padding-top: {{ block.settings.tab2_title2_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab2_title2_padding_bottom -}}rem;
                   }
 
                   .tab3-title-1 {
@@ -546,12 +556,16 @@
                     font-size: {{ block.settings.tab_title3_size -}}rem;
                     font-weight: {{- block.settings.tab_title3_weight -}};
                     text-align: {{ block.settings.tab_title3_justify -}};
+                    padding-top: {{ block.settings.tab3_title_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab3_title_padding_bottom -}}rem;
                   }
                   .tab3-title-2 {
                     color: {{ block.settings.tab3_title2_color }};
                     font-size: {{ block.settings.tab_title32_size -}}rem;
                     font-weight: {{- block.settings.tab_title32_weight -}};
                     text-align: {{ block.settings.tab_title32_justify -}};
+                    padding-top: {{ block.settings.tab3_title2_padding_top -}}rem;
+                    padding-bottom: {{ block.settings.tab3_title2_padding_bottom -}}rem;
                   }
                   
                   .tab1__content {
@@ -618,9 +632,9 @@
                 }
                 {% endif %}
                 {% endstyle %}
-                <div class="tabcontent__title tab1-title-1">{{ block.settings.tab1_title }}</div>
-                <div class="tabcontent__title tab1-title-2">{{ block.settings.tab1_title2 }}</div>
-                <div class="tab1__content">{{ block.settings.tab1_content }}</div>
+                <div class="tabcontent__title tab1-title-1 {{ block.settings.tab1_title_family }}">{{ block.settings.tab1_title }}</div>
+                <div class="tabcontent__title tab1-title-2 {{ block.settings.tab1_title2_family }}">{{ block.settings.tab1_title2 }}</div>
+                <div class="tab1__content {{ block.settings.tab1_content_family }}">{{ block.settings.tab1_content }}</div>
               </div>
               <div id="tab-2" class="tabcontent-cus animate-opacity">
                 {% style %}
@@ -632,9 +646,9 @@
                 }
                 {% endif %}
                 {% endstyle %}
-                <div class="tabcontent__title tab2-title-1">{{ block.settings.tab2_title }}</div>
-                <div class="tabcontent__title tab2-title-2 ">{{ block.settings.tab2_title2 }}</div>
-                <div class="tab2__content">{{ block.settings.tab2_content }}</div>
+                <div class="tabcontent__title tab2-title-1 {{ block.settings.tab2_title_family }}">{{ block.settings.tab2_title }}</div>
+                <div class="tabcontent__title tab2-title-2 {{ block.settings.tab2_title2_family }}">{{ block.settings.tab2_title2 }}</div>
+                <div class="tab2__content {{ block.settings.tab2_content_family }}">{{ block.settings.tab2_content }}</div>
               </div>
               <div id="tab-3" class="tabcontent-cus animate-opacity">
                 {% style %}
@@ -646,9 +660,9 @@
                 }
                 {% endif %}
                 {% endstyle %}
-                <div class="tabcontent__title tab3-title-1">{{ block.settings.tab3_title }}</div>
-                <div class="tabcontent__title tab3-title-2">{{ block.settings.tab3_title2 }}</div>
-                <div class="tab3__content">{{ block.settings.tab3_content }}</div>
+                <div class="tabcontent__title tab3-title-1 {{ block.settings.tab3_title_family }}">{{ block.settings.tab3_title }}</div>
+                <div class="tabcontent__title tab3-title-2 {{ block.settings.tab3_title2_family }}">{{ block.settings.tab3_title2 }}</div>
+                <div class="tab3__content {{ block.settings.tab3_content_family }}">{{ block.settings.tab3_content }}</div>
               </div>
               <style>
               .tab-customize {
@@ -677,6 +691,7 @@
                 width: 100%;
               }
               .tabcontent__title p {
+                line-height: 1;
                 margin: 0;
               }
               </style>
@@ -831,7 +846,7 @@
                               }
                             {% endstyle %}
                             <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button {% unless pageId %} no-events {% endunless %}" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
-                              <legend class="form__label color-group-legend color-group-legend-1" >{{ block.settings.group_1_title }} <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                              <legend class="form__label color-group-legend color-group-legend-1 {{ block.settings.group_1_title_family }}" >{{ block.settings.group_1_title }} <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
                             </button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -897,6 +912,7 @@
                               {% if block.settings.pop_up_alignment %}
                               justify-content: space-between;
                               {% endif %}
+                              column-gap: {{ block.settings.pop_up_gap }};
                               align-items: center;
                             }
                             .color-group-legend-2 {
@@ -908,7 +924,7 @@
                             <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
                               {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
                               <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link color-group-legend-btn js-pop-up-button {% unless pageId2 %} no-events {% endunless %}" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
-                                <legend class="form__label color-group-legend color-group-legend-2">{{ block.settings.group_2_title }} <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                                <legend class="form__label color-group-legend color-group-legend-2 {{ block.settings.group_2_title_family }}">{{ block.settings.group_2_title }} <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
                               </button>
                             </modal-opener>
                             <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
@@ -926,7 +942,7 @@
                             </modal-dialog>
                             <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" {{ block.shopify_attributes }}>
                               {% assign pageId22 = block.settings.color_group2_page2.template_suffix %}
-                              <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button color-group2-page2-legend {% unless pageId22 %} no-events {% endunless %} sizes-guide" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings.color_group_2_popup_title | default: block.settings.page.title }}</button>
+                              <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button color-group2-page2-legend {% unless pageId22 %} no-events {% endunless %} sizes-guide {{ block.settings.color_group_2_popup_title_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings.color_group_2_popup_title | default: block.settings.page.title }}</button>
                             </modal-opener>
                             <modal-dialog id="PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
                               <div role="dialog" aria-label="{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
@@ -1000,7 +1016,7 @@
                           <legend class="form__label sizes-legend">{{ option.name }}</legend>
                           {% assign pageId3 = block.settings.size_guide_page.template_suffix %}
                           <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" {{ block.shopify_attributes }}>
-                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button sizes-guide" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</button>
+                            <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button sizes-guide {{ block.settings.size_guide_text_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</button>
                           </modal-opener>
                           <modal-dialog id="PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
                             <div role="dialog" aria-label="{{ block.settings.size_guide_text | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
@@ -1406,6 +1422,21 @@
           "step": 0.1,
           "unit": "rem",
           "default": 0
+        },
+        {
+          "type": "select",
+          "id": "text_family",
+          "label": "Font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
         },
         {
           "type": "select",
@@ -2052,6 +2083,41 @@
           "default": "<p>Tab 1 title</p>"
         },
         {
+          "type": "select",
+          "id": "tab1_title_family",
+          "label": "tab 1 title font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab1_title_padding_top",
+          "label": "Title 1 padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab1_title_padding_bottom",
+          "label": "Title 1 padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
           "type": "color",
           "id": "tab1_title_color",
           "label": "Tab 1 title color"
@@ -2061,6 +2127,41 @@
           "id": "tab1_title2",
           "label": "Tab 1 title 2",
           "default": "<p>Tab 1 title 2</p>"
+        },
+        {
+          "type": "select",
+          "id": "tab1_title2_family",
+          "label": "tab 1 title 2 font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab1_title2_padding_top",
+          "label": "Title 2 padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab1_title2_padding_bottom",
+          "label": "Title 2 padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
         },
         {
           "type": "color",
@@ -2078,7 +2179,22 @@
           "id": "tab1_content",
           "label": "tab1 content",
           "default": "<p>tab1 content</p>"
-        },        
+        }, 
+        {
+          "type": "select",
+          "id": "tab1_content_family",
+          "label": "tab 1 content font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },       
         {
           "type": "image_picker",
           "id": "tab2_image",
@@ -2098,6 +2214,41 @@
           "default": "<p>Tab 2 title</p>"
         },
         {
+          "type": "select",
+          "id": "tab2_title_family",
+          "label": "tab 2 title font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab2_title_padding_top",
+          "label": "Title padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab2_title_padding_bottom",
+          "label": "Title padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
           "type": "color",
           "id": "tab2_title_color",
           "label": "Tab 2 title color"
@@ -2107,6 +2258,41 @@
           "id": "tab2_title2",
           "label": "Tab 2 title 2",
           "default": "<p>Tab 2 title 2</p>"
+        },
+        {
+          "type": "select",
+          "id": "tab2_title2_family",
+          "label": "tab 2 title 2 font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab2_title2_padding_top",
+          "label": "Title 2 padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab2_title2_padding_bottom",
+          "label": "Title 2 padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
         },
         {
           "type": "color",
@@ -2126,6 +2312,21 @@
           "default": "<p>tab2 content</p>"
         }, 
         {
+          "type": "select",
+          "id": "tab2_content",
+          "label": "tab 2 content",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
           "type": "image_picker",
           "id": "tab3_image",
           "label": "Tab 3 image",
@@ -2144,6 +2345,41 @@
           "default": "<p>Tab 3 title</p>"
         },
         {
+          "type": "select",
+          "id": "tab3_title_family",
+          "label": "tab 3 title font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab3_title_padding_top",
+          "label": "Title 3 padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab3_title_padding_bottom",
+          "label": "Title 3 padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
           "type": "color",
           "id": "tab3_title_color",
           "label": "Tab 3 title color"
@@ -2153,6 +2389,41 @@
           "id": "tab3_title2",
           "label": "Tab 3 title 2",
           "default": "<p>Tab 3 title 2</p>"
+        },
+        {
+          "type": "select",
+          "id": "tab3_title2_family",
+          "label": "tab 3 title 2 font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "tab3_title2_padding_top",
+          "label": "Title 2 padding top",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
+        },
+        {
+          "type": "range",
+          "id": "tab3_title2_padding_bottom",
+          "label": "Title 2 padding bottom",
+          "min": 0,
+          "max": 5,
+          "unit": "rem",
+          "default": 0,
+          "step": 0.1
         },
         {
           "type": "color",
@@ -2170,7 +2441,22 @@
           "id": "tab3_content",
           "label": "tab3 content",
           "default": "<p>tab3 content</p>"
-        }
+        },
+        {
+          "type": "select",
+          "id": "tab3_content_family",
+          "label": "tab 1 title font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default",
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
       ]
     },
     {
@@ -2351,10 +2637,35 @@
           "default": true
         },
         {
+          "type": "range",
+          "id": "pop_up_gap",
+          "label": "Button gap",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "rem",
+          "default": 1.6
+        },
+        {
           "type": "text",
           "id": "color_group_2_popup_title",
           "default": "pop-up",
           "label": "Pop-up link text"
+        },
+        {
+          "type": "select",
+          "id": "color_group_2_popup_title_family",
+          "label": "color_group_2_popup_title_family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
         },
         {
           "type": "page",
@@ -2366,6 +2677,21 @@
           "id": "size_guide_text",
           "default": "Size Guide",
           "label": "Pop-up link text"
+        },
+        {
+          "type": "select",
+          "id": "size_guide_text_family",
+          "label": "size_guide_text_family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            }
+          ]
         },
         {
           "type": "page",
@@ -2503,6 +2829,21 @@
           "default": "Color group 1 title"
         },
         {
+          "type": "select",
+          "id": "group_1_title_family",
+          "label": "Group 1 title font family",
+          "options": [
+            {
+              "type": "default",
+              "value": "Default"
+            },
+            {
+              "type": "hind",
+              "label": "Hind"
+            }
+          ]
+        },
+        {
           "type": "color",
           "id": "group1_legend_color",
           "label": "Color group 1 legend color"
@@ -2636,6 +2977,21 @@
           "id": "group_2_title",
           "label": "Color group 2 title",
           "default": "Color group 2 title"
+        },
+        {
+          "type": "select",
+          "id": "group_2_title_family",
+          "label": "Group 1 title font family",
+          "options": [
+            {
+              "type": "default",
+              "value": "Default"
+            },
+            {
+              "type": "hind",
+              "label": "Hind"
+            }
+          ]
         },
         {
           "type": "color",
@@ -3140,10 +3496,10 @@
       "content": "On picture text options"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "on_picture_text",
       "label": "On picture text",
-      "default": "Lorem ipsum dolorem sit ammet dignissimos."
+      "default": "<p>Lorem ipsum dolorem sit ammet dignissimos.</p>"
     },
     {
       "type": "range",
@@ -3202,7 +3558,7 @@
       "options": [
         {
           "value": "left",
-          "label": "Right"
+          "label": "Left"
         },
         {
           "value": "center",
@@ -3211,6 +3567,10 @@
         {
           "value": "right",
           "label": "Right"
+        },
+        {
+          "value": "justify",
+          "label": "Justify"
         }
       ],
       "default": "left"
@@ -3228,10 +3588,10 @@
       "default": "#dddddd40"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "on_picture_text_natural",
-      "label": "On picture text",
-      "default": "Lorem ipsum dolorem sit ammet dignissimos."
+      "label": "On picture text for natural",
+      "default": "<p>Lorem ipsum dolorem sit ammet dignissimos.</p>"
     },
     {
       "type": "range",
@@ -3290,7 +3650,7 @@
       "options": [
         {
           "value": "left",
-          "label": "Right"
+          "label": "Left"
         },
         {
           "value": "center",
@@ -3299,6 +3659,10 @@
         {
           "value": "right",
           "label": "Right"
+        },
+        {
+          "value": "justify",
+          "label": "Justify"
         }
       ],
       "default": "left"
