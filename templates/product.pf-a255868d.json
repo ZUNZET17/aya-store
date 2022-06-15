@@ -182,13 +182,23 @@
             "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
         },
+        "b72be404-470c-41d2-8e44-943ec9214c5a": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Materials & Ingredients",
+            "icon": "none",
+            "content": "<p>• 100% Organic Pima Cotton Fabric<br\/>• 100% Cotton Threads<br\/>• 100% Organic Cotton Labels<br\/>• 100% Natural Dyes \/ OEKO-TEX Certified Dyes<br\/>• OEKO-TEX Certified Silicone Fabric Finishing<br\/>• GOTS Certified Ink (on labels)<\/p>",
+            "page": ""
+          }
+        },
         "60bff899-4b1d-4fc3-9dca-73dd8958d050": {
           "type": "collapsible_tab",
           "settings": {
             "hide_mobile": false,
-            "heading": "Description",
+            "heading": "Product Details",
             "icon": "none",
-            "content": "<p>This organic cotton v-neck delivers both style and sustainability. Great for travel and casual wear.<\/p><p>Regular fitModel is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips<\/p>",
+            "content": "<p>• Regular Fit<br\/>• Model is 6'1\", has 34\" chest and 32\" hips<\/p>",
             "page": ""
           }
         },
@@ -198,7 +208,7 @@
             "hide_mobile": false,
             "heading": "Fabric Care",
             "icon": "none",
-            "content": "",
+            "content": "<p>• Machine wash cold<\/p><p>• Tumble dry low<\/p>",
             "page": ""
           }
         }
@@ -213,6 +223,7 @@
         "7432a9af-0705-4f40-92f1-2074055942ed",
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
+        "b72be404-470c-41d2-8e44-943ec9214c5a",
         "60bff899-4b1d-4fc3-9dca-73dd8958d050",
         "73a524bf-8085-4594-b919-802d6df166e4"
       ],
