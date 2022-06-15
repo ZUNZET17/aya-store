@@ -34,10 +34,19 @@
             "show_dynamic_checkout": false
           }
         },
+        "2f3facc9-37c5-4617-8c84-12b5551eb8e5": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materials & Ingredients",
+            "icon": "none",
+            "content": "<p>• 100% Organic Pima Cotton Fabric<br\/>• 100% Cotton Threads<br\/>• 100% Organic Cotton Labels<br\/>• 100% Natural Dyes \/ OEKO-TEX Certified Dyes<br\/>• OEKO-TEX Certified Silicone Fabric Finishing<br\/>• GOTS Certified Ink (on labels)<\/p>",
+            "page": ""
+          }
+        },
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Description",
+            "heading": "Product Details",
             "icon": "none",
             "content": "<p>Soft & Breathable 100% Organic Cotton Panties.<\/p>",
             "page": ""
@@ -59,6 +68,7 @@
         "price",
         "variant_picker",
         "buy_buttons",
+        "2f3facc9-37c5-4617-8c84-12b5551eb8e5",
         "collapsible-row-0",
         "collapsible-row-3"
       ],
