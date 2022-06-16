@@ -248,7 +248,6 @@
         },
         "8cb1b144-d047-4453-9184-59446ed8e9f7": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "heading": "Description",
@@ -259,7 +258,6 @@
         },
         "f5560f9d-89a0-4ec4-aa6c-19512d115e33": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "heading": "Sustainable Materials",
