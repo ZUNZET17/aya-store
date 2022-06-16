@@ -6,13 +6,9 @@
         "vendor": {
           "type": "text",
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p> Luxurious Pima. Unbelievably Soft.<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Luxurious Pima. Unbelievably Soft.</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 0.4,
             "text_family": "hind",
@@ -59,7 +55,7 @@
             "pop_up_gap": 1.6,
             "color_group_2_popup_title": "Why are they different?",
             "color_group_2_popup_title_family": "default",
-            "color_group2_page2": "",
+            "color_group2_page2": "cotton-fabric-care",
             "size_guide_text": "Size Guide",
             "size_guide_text_family": "default",
             "size_guide_page": "sizechart-mens-tops",
@@ -138,13 +134,9 @@
           "type": "text",
           "disabled": true,
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p>LET'S REDEFINE FASHION<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Let's Redefine Fashion</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 0.7,
             "text_family": "hind",
@@ -158,13 +150,9 @@
           "type": "text",
           "disabled": true,
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p>Be Part of the Change<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Be Part of the Change</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 2.7,
             "text_family": "default",
@@ -211,7 +199,6 @@
             "tab3_content_justify": "left",
             "btn_bk_active": "#434442",
             "icon_color_hover": "#434442",
-<<<<<<< Updated upstream
             "tab1_image": "shopify:\/\/shop_images\/01.png",
             "tab1_image_white": "shopify:\/\/shop_images\/02.png",
             "tab1_title": "<p><strong>CHANGE 1: MICROPLASTIC FREE WORLD<\/strong><\/p>",
@@ -279,20 +266,6 @@
             "icon": "none",
             "content": "<p>Our Men's Organic Pima Cotton Long Sleeve Shirt is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread:<\/strong>100% Cotton<\/p><p><strong>Label:<\/strong>100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes:<\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing:<\/strong>OEKO-TEX Certified<\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
             "page": ""
-=======
-            "tab1_image": "shopify:\/\/shop_images\/Microplastics_Free_1.png",
-            "tab1_image_white": "shopify:\/\/shop_images\/worldicon2.png",
-            "tab1_title": "<p>Microplastic-Free World</p>",
-            "tab1_content": "<p>We put a stop to plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.<\/p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.<\/strong><\/p>",
-            "tab2_image": "shopify:\/\/shop_images\/Co2_2.png",
-            "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
-            "tab2_title": "<p>One-Country Supply Chain</p>",
-            "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
-            "tab3_image": "shopify:\/\/shop_images\/Cotton_Product_Page_1.png",
-            "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
-            "tab3_title": "<p>100% Organic Pima</p>",
-            "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
->>>>>>> Stashed changes
           }
         }
       },
@@ -314,12 +287,8 @@
         "bc_hide_mobile": false,
         "bc_size": 1.4,
         "bc_weight": "500",
-<<<<<<< Updated upstream
         "bc_is_uppercase": false,
         "on_picture_text": "<p><strong>Fiber: <\/strong>100% Organic Pima Cotton<br\/><strong>Thread: <\/strong>100% Cotton<br\/><strong>Label:<\/strong> 100% Organic Cotton + GOTS Certified Ink<br\/><strong>Dyes:<\/strong> Low Impact Dyes (GOTS) & 100% Natural Dyes<br\/><strong>Finishing:<\/strong> OEKO-TEX Certified<br\/><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
-=======
-        "on_picture_text": "<p>Luxurious Pima. Unbelievably Soft</p>",
->>>>>>> Stashed changes
         "on_image_text_size": 1.2,
         "on_image_text_weight": "500",
         "on_image_text_align": "flex-end",
