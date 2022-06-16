@@ -3080,6 +3080,13 @@ details-disclosure > details {
     border-radius: .5rem;
     transition: all 0.2s ease-in-out;
   }
+  
+  .product-size-label.unavailable {
+    background-color: transparent!important;
+    border-color: #ddd!important;
+    color: #ddd!important;
+    pointer-events: none;
+  }
 
   .variant-option-input:checked + .product-size-label {
     color: #ffffff;

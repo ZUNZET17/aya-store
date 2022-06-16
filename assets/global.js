@@ -966,6 +966,7 @@ const sizesAvailability = function (option) {
 const colorLabels = document.querySelectorAll('.js-color-label');
 
 const displaySwatchColor = function (ev) {
+  console.log('display')
   const input = ev.target == document ? document.querySelector('.js-variant-option-color:checked + .js-color-label') : ev.target;
   const value = input.getAttribute("swatch-color")
   const size = document.querySelector('.js-variant-option-size:checked').value
