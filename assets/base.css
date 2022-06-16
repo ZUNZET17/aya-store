@@ -2963,7 +2963,9 @@ details-disclosure > details {
   }
 
   .color-options {
+    align-content: center;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
   }
@@ -2989,7 +2991,7 @@ details-disclosure > details {
     transition: all 0.2s ease-in-out;
   }
   
-  .color-swatch__label:hover {
+  .color-swatch__label:hover:not(.variant-option-input:checked + .color-swatch__label) {
     transform: scale(1.2);
     border-collapse: separate;
     border-spacing: 1.5rem;
