@@ -956,14 +956,14 @@
                                 </div>
                               </div>
                             </modal-dialog>
-                            <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" {{ block.shopify_attributes }}>
+                            <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace: '?', '' }}" {{ block.shopify_attributes }}>
                               {% assign pageId22 = block.settings.color_group2_page2.template_suffix %}
                               <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link js-pop-up-button color-group2-page2-legend {% unless pageId22 %} no-events {% endunless %} sizes-guide {{ block.settings.color_group_2_popup_title_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings.color_group_2_popup_title | default: block.settings.page.title }}</button>
                             </modal-opener>
-                            <modal-dialog id="PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                            <modal-dialog id="PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace : '?', '' }}" class="product-popup-modal" {{ block.shopify_attributes }}>
                               <div role="dialog" aria-label="{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                                <button id="ModalClose-{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page2.content != blank %}js-page-{{-color_group_2_page2}} js-page-content{% endunless %}">
+                                <button id="ModalClose-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace: '?', '' }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page2.content != blank %}js-page-{{-pageId22}} js-page-content{% endunless %}">
                                   {% if block.settings.color_group2_page2.content != blank %}
                                   {{ block.settings.color_group2_page2.content }}
                                 {% else %}
@@ -1286,6 +1286,7 @@
       let pageContent;  
       function handleResponse() {
         pageContent = JSON.parse(this.responseText);
+        console.log('afterload', pageContent)
         let container = document.createElement( 'html' );
         container.innerHTML = pageContent[pageId]
         document.querySelector(`.js-page-${pageId}`).appendChild(container)
@@ -2698,7 +2699,7 @@
         {
           "type": "page",
           "id": "color_group2_page2",
-          "label": "color-group-page 2"
+          "label": "color group 2 page 2"
         }, 
         {
           "type": "text",
