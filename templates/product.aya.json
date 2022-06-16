@@ -51,7 +51,7 @@
             "sizes_guide_underline": true,
             "color_group1_page": "",
             "color_group2_page": "",
-            "pop_up_alignment": true,
+            "pop_up_alignment": false,
             "pop_up_gap": 1.6,
             "color_group_2_popup_title": "Why are they different?",
             "color_group_2_popup_title_family": "default",
