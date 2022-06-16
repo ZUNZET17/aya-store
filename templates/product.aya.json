@@ -6,13 +6,9 @@
         "vendor": {
           "type": "text",
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p>Luxurious Pima. Unbelievably Soft.<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Luxurious Pima. Unbelievably Soft.</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 0,
             "text_style": "uppercase",
@@ -132,13 +128,9 @@
           "type": "text",
           "disabled": true,
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p>Let's Redefine Fashion<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Let's Redefine Fashion</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 0.7,
             "text_style": "uppercase",
@@ -151,13 +143,9 @@
           "type": "text",
           "disabled": true,
           "settings": {
-<<<<<<< Updated upstream
             "hide_mobile": false,
             "text": "<p>Be Part of the Change<\/p>",
             "text_color": "",
-=======
-            "text": "<p>Be Part of the Change</p>",
->>>>>>> Stashed changes
             "padding_top": 0,
             "padding_bottom": 2.7,
             "text_style": "uppercase",
@@ -203,7 +191,6 @@
             "tab3_content_justify": "left",
             "btn_bk_active": "#434442",
             "icon_color_hover": "#434442",
-<<<<<<< Updated upstream
             "tab1_image": "shopify:\/\/shop_images\/01.png",
             "tab1_image_white": "shopify:\/\/shop_images\/02.png",
             "tab1_title": "<p>Change 1: Microplastic-Free World<\/p>",
@@ -227,19 +214,6 @@
             "tab3_title2": "<p><em>Be Part of the Change<\/em><\/p>",
             "tab3_title2_color": "",
             "tab3_title2_hide_mobile": false,
-=======
-            "tab1_image": "shopify:\/\/shop_images\/Microplastics_Free_1.png",
-            "tab1_image_white": "shopify:\/\/shop_images\/worldicon2.png",
-            "tab1_title": "<p>Microplastic-Free World</p>",
-            "tab1_content": "<p>We put a stop to plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.<\/p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.<\/strong><\/p>",
-            "tab2_image": "shopify:\/\/shop_images\/Co2_2.png",
-            "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
-            "tab2_title": "<p>One-Country Supply Chain</p>",
-            "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more international supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
-            "tab3_image": "shopify:\/\/shop_images\/Cotton_Product_Page_1.png",
-            "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
-            "tab3_title": "<p>100% Organic Pima</p>",
->>>>>>> Stashed changes
             "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
           }
         },
@@ -282,19 +256,15 @@
         "bc_hide_mobile": false,
         "bc_size": 1.4,
         "bc_weight": "500",
-<<<<<<< Updated upstream
         "bc_is_uppercase": false,
-        "on_picture_text": "Fiber: 100% Organic Pima Cotton\nThread: 100% Cotton\nLabel:100% Organic Cotton + GOTS Certified Ink\nDyes: Low Impact Dyes (GOTS) & 100% Natural Dyes\nFinishing: OEKO-TEX Certified\nCare: Tumble dry low. Machine wash cold.",
-=======
-        "on_picture_text": "<p>Luxurious Pima. Unbelievably Soft</p>",
->>>>>>> Stashed changes
+        "on_picture_text": "<p>Fiber: 100% Organic Pima Cotton\nThread: 100% Cotton\nLabel:100% Organic Cotton + GOTS Certified Ink\nDyes: Low Impact Dyes (GOTS) & 100% Natural Dyes\nFinishing: OEKO-TEX Certified\nCare: Tumble dry low. Machine wash cold.</p>",
         "on_image_text_size": 1.2,
         "on_image_text_weight": "500",
         "on_image_text_align": "flex-end",
         "on_image_text_content_align": "right",
         "on_picture_text_color": "#434442",
         "on_image_bk": "rgba(255,255,255,0.6)",
-        "on_picture_text_natural": "Fiber: 100% Organic Pima Cotton\nThread: 100% Cotton\nLabel : 100% Organic Cotton + GOTS Certified Ink\nDyes: Low Impact Dyes (GOTS) & 100% Natural Dyes\nFinishing: OEKO-TEX Certified\nCare: Tumble dry low. Machine wash cold.",
+        "on_picture_text_natural": "<p>Fiber: 100% Organic Pima Cotton\nThread: 100% Cotton\nLabel : 100% Organic Cotton + GOTS Certified Ink\nDyes: Low Impact Dyes (GOTS) & 100% Natural Dyes\nFinishing: OEKO-TEX Certified\nCare: Tumble dry low. Machine wash cold.</p>",
         "on_image_text_size_natural": 1.2,
         "on_image_text_weight_natural": "400",
         "on_image_text_align_natural": "flex-end",
