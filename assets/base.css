@@ -3084,7 +3084,7 @@ details-disclosure > details {
   .product-size-label.unavailable {
     background-color: transparent!important;
     border-color: #ddd!important;
-    color: #ddd!important;
+    color: #dddddd!important;
     pointer-events: none;
   }
 
