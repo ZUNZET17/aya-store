@@ -2991,6 +2991,10 @@ details-disclosure > details {
     transition: all 0.2s ease-in-out;
   }
   
+  .color-swatch__label svg {
+    border-radius: 50%;
+  }
+  
   .color-swatch__label:hover:not(.variant-option-input:checked + .color-swatch__label) {
     transform: scale(1.2);
     border-collapse: separate;
