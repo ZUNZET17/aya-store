@@ -966,7 +966,6 @@ const sizesAvailability = function (option) {
 const colorLabels = document.querySelectorAll('.js-color-label');
 
 const displaySwatchColor = function (ev) {
-  console.log('display')
   const input = ev.target == document ? document.querySelector('.js-variant-option-color:checked + .js-color-label') : ev.target;
   const value = input.getAttribute("swatch-color")
   const size = document.querySelector('.js-variant-option-size:checked').value
@@ -999,7 +998,6 @@ const sortVariantPictures = function (ev) {
   const filteredArray = picturesArray.filter( x => {
     const altArr = x.getAttribute('media-alt').split(' ');
     let xColor = altArr.slice(altArr.indexOf('color') + 1);
-    console.log(xColor.join('-').toLowerCase())
     return xColor.join('-').toLowerCase() === value
   })
 
@@ -1021,13 +1019,15 @@ const accordionSolo = function (ev) {
   const input = ev.currentTarget;
   const currentAccordion = input.parentElement;
   const accordionArr = Array.from(document.querySelectorAll('.js-accordion-details'));
-  console.log(currentAccordion)
 
-  accordionArr.forEach(a => {
-    a.removeAttribute('open')
-  })
+  if (!currentAccordion.getAttribute('open')) {
+    accordionArr.forEach(a => {
+      if( a == currentAccordion ) return;
+      a.removeAttribute('open');
+    })
+  }
 
-  currentAccordion.setAttribute(open)
+  //currentAccordion.setAttribute(open)
 }
 
 document.addEventListener("DOMContentLoaded", sortVariantPictures)
