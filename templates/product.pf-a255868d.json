@@ -255,7 +255,7 @@
           "settings": {
             "hide_mobile": false,
             "heading": "Product Details",
-            "accordion_title_size": 1.4,
+            "accordion_title_size": 1.3,
             "accordion_title_weight": "400",
             "accordion_title_family": "default",
             "accordion_title_color": "",
@@ -275,7 +275,7 @@
           "settings": {
             "hide_mobile": false,
             "heading": "Fabric Care",
-            "accordion_title_size": 1.4,
+            "accordion_title_size": 1.3,
             "accordion_title_weight": "400",
             "accordion_title_family": "default",
             "accordion_title_color": "",
