@@ -489,8 +489,8 @@
               }
             {% endstyle %}
             <div class="product__accordion accordion quick-add-hidden accordion--{{- block.id -}}" {{ block.shopify_attributes }}>
-              <details id="Details-{{ block.id }}-{{ section.id }}">
-                <summary>
+              <details class="js-accordion-details" id="Details-{{ block.id }}-{{ section.id }}">
+                <summary class="js-accordion-summary">
                   <div class="summary__title">
                     {% render 'icon-accordion', icon: block.settings.icon %}
                     <h2 class="h4 accordion__title accordion__title{{block.id}} {{ block.settings.accordion_title_family }} ">

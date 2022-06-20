@@ -996,7 +996,12 @@ const sortVariantPictures = function (ev) {
   selectedColor = value;
 
   const picturesArray = Array.from(document.querySelectorAll('.product__media-item'));
-  const filteredArray = picturesArray.filter( x => x.getAttribute('media-alt').toLowerCase() === value)
+  const filteredArray = picturesArray.filter( x => {
+    const altArr = x.getAttribute('media-alt').split(' ');
+    let xColor = altArr.slice(altArr.indexOf('color') + 1);
+    console.log(xColor.join('-').toLowerCase())
+    return xColor.join('-').toLowerCase() === value
+  })
 
   if(filteredArray.length > 0 ) {
     picturesArray.map(x => {
@@ -1009,10 +1014,29 @@ const sortVariantPictures = function (ev) {
   }
 };
 
+//Accordions solo function
+
+const accordionSummaries = document.querySelectorAll('.js-accordion-summary')
+const accordionSolo = function (ev) {
+  const input = ev.currentTarget;
+  const currentAccordion = input.parentElement;
+  const accordionArr = Array.from(document.querySelectorAll('.js-accordion-details'));
+  console.log(currentAccordion)
+
+  accordionArr.forEach(a => {
+    a.removeAttribute('open')
+  })
+
+  currentAccordion.setAttribute(open)
+}
+
 document.addEventListener("DOMContentLoaded", sortVariantPictures)
 document.addEventListener("DOMContentLoaded", optionsAvailability)
 document.addEventListener("DOMContentLoaded", displaySwatchColor)
 
 colorLabels.forEach(label => {
   label.addEventListener('click', sortVariantPictures, false)
+})
+accordionSummaries.forEach(label => {
+  label.addEventListener('click', accordionSolo, false)
 })
