@@ -289,6 +289,26 @@
             "accordion_content_align": "left",
             "page": ""
           }
+        },
+        "f589c720-d4c0-4770-9262-fc90587c5696": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Shipping & Returns",
+            "accordion_title_size": 1.5,
+            "accordion_title_weight": "400",
+            "accordion_title_family": "default",
+            "accordion_title_color": "",
+            "accordion_title_align": "left",
+            "icon": "none",
+            "content": "<p>Free Shipping on orders above $50.<\/p><p>Free Returns on all orders.<\/p>",
+            "accordion_content_size": 1.5,
+            "accordion_content_weight": "400",
+            "accordion_content_family": "default",
+            "accordion_content_color": "",
+            "accordion_content_align": "left",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -302,7 +322,8 @@
         "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
         "8cb1b144-d047-4453-9184-59446ed8e9f7",
-        "f5560f9d-89a0-4ec4-aa6c-19512d115e33"
+        "f5560f9d-89a0-4ec4-aa6c-19512d115e33",
+        "f589c720-d4c0-4770-9262-fc90587c5696"
       ],
       "settings": {
         "enable_sticky_info": true,
