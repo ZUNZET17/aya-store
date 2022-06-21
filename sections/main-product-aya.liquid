@@ -229,24 +229,6 @@
               {%- endunless -%}
             {%- endfor -%}
           </ul>
-          <!-- <div class="on-picture-text-container">
-            <div class="on-picture-text js-on-picture-text">
-              {{ section.settings.on_picture_text }}
-              <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
-            </div>
-            <div class="on-picture-text__mobile-trigger js-on-image-text-mobile-trigger">
-              {{ section.settings.on_picture_trigger_text }}
-            </div>
-          </div>
-          <div class="on-picture-text-container on-picture-text-container--natural">
-            <div class="on-picture-text on-picture-text--natural js-on-picture-text">
-              {{ section.settings.on_picture_text_natural | newline_to_br }}
-              <span class="on-picture-text__close js-on-picture-close">{% render 'icon-close' %}</span>
-            </div>
-            <div class="on-picture-text__mobile-trigger on-picture-text__mobile-trigger--natural js-on-image-text-mobile-trigger">
-              {{ section.settings.on_picture_trigger_text_natural | newline_to_br }}
-            </div>
-          </div> -->
           <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             {% comment %}
