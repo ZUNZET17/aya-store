@@ -301,7 +301,7 @@
             "accordion_title_color": "",
             "accordion_title_align": "left",
             "icon": "none",
-            "content": "<p>Free Shipping on orders above $50.<\/p><p>Free Returns on all orders.<\/p>",
+            "content": "<p>Free <a href=\"\/policies\/shipping-policy\" target=\"_blank\" title=\"Shipping Policy\">Shipping<\/a> and <a href=\"\/policies\/refund-policy\" target=\"_blank\" title=\"Refund Policy\">Returns<\/a> on orders above $50.<\/p>",
             "accordion_content_size": 1.2,
             "accordion_content_weight": "400",
             "accordion_content_family": "default",
