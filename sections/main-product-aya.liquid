@@ -91,8 +91,6 @@
             }
             .on-picture-text--natural {
               display: none;
-              width: max-content;
-              padding: .5rem;
               color: {{ section.settings.on_picture_text_color_natural }};
               font-size: {{ section.settings.on_image_text_size_natural }}rem;
               font-weight: {{ section.settings.on_image_text_weight_natural }};
@@ -128,6 +126,9 @@
               border-radius: 10rem;
               text-align: center;
               cursor: pointer;
+              {% if section.settings.on_picture_trigger_text_underline %}
+              text-decoration: underline;
+              {% endif %}
             }
             .on-picture-text__mobile-trigger--natural {
               display: block;
@@ -140,6 +141,9 @@
               border-radius: 10rem;
               text-align: center;
               cursor: pointer;
+              {% if section.settings.on_picture_trigger_text_natural_underline %}
+              text-decoration: underline;
+              {% endif %}
             }
             @media screen and (min-width: 750px) {
               .on-picture-text-container {
@@ -3880,10 +3884,22 @@
       "default": "Model Info"
     },
     {
+      "type": "checkbox",
+      "id": "on_picture_trigger_text_underline",
+      "label": "underline",
+      "default": false
+    },
+    {
       "type": "textarea",
       "id": "on_picture_trigger_text_natural",
       "label": "On picture mobile trigger button text for natural colors",
       "default": "Model Info Natural"
+    },
+    {
+      "type": "checkbox",
+      "id": "on_picture_trigger_text_natural_underline",
+      "label": "underline natural",
+      "default": false
     },
     {
       "type": "header",
