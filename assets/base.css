@@ -3115,6 +3115,10 @@ details-disclosure > details {
     border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
   }
 
+  .text-block {
+    line-height: 1;
+  }
+
   .text-block p {
     margin: 0!Important;
   }
@@ -3131,4 +3135,44 @@ details-disclosure > details {
 
   .montserrat {
     font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Zoom Image */
+  
+  .zoom-thumb modal-opener{
+    pointer-events: none;
+  }
+
+  .zoom-thumb {
+    cursor: zoom-in;
+    overflow: hidden;
+  }
+
+  .zoom-thumb.zoomed {
+    cursor: zoom-out;
+  }
+
+  .zoom-thumb.zoomed .on-picture-text-container {
+    pointer-events: none;
+  }
+
+  .product__media-item > .zoom-image {
+    display: none;
+    position: absolute!important;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 50%;
+    pointer-events: none;
+    z-index: 9;
+  }
+
+  .zoom-image.active-zoom {
+    display: block!important;
+  }
+
+  .product__title {
+    line-height: 1;
   }

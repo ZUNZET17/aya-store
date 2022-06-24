@@ -458,7 +458,7 @@ class ModalDialog extends HTMLElement {
   connectedCallback() {
     if (this.moved) return;
     this.moved = true;
-    document.body.appendChild(this);
+    document.body.append(this);
   }
 
   show(opener) {
@@ -900,7 +900,6 @@ class VariantRadios extends VariantSelects {
 
 customElements.define('variant-radios', VariantRadios);
 
-
 // aoa custom scrtipts
 
 /* Tabs script */
@@ -988,9 +987,16 @@ colorLabels.forEach(label => {
 
 // Sort Color Variant Picture
 let selectedColor;
+let variantColor;
+const variantData = JSON.parse(document.querySelector('.js-variants-data').textContent);
+let variantId = location.href.split("variant=")[1]
+variantColor = variantData.find(v => v.id == variantId ).options[0].toLowerCase().replace(' ', '-')
+
 const sortVariantPictures = function (ev) {
   const input = ev.target !== document ? ev.target : document.querySelector('.js-color-label.selected');
-  const value = input.getAttribute('swatch-color').toLowerCase().replace(' ', '-');
+  const value = variantColor || input.getAttribute('swatch-color').toLowerCase().replace(' ', '-');
+  
+  variantColor = ""
   if(selectedColor == value) return;
   selectedColor = value;
 
