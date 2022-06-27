@@ -84,9 +84,9 @@
     "sold_out_badge_color_scheme": "inverse",
     "accent_icons": "accent-1",
     "social_twitter_link": "",
-    "social_facebook_link": "https://facebook.com/ayaecofashion",
+    "social_facebook_link": "https:\/\/facebook.com\/ayaecofashion",
     "social_pinterest_link": "",
-    "social_instagram_link": "http://instagram.com/eco.aya",
+    "social_instagram_link": "http:\/\/instagram.com\/eco.aya",
     "social_tiktok_link": "",
     "social_tumblr_link": "",
     "social_snapchat_link": "",
@@ -95,7 +95,7 @@
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
-    "favicon": "shopify://shop_images/AYA_Favicon_Black_735a80f1-36e8-4dcb-85b0-1d3eab7cb5eb.png",
+    "favicon": "shopify:\/\/shop_images\/AYA_Favicon_Black_735a80f1-36e8-4dcb-85b0-1d3eab7cb5eb.png",
     "currency_code_enabled": true,
     "sections": {
       "announcement-bar": {
@@ -106,7 +106,7 @@
             "settings": {
               "text": "Free Shipping & Returns* | Compostable Packaging",
               "color_scheme": "inverse",
-              "link": "shopify://policies/shipping-policy"
+              "link": "shopify:\/\/policies\/shipping-policy"
             }
           }
         },
@@ -120,7 +120,7 @@
         "type": "header",
         "settings": {
           "color_scheme": "background-1",
-          "logo": "shopify://shop_images/AYA-logo.png",
+          "logo": "shopify:\/\/shop_images\/AYA-logo.png",
           "logo_width": 90,
           "logo_position": "middle-left",
           "menu": "main-menu",
@@ -145,7 +145,7 @@
             "disabled": true,
             "settings": {
               "heading": "Our mission",
-              "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+              "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
             }
           }
         },
@@ -185,19 +185,19 @@
     ],
     "blocks": {
       "855628211100114053": {
-        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {
         }
       },
       "573254258818049612": {
-        "type": "shopify://apps/crazy-egg/blocks/app-embed/7ea73823-6ad9-4252-a63e-088397d54aed",
+        "type": "shopify:\/\/apps\/crazy-egg\/blocks\/app-embed\/7ea73823-6ad9-4252-a63e-088397d54aed",
         "disabled": false,
         "settings": {
         }
       },
       "4571859552318407796": {
-        "type": "shopify://apps/g-variant-image-color-swatch/blocks/app-embed-block/4394f710-096c-4021-bbde-8ebb26057c11",
+        "type": "shopify:\/\/apps\/g-variant-image-color-swatch\/blocks\/app-embed-block\/4394f710-096c-4021-bbde-8ebb26057c11",
         "disabled": true,
         "settings": {
         }
@@ -354,7 +354,7 @@
               "type": "text",
               "settings": {
                 "heading": "Our mission",
-                "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+                "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
               }
             }
           },
