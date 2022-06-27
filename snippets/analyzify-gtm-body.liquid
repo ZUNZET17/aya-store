@@ -343,8 +343,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var cartItemsQuantity = [];
         var cartItemsCategoryIds = [];
 
-        {% assign item_category_list = '' %}
-        {% assign item_category_ids_list = '' %}
+        
+        
 
         {%- for item in cart.items -%}
           cartItemsName.push("{{ item.title | remove: "'" | remove: '"' }}");

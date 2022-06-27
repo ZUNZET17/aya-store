@@ -1,1 +1,12 @@
-{"sections":{"pf-043cc1d1":{"type":"pf-043cc1d1","settings":{}}},"order":["pf-043cc1d1"]}
+{
+  "sections": {
+    "pf-043cc1d1": {
+      "type": "pf-043cc1d1",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "pf-043cc1d1"
+  ]
+}

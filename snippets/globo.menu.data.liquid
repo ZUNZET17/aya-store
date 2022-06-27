@@ -6,9 +6,9 @@
   window.GloboMenuConfig.products = window.GloboMenuConfig.products || {};
   window.GloboMenuConfig.collections = window.GloboMenuConfig.collections || {};
   window.GloboMenuConfig.pages = window.GloboMenuConfig.pages || {};
-  window.GloboMenuConfig.curLocale = {{request.locale.iso_code | json}};
-  window.GloboMenuConfig.GloboMenuLocale = {{request.locale.iso_code | json}};
-  window.GloboMenuConfig.locale = {{primary_locale}};
+  window.GloboMenuConfig.curLocale = {{ request.locale.iso_code | json }};
+  window.GloboMenuConfig.GloboMenuLocale = {{ request.locale.iso_code | json }};
+  window.GloboMenuConfig.locale = {{ primary_locale }};
   window.GloboMenuConfig.isMultiCurrency  = false;
   window.GloboMenuConfig.GloboMenuMissingProducts = [];
-  window.GloboMenuConfig.pages['about'] = {handle:{{-pages['about'].handle | json-}},title:{{-pages['about'].title | json-}}};window.GloboMenuConfig.pages['our-materials'] = {handle:{{-pages['our-materials'].handle | json-}},title:{{-pages['our-materials'].title | json-}}};window.GloboMenuConfig.pages['supply-chain'] = {handle:{{-pages['supply-chain'].handle | json-}},title:{{-pages['supply-chain'].title | json-}}};</script>
+  window.GloboMenuConfig.pages['about'] = {handle:{{- pages['about'].handle | json -}},title:{{- pages['about'].title | json -}}};window.GloboMenuConfig.pages['our-materials'] = {handle:{{- pages['our-materials'].handle | json -}},title:{{- pages['our-materials'].title | json -}}};window.GloboMenuConfig.pages['supply-chain'] = {handle:{{- pages['supply-chain'].handle | json -}},title:{{- pages['supply-chain'].title | json -}}};</script>

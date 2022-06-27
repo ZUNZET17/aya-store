@@ -7,7 +7,7 @@
           "type": "text",
           "settings": {
             "hide_mobile": false,
-            "text": "<p>Luxurious Pima. Unbelievably Soft.<\/p>",
+            "text": "<p>Luxurious Pima. Unbelievably Soft.</p>",
             "padding_top": 0,
             "padding_bottom": 0,
             "text_style": "uppercase",
@@ -118,7 +118,7 @@
           "disabled": true,
           "settings": {
             "hide_mobile": false,
-            "text": "<p>Let's Redefine Fashion<\/p>",
+            "text": "<p>Let's Redefine Fashion</p>",
             "padding_top": 0,
             "padding_bottom": 0.7,
             "text_style": "uppercase",
@@ -132,7 +132,7 @@
           "disabled": true,
           "settings": {
             "hide_mobile": false,
-            "text": "<p>Be Part of the Change<\/p>",
+            "text": "<p>Be Part of the Change</p>",
             "padding_top": 0,
             "padding_bottom": 2.7,
             "text_style": "subtitle",
@@ -156,24 +156,24 @@
             "tab_content_justify": "left",
             "btn_bk_active": "#434442",
             "icon_color_hover": "#434442",
-            "tab1_image": "shopify:\/\/shop_images\/Microplastics_Free_1.png",
-            "tab1_image_white": "shopify:\/\/shop_images\/worldicon2.png",
-            "tab1_title": "<p>Change 1: Microplastic-Free World<\/p>",
-            "tab1_title2": "<p><em>Be Part of the Change<\/em><\/p>",
+            "tab1_image": "shopify://shop_images/Microplastics_Free_1.png",
+            "tab1_image_white": "shopify://shop_images/worldicon2.png",
+            "tab1_title": "<p>Change 1: Microplastic-Free World</p>",
+            "tab1_title2": "<p><em>Be Part of the Change</em></p>",
             "tab1_title2_hide_mobile": false,
-            "tab1_content": "<p>We put a stop to plastic pollution.<\/p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.<\/p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.<\/strong><\/p>",
-            "tab2_image": "shopify:\/\/shop_images\/Co2_2.png",
-            "tab2_image_white": "shopify:\/\/shop_images\/co2icon2.png",
-            "tab2_title": "<p>Change 2: One-Country Supply Chain<\/p>",
-            "tab2_title2": "<p><em>Be Part of the Change<\/em><\/p>",
+            "tab1_content": "<p>We put a stop to plastic pollution.</p><p>We use only organic materials: 100% Organic Cotton fabric sewn with 100% Cotton threads. Even our labels are 100% Cotton.</p><p>This is the first step in making our entire catalog <strong>plastic-free and biodegradable.</strong></p>",
+            "tab2_image": "shopify://shop_images/Co2_2.png",
+            "tab2_image_white": "shopify://shop_images/co2icon2.png",
+            "tab2_title": "<p>Change 2: One-Country Supply Chain</p>",
+            "tab2_title2": "<p><em>Be Part of the Change</em></p>",
             "tab2_title2_hide_mobile": false,
-            "tab2_content": "<p>We perfected the supply chain model.<\/p><p><strong>No more multinational supply chain<\/strong> with high carbon footprint and low transparency.<\/p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.<\/p>",
-            "tab3_image": "shopify:\/\/shop_images\/Cotton_Product_Page_1.png",
-            "tab3_image_white": "shopify:\/\/shop_images\/cottonicon2.png",
-            "tab3_title": "<p>Change 3: 100% Organic Pima<\/p>",
-            "tab3_title2": "<p><em>Be Part of the Change<\/em><\/p>",
+            "tab2_content": "<p>We perfected the supply chain model.</p><p><strong>No more multinational supply chain</strong> with high carbon footprint and low transparency.</p><p>Our Organic Pima Cotton is cultivated, spun into yarn, knitted into fabric and sewn into the perfectly designed T-shirt in our production studio - all sustainably and exclusively in Peru.</p>",
+            "tab3_image": "shopify://shop_images/Cotton_Product_Page_1.png",
+            "tab3_image_white": "shopify://shop_images/cottonicon2.png",
+            "tab3_title": "<p>Change 3: 100% Organic Pima</p>",
+            "tab3_title2": "<p><em>Be Part of the Change</em></p>",
             "tab3_title2_hide_mobile": false,
-            "tab3_content": "<p>We redefined sustainability.<\/p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.<\/p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.<\/p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.<\/strong><\/p>"
+            "tab3_content": "<p>We redefined sustainability.</p><p>This is not just another organic T-shirt. We use 100% Organic Pima Cotton, native to Peru that uses zero toxic chemicals.</p><p>Peruvian Pima is the parent fiber to all premium cotton, unbelievably soft and breathable.</p><p><strong>Your next purchase makes a difference. Wear what's best for the Earth.</strong></p>"
           }
         },
         "60bff899-4b1d-4fc3-9dca-73dd8958d050": {
@@ -183,7 +183,7 @@
             "hide_mobile": false,
             "heading": "Description",
             "icon": "none",
-            "content": "<p>This organic cotton v-neck delivers both style and sustainability. Great for travel and casual wear.<\/p><p>Regular fitModel is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips<\/p>",
+            "content": "<p>This organic cotton v-neck delivers both style and sustainability. Great for travel and casual wear.</p><p>Regular fitModel is 6'1\" (1.86m), has 3'4\" chest and 3'2\" hips</p>",
             "page": ""
           }
         }
