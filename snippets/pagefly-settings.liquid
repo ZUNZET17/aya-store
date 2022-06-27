@@ -2,7 +2,7 @@
 {% if shop.metafields.pagefly.acceptTracking %}
 <script>window.__pagefly_analytics_settings__={
 	acceptNewTracking: true, 
-	enableTrackingRevenue: {{ shop.metafields.pagefly.enableTrackingRevenue | default: false }}, 
+	enableTrackingRevenue: {{shop.metafields.pagefly.enableTrackingRevenue | default: false}}, 
 	sessionTimeout: {{ shop.metafields.pagefly.sessionTimeout | default: 30 }},
 	timezoneOffset: {{ shop.metafields.pagefly.timezoneOffset | default: 0 }}
 };
