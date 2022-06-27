@@ -3144,12 +3144,17 @@ details-disclosure > details {
   }
 
   .zoom-thumb {
-    cursor: zoom-in;
     overflow: hidden;
   }
 
-  .zoom-thumb.zoomed {
-    cursor: zoom-out;
+  @media screen and (min-width: 750px) {
+    .zoom-thumb {
+      cursor: zoom-in;
+    }
+  
+    .zoom-thumb.zoomed {
+      cursor: zoom-out;
+    }
   }
 
   .zoom-thumb.zoomed .on-picture-text-container {
