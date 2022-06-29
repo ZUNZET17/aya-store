@@ -24,7 +24,7 @@ const optionsAvailability = function () {
   const colorsOptions = Array.from(document.querySelectorAll('.js-color-label'))
   const colorsArr = colorsOptions.map(x => x.getAttribute('swatch-color').toLowerCase().replace(" ", "-"))
   const sizesOptions = Array.from(document.querySelectorAll('.js-variant-option-size'))
-  const sizesArr = sizesOptions.map(x => x.value.toLowerCase())
+  const sizesArr = sizesOptions.map(x => x.value.toLowerCase().replace(" ", "-"))
 
   colorsOptions.forEach((x, i) => {
     let overAllAvailability = []
