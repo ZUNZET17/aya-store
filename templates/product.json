@@ -3,16 +3,16 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {
-          }
-        },
         "vendor": {
           "type": "text",
           "settings": {
             "text": "Luxurious Pima. Unbelievably Soft. Perfectly Constructed.",
             "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
           }
         },
         "price": {
@@ -92,8 +92,8 @@
         }
       },
       "block_order": [
-        "title",
         "vendor",
+        "title",
         "price",
         "variant_picker",
         "quantity_selector",
