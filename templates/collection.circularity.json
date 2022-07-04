@@ -1,7 +1,20 @@
 {
   "sections": {
+    "16569673137008f673": {
+      "type": "pagefly-section",
+      "settings": {
+        "section_id": "pf-0670f322"
+      }
+    },
+    "1656967342e846dfd7": {
+      "type": "pagefly-section",
+      "settings": {
+        "section_id": "pf-8bc10dc1"
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": false,
         "show_collection_image": false,
@@ -48,6 +61,8 @@
     }
   },
   "order": [
+    "16569673137008f673",
+    "1656967342e846dfd7",
     "banner",
     "product-grid",
     "1652372343158d359d"
