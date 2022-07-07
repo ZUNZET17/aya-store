@@ -3015,6 +3015,17 @@ details-disclosure > details {
     transition-duration: 250ms;
     box-shadow: 0 0 0 1pt rgb(116, 121, 124);
   }
+
+  .color-swatch__label svg {
+    display: none;
+  }
+
+  .color-swatch__label.unavailable-swatch svg {
+    display: block;
+  }
+  .variant-option-input:checked + .color-swatch__label {
+    border-width: .2rem!important;
+  }
   
   .color-swatch__pin {
     font-size: 1.2rem;
