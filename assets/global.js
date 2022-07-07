@@ -891,6 +891,7 @@ class VariantRadios extends VariantSelects {
   }
 
   updateOptions() {
+    console.log('variant-radios')
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
@@ -916,14 +917,15 @@ class VariantRadiosBundle extends VariantRadios {
   }
 
   onChangeHandler() {
-    super.updateURL()
     this.setAvailability()
     this.sortVariantPictures()
     this.toggleAddButton()
   }
 
+
+
   toggleAddButton() {
-    return
+    console.log('newToggleFunction')
   }
 
   setAvailability() {
@@ -933,18 +935,18 @@ class VariantRadiosBundle extends VariantRadios {
 
       this.sizes.forEach(size => {
         let currentOption = [color.value, size.value]
-        let currentVariant = this.getVariantData().find((variant) => {
+        let optionVariant = this.getVariantData().find((variant) => {
           return !variant.options.map((option, index) => {
             return currentOption[index] === option;
           }).includes(false);
         })
 
         if (!this.firstLoad) {
-          colorAvailability.push(currentVariant)
+          colorAvailability.push(optionVariant)
           return
         }
 
-        if (!currentVariant.available) {
+        if (!optionVariant.available) {
           size.nextElementSibling.classList.add('unavailable')
           return
         }
@@ -990,9 +992,11 @@ class VariantRadiosBundle extends VariantRadios {
 
 customElements.define('variant-radios-bundle', VariantRadiosBundle)
 
+let selectedVariants
+
 const bundleItems = function (ev) {
   const input = ev.currentTarget
-  const selectedVariants = Array.from(document.querySelectorAll('variant-radios-bundle')).map(x => x.currentVariant)
+  selectedVariants = Array.from(document.querySelectorAll('variant-radios-bundle')).map(x => x.currentVariant)
   const productForm = document.getElementById(`product-form-${input.dataset?.section || dataSection}`);
 
   if (!productForm) return;
@@ -1017,3 +1021,37 @@ window.addEventListener('load', bundleItems)
 Array.from(document.querySelectorAll('variant-radios-bundle')).forEach(v => {
   v.addEventListener('change', bundleItems)
 })
+
+const addAllItems = function() {
+  var product_data = selectedVariants.map(variant => {
+    return {quantity: 1, id: variant.id}
+  })
+ 
+  var data = {
+    items: product_data
+  }
+        
+  fetch('/cart/add.js', {
+    body: JSON.stringify(data),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With':'xmlhttprequest'
+    },
+    method: 'POST'
+  }).then((response) => {
+    return response.json();
+  }).then((json) => {
+    /* yay! our products were added - do something here to indicate to the user */
+    console.log('products', json)
+  }).catch((err) => {
+    /* uh oh, we have error. */
+    console.error(err)
+  });
+}
+
+const productForm = document.getElementById(`product-form-${dataSection}`);
+
+const addButton = productForm.querySelector('[name="add"]');
+
+addButton.addEventListener('click', addAllItems)
