@@ -1022,7 +1022,9 @@ Array.from(document.querySelectorAll('variant-radios-bundle')).forEach(v => {
   v.addEventListener('change', bundleItems)
 })
 
-const addAllItems = function() {
+const addAllItems = function(ev) {
+  ev.preventDefault()
+  const cartNotification = document.querySelector('cart-notification')
   var product_data = selectedVariants.map(variant => {
     return {quantity: 1, id: variant.id}
   })
@@ -1044,6 +1046,7 @@ const addAllItems = function() {
   }).then((json) => {
     /* yay! our products were added - do something here to indicate to the user */
     console.log('products', json)
+    cartNotification.renderContents(json);
   }).catch((err) => {
     /* uh oh, we have error. */
     console.error(err)
