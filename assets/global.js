@@ -1025,11 +1025,11 @@ Array.from(document.querySelectorAll('variant-radios-bundle')).forEach(v => {
 const addAllItems = function(ev) {
   ev.preventDefault()
   const cartNotification = document.querySelector('cart-notification')
-  var product_data = selectedVariants.map(variant => {
+  const product_data = selectedVariants.map(variant => {
     return {quantity: 1, id: variant.id}
   })
  
-  var data = {
+  const data = {
     items: product_data
   }
         
@@ -1038,7 +1038,7 @@ const addAllItems = function(ev) {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      'X-Requested-With':'xmlhttprequest'
+      'X-Requested-With':'XMLHttpRequest'
     },
     method: 'POST'
   }).then((response) => {

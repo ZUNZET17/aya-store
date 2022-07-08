@@ -29,7 +29,7 @@ if (!customElements.get('product-form')) {
       formData.append('sections', this.cartNotification.getSectionsToRender().map((section) => section.id));
       formData.append('sections_url', window.location.pathname);
       config.body = formData;
-
+      console.log('config', config)
       fetch(`${routes.cart_add_url}`, config)
         .then((response) => response.json())
         .then((response) => {
