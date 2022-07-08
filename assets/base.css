@@ -3192,3 +3192,10 @@ details-disclosure > details {
   .product__title {
     line-height: 1;
   }
+
+  /*Bundle minicart*/
+  .cart-notification-product {
+    max-height: 50vh;
+    flex-direction: column;
+    overflow-y: scroll;
+  }

@@ -5,7 +5,7 @@ if (!customElements.get('product-form')) {
 
       this.form = this.querySelector('form');
       this.form.querySelector('[name=id]').disabled = false;
-      this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
+      //this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
       this.cartNotification = document.querySelector('cart-notification');
       this.submitButton = this.querySelector('[type="submit"]');
     }
@@ -29,7 +29,8 @@ if (!customElements.get('product-form')) {
       formData.append('sections', this.cartNotification.getSectionsToRender().map((section) => section.id));
       formData.append('sections_url', window.location.pathname);
       config.body = formData;
-      console.log('config', config)
+      console.log('originalForm')
+
       fetch(`${routes.cart_add_url}`, config)
         .then((response) => response.json())
         .then((response) => {

@@ -891,7 +891,6 @@ class VariantRadios extends VariantSelects {
   }
 
   updateOptions() {
-    console.log('variant-radios')
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
@@ -911,6 +910,8 @@ class VariantRadiosBundle extends VariantRadios {
     dataSection = this.dataset.section
     this.addEventListener('change', this.onChangeHandler)
     super.getVariantData()
+    this.existingVariant = location.href.split('variant=')[1]
+    this.existingColor = this.variantData.find(v => v.id == this.existingVariant)?.option1.toLowerCase() || null
     super.updateOptions()
     super.updateMasterId()
     this.onChangeHandler()
@@ -966,9 +967,6 @@ class VariantRadiosBundle extends VariantRadios {
   }
 
   sortVariantPictures() {
-    this.existingVariant = location.href.split('variant=')[1]
-    this.existingColor = this.variantData.find(v => v.id == this.existingVariant)?.option1.toLowerCase() || hrefColor
-    hrefColor = this.existingColor
     this.selectedColor = this.existingColor || this.querySelectorAll('fieldset.color-swatches input:checked')[0].value.toLowerCase()
     this.picturesArray = Array.from(document.querySelectorAll('.product__media-item'));
     this.filteredArray = this.picturesArray.filter( x => {
@@ -1022,23 +1020,61 @@ Array.from(document.querySelectorAll('variant-radios-bundle')).forEach(v => {
   v.addEventListener('change', bundleItems)
 })
 
+const productForm = document.getElementById(`product-form-${dataSection}`);
+
 const addAllItems = function(ev) {
   ev.preventDefault()
   const cartNotification = document.querySelector('cart-notification')
+  cartNotification.getSectionsToRender = [
+      {
+        id: 'cart-notification-product',
+        selector: `[id="shopify-section-cart-notification-product"]`,
+      },
+      {
+        id: 'cart-notification-button'
+      },
+      {
+        id: 'cart-icon-bubble'
+      }
+    ];
+  cartNotification.getSectionInnerHTML = (html, selector = ['.shopify-section']) => {
+    let index = Array.isArray(selector) ? selector.length : 1
+    let result = []
+    const parser = new DOMParser()
+    for (let i = 0; i < index; i++ ) {
+      let parsedItem = parser.parseFromString(html, 'text/html').querySelector(selector[i]).innerHTML;
+      result.push(parsedItem.toString())
+    }
+    result = result.map(item => `<div class="minicart__item">${item}</div>`).join(' ')
+    return result
+  }
+
+  cartNotification.renderContents = (parsedState) => {
+    cartNotification.getSectionsToRender[0].selector = parsedState.items.map(x => `[id="cart-notification-product-${x.key}"]`)
+    cartNotification.cartItemKey = parsedState.items[0].key;
+    cartNotification.getSectionsToRender.forEach((section => {
+      document.getElementById(section.id).innerHTML =
+        cartNotification.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
+    }));
+
+    if (cartNotification.header) cartNotification.header.reveal();
+    cartNotification.open();
+  }
   const product_data = selectedVariants.map(variant => {
     return {quantity: 1, id: variant.id}
   })
  
   const data = {
-    items: product_data
+    items: product_data,
+    sections: cartNotification.getSectionsToRender.map((section) => section.id)
   }
-        
+
   fetch('/cart/add.js', {
     body: JSON.stringify(data),
-    credentials: 'same-origin',
+    credentials: 'same-origin', 
     headers: {
       'Content-Type': 'application/json',
-      'X-Requested-With':'XMLHttpRequest'
+      'X-Requested-With':'xmlhttprequest'
     },
     method: 'POST'
   }).then((response) => {
@@ -1053,8 +1089,8 @@ const addAllItems = function(ev) {
   });
 }
 
-const productForm = document.getElementById(`product-form-${dataSection}`);
 
-const addButton = productForm.querySelector('[name="add"]');
 
-addButton.addEventListener('click', addAllItems)
+// const addButton = productForm.querySelector('[name="add"]');
+
+productForm.addEventListener('submit', addAllItems)

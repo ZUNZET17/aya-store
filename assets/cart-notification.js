@@ -32,8 +32,6 @@ class CartNotification extends HTMLElement {
   }
 
   renderContents(parsedState) {
-    console.log(this)
-    console.log('zunzet')
       this.cartItemKey = parsedState.key;
       this.getSectionsToRender().forEach((section => {
         document.getElementById(section.id).innerHTML =
@@ -60,6 +58,8 @@ class CartNotification extends HTMLElement {
   }
 
   getSectionInnerHTML(html, selector = '.shopify-section') {
+    console.log(selector)
+    console.log( new DOMParser().parseFromString(html, 'text/html'))
     return new DOMParser()
       .parseFromString(html, 'text/html')
       .querySelector(selector).innerHTML;
