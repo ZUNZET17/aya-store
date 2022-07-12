@@ -897,7 +897,7 @@
             {% endstyle %}
               <div class="product__accordion accordion quick-add-hidden accordion--{{- block.id }} product__accordion--variant" {{ block.shopify_attributes }}>
               <details class="accordion-details-bundle-options" id="Details-{{ block.id }}-{{ section.id }}">
-                <summary class="accordion-summary">
+                <summary class="accordion-summary js-accordion-summary">
                   <div class="summary__title">
                     {% render 'icon-accordion', icon: block.settings.icon %}
                     <h2 class="h4 accordion__title accordion__title-{{ block.id }} {{ block.settings.accordion_title_family }} ">
@@ -909,27 +909,29 @@
                 </summary>
                 <div class="accordion__content accordion__content--bundle accordion__content-{{ block.id }} rte {{ block.settings.accordion_content_family }}" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
                 {%- if block.settings.picker_type == 'button' -%}
-                <div class="product-form__input product-form__input--dropdown">
-                  <div class="select">
-                    <select id="Product_option--{{ forloop.index0 }}"
-                      class="select__select"
-                      name="options[{{ product_option | escape }}]"
-                    >
-                      <option value="" disabled>{{block.settings.select_placeholder}}</option>
-                      {%- for setting in block.settings -%}
-                      {% assign product_index = 'product_option' | append: forloop.index%}
-                      {% assign product_option = block.settings[product_index] %}
-                      {% assign product_option_name = product_index | append: '_name'  %}
-                      {% unless product_option == blank %}
-                        <option value="{{ product_option }}">
-                          {{  block.settings[product_option_name] }}
-                        </option>
-                      {% endunless %}
-                      {%- endfor -%}
-                    </select>
-                    {% render 'icon-caret' %}
+                {% if block.settings.dropdown_options %}
+                  <div class="product-form__input product-form__input--dropdown">
+                    <div class="select">
+                      <select id="Product_option--{{ forloop.index0 }}"
+                        class="select__select"
+                        name="options[{{ product_option | escape }}]"
+                      >
+                        <option value="" disabled>{{block.settings.select_placeholder}}</option>
+                        {%- for setting in block.settings -%}
+                        {% assign product_index = 'product_option' | append: forloop.index%}
+                        {% assign product_option = block.settings[product_index] %}
+                        {% assign product_option_name = product_index | append: '_name'  %}
+                        {% unless product_option == blank %}
+                          <option value="{{ product_option }}">
+                            {{  block.settings[product_option_name] }}
+                          </option>
+                        {% endunless %}
+                        {%- endfor -%}
+                      </select>
+                      {% render 'icon-caret' %}
+                    </div>
                   </div>
-                </div>
+                {% endif %}
                 {% for i in (1..5) %}
                 {% assign product_index = 'product_option' | append: i %}
                 {% assign product_option = block.settings[product_index] %}
@@ -2719,6 +2721,12 @@
         {
           "type": "header",
           "content": "Product Accordion options"
+        },
+        {
+          "type": "checkbox",
+          "id": "dropdown_options",
+          "label": "Dropdown options",
+          "default": false
         },
         {
           "type": "text",

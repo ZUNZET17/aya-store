@@ -990,9 +990,41 @@ customElements.define('variant-radios-bundle', VariantRadiosBundle)
 
 let selectedVariants
 
+//Product Bundle option accordion
+
+const bundleAccordion = function (ev) {
+  if (this.querySelector('select')) {
+    const selectValue = this.querySelector('select').value
+    const variantRadios = this.querySelectorAll('variant-radios-bundle')
+  
+    variantRadios.forEach( v => {
+      let product = v.getAttribute('data-product')
+      v.classList.add('js-none')
+      if (selectValue == product) {
+        v.classList.remove('js-none')
+      }
+    })
+    
+  }
+
+  const displaySelected = this.parentElement.querySelector('.selection-span')
+
+  displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
+
+}
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('.accordion__content--bundle').forEach(a => {
+    a.addEventListener('change', bundleAccordion)
+    a.dispatchEvent(new Event('change'))
+  })
+})
+
+//Set button availabitlity
+
 const bundleItems = function (ev) {
   const input = ev.currentTarget
-  selectedVariants = Array.from(document.querySelectorAll('variant-radios-bundle')).map(x => x.currentVariant)
+  selectedVariants = Array.from(document.querySelectorAll('variant-radios-bundle')).filter(x => !x.classList.contains('js-none')).map(x => x.currentVariant)
   const productForm = document.getElementById(`product-form-${input.dataset?.section || dataSection}`);
 
   if (!productForm) return;
@@ -1017,6 +1049,8 @@ window.addEventListener('load', bundleItems)
 Array.from(document.querySelectorAll('variant-radios-bundle')).forEach(v => {
   v.addEventListener('change', bundleItems)
 })
+
+//Add all bundle items
 
 const productForm = document.getElementById(`product-form-${dataSection}`);
 
@@ -1082,7 +1116,7 @@ const addAllItems = function(ev) {
   }).then((response) => {
     return response.json();
   }).then((json) => {
-    /* yay! our products were added - do something here to indicate to the user */
+    /* yay! our products were added */
     console.log('products', json)
     cartNotification.renderContents(json);
   }).catch((err) => {
@@ -1090,7 +1124,5 @@ const addAllItems = function(ev) {
     console.error(err)
   });
 }
-
-// const addButton = productForm.querySelector('[name="add"]');
 
 productForm.addEventListener('submit', addAllItems)

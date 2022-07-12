@@ -877,7 +877,6 @@
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-                  <!-- variants list -->
                   {%- capture variants_list -%}
                     {
                     {%- for variant in product.variants -%}

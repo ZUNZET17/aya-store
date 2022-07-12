@@ -138,29 +138,3 @@ if ( document.querySelector('.js-page-content') ) {
     btn.addEventListener('click', RequestPageSection, false)
   });
 }
-
-//Poruct Bundle option accordion
-
-const bundleAccordion = function (ev) {
-  const selectValue = this.querySelector('select').value
-  const variantRadios = this.querySelectorAll('variant-radios-bundle')
-  const displaySelected = this.parentElement.querySelector('.selection-span')
-
-  variantRadios.forEach( v => {
-    let product = v.getAttribute('data-product')
-    v.classList.add('js-none')
-    if (selectValue == product) {
-      v.classList.remove('js-none')
-    }
-  })
-
-  displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
-
-}
-
-window.addEventListener('load', () => {
-  document.querySelectorAll('.accordion__content--bundle').forEach(a => {
-    a.addEventListener('change', bundleAccordion)
-    a.dispatchEvent(new Event('change'))
-  })
-})
