@@ -1129,7 +1129,7 @@
                             }
                           {% endstyle %}
                           <fieldset class="js product-form__input size-options">
-                            <div class="sizes-options__header{{block.id}}">
+                            <div class="sizes-options__header{{block.id}} sizes-options__header">
                               <legend class="form__label sizes-legend{{block.id}}">{{ option.name }}</legend>
                               {% assign pageId3 = block.settings.size_guide_page.template_suffix %}
                               <modal-opener {% unless block.settings.size_guide_page %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" {{ block.shopify_attributes }}>
