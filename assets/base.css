@@ -3199,3 +3199,33 @@ details-disclosure > details {
     flex-direction: column;
     overflow-y: scroll;
   }
+
+  /*Product option accordion*/
+  .accordion--variant_picker {
+    margin-bottom: .5rem!important;
+  }
+
+  .accordion__content {
+    padding: 1rem 1rem 0!important;
+  }
+
+  .accordion-details-bundle-options {
+    border: 2px solid #e6e6e6; 
+  }
+
+  .accordion-summary {
+    padding: 1.5rem!important;
+  }
+
+  .accordion-summary:focus {
+    background: #e6e6e6;
+    padding: 1.5rem!important;
+  }
+
+  .accordion__title p {
+    margin: 0;
+  }
+
+  .js-none {
+    display: none!important;
+  }

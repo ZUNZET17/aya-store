@@ -923,8 +923,6 @@ class VariantRadiosBundle extends VariantRadios {
     this.toggleAddButton()
   }
 
-
-
   toggleAddButton() {
     console.log('newToggleFunction')
   }
@@ -1060,10 +1058,14 @@ const addAllItems = function(ev) {
     if (cartNotification.header) cartNotification.header.reveal();
     cartNotification.open();
   }
+
   const product_data = selectedVariants.map(variant => {
-    return {quantity: 1, id: variant.id}
+    return {
+      quantity: 1,
+      id: variant.id,
+    }
   })
- 
+
   const data = {
     items: product_data,
     sections: cartNotification.getSectionsToRender.map((section) => section.id)
@@ -1088,8 +1090,6 @@ const addAllItems = function(ev) {
     console.error(err)
   });
 }
-
-
 
 // const addButton = productForm.querySelector('[name="add"]');
 
