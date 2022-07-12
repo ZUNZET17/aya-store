@@ -3201,6 +3201,11 @@ details-disclosure > details {
   }
 
   /*Product option accordion*/
+
+  variant-radios-bundle {
+    display: block!important
+  }
+
   .accordion--variant_picker {
     margin-bottom: .5rem!important;
   }
