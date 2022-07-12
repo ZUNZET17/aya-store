@@ -42,7 +42,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "dropdown_options": true,
+            "dropdown_options": false,
             "select_placeholder": "Select an option",
             "product_option1": "mens-organic-pima-cotton-long-sleeve-shirt",
             "product_option1_name": "Product option1 name",
