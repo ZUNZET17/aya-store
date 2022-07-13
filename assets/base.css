@@ -3222,7 +3222,7 @@ details-disclosure > details {
     padding: 1.5rem!important;
   }
 
-  .accordion-summary:focus {
+  .accordion-details-bundle-options.open .accordion-summary {
     background: #e6e6e6;
     padding: 1.5rem!important;
   }

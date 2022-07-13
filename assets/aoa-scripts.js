@@ -24,14 +24,18 @@ const AccordionSolo = function (ev) {
   const currentAccordion = input.parentElement;
   const parentClass = Array.from(currentAccordion.classList)[0]
   const accordionArr = Array.from(document.querySelectorAll('.' + parentClass));
+
   if (!currentAccordion.getAttribute('open')) {
     accordionArr.forEach(a => {
-      if( a == currentAccordion ) return;
+      if( a == currentAccordion ){
+        a.closest('details').classList.add('open');
+        return;
+      } 
       a.removeAttribute('open');
+      a.closest('details').classList.remove('open');
     })
   }
-
-  //currentAccordion.setAttribute(open)
+  
 }
 
 //Trigger Product Info
@@ -102,10 +106,12 @@ Set Event Listeners
 */
 
 //AccordionSolo
-const accordionSummaries = document.querySelectorAll('.js-accordion-summary')
-
-accordionSummaries.forEach(label => {
-  label.addEventListener('click', AccordionSolo, false)
+window.addEventListener('load', () => {
+  const accordionSummaries = document.querySelectorAll('.js-accordion-summary')
+  accordionSummaries.forEach(label => {
+    label.addEventListener('click', AccordionSolo, false)
+  })
+  document.querySelectorAll('.accordion-details-bundle-options')[0].querySelector('summary').click()
 })
 
 //TriggerProduct Info
