@@ -258,6 +258,7 @@
         },
         "8cb1b144-d047-4453-9184-59446ed8e9f7": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "hide_mobile": false,
             "heading": "Size & Fit",
