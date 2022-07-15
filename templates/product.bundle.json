@@ -270,7 +270,7 @@
         "aeae2c33-7b13-436b-9b72-36b7e10eefd8": {
           "type": "variant_picker",
           "settings": {
-            "dropdown_options": false,
+            "dropdown_options": true,
             "select_placeholder": "Select an option",
             "product_option1": "mens-organic-pima-cotton-v-neck-t-shirt",
             "product_option1_name": "Product option1 name",
