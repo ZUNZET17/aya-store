@@ -191,7 +191,7 @@
             -%}
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
               {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-              <li style="position: relative; display:block"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="js-zoom-thumb zoom-thumb {% if featured_media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}" media-alt="{{ featured_media.alt }}">
+              <li style="position: relative; display:block"  id="Slide-{{ section.id }}-{{ featured_media.id }}" class="js-zoom-thumb zoom-thumb {% if featured_media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}" media-alt="{{ featured_media.alt }}" product-title="{{product.title}}">
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}              
                 <div class="on-picture-text-container">
@@ -240,7 +240,7 @@
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                <li id="Slide-{{ section.id }}-{{ media.id }}" class="js-zoom-thumb zoom-thumb {% if media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative; display: none" media-alt="{{ media.alt }}">
+                <li id="Slide-{{ section.id }}-{{ media.id }}" class="js-zoom-thumb zoom-thumb {% if media.alt contains 'natural' %}natural{% endif %} product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" style="position: relative; display: none" media-alt="{{ media.alt }}" product-title="{{product.title}}">
                   {%- assign media_position = media_position | default: 0 | plus: 1 -%}
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
                   {%- if media.media_type == 'image' -%}
@@ -831,20 +831,28 @@
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
+          <!-- <button class="button button--step">BUNDLE STEP N</button> -->
+          <fieldset class="bundle-steps">
+            {% assign steps_amount = block.settings.steps_amount %}
+            {% for s  in (1..steps_amount) %}
+              <input id="step-{{forloop.index}}"  type="radio" name="bundles-steps" class="bundle-steps__input" value="{{forloop.index}}">
+              <label for="step-{{forloop.index}}" class="bundle-steps__label js-step {% if forloop.index == 1 %}is-complete{% endif %}">Step {{forloop.index}}</label>
+            {% endfor %}
+          </fieldset>
           {% style %}
-            .color-swatches-block {
+            .color-swatches-block{{block.id}} {
               padding-top: {{ block.settings.swatches_padding_top -}}rem;
               padding-bottom: {{ block.settings.swatches_padding_bottom -}}rem;
             }
-            .color-group-legend {
+            .color-group-legend{{block.id}}{
               font-size: {{- block.settings.legend_size -}}rem;
-              font-weight: {{-block.settings.legend_weight -}};
+              font-weight: {{- block.settings.legend_weight -}};
             }
-            .sizes-legend {
+            .sizes-legend{{block.id}} {
               font-size: {{ block.settings.sizes_legend_size -}}rem;
               font-weight: {{ block.settings.sizes_legend_weight }};
             }
-            .color-group2-page2-legend {
+            .color-group2-page2-legend{{block.id}} {
               color: {{ block.settings.group22_legend_color }};
               font-size: {{ block.settings.color_group2_page2_legend_size -}}rem;
               font-weight: {{ block.settings.color_group2_page2_weight }};
@@ -861,281 +869,351 @@
               {% if block.settings.swatch_display == "circle" %}
               border-radius: 50%;
               {% endif %}
-            }
-            .color-swatch__label svg {
-              display: none;
-              color: 
-            }
-            .color-swatch__label.unavailable-swatch svg {
-              display: block;
-            }
-            .variant-option-input:checked + .color-swatch__label {
-              border-width: .2rem!important;
-            }
-                       
+            }          
           {% endstyle %}
           <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
-            {%- unless product.has_only_default_variant -%}
-              {%- if block.settings.picker_type == 'button' -%}
-                <variant-radios-bundle class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-                  {%- for option in product.options_with_values -%}
-                    {% capture idx_top %}color_group_{{- forloop.index -}}_padding_top{% endcapture %}
-                    {% capture idx_bottom %}color_group_{{- forloop.index -}}_padding_bottom{% endcapture %}
-                    {% style %}
-                    .color-group--{{- forloop.index }} {
-                      padding-top: {{ block.settings[idx_top] -}}rem;
-                      padding-bottom: {{ block.settings[idx_bottom] -}}rem;
-                    }
-                    {% endstyle %}
-                    {% if option.name == 'Color' %}
-                      <fieldset class="js product-form__input color-swatches">
-                        <div class="color-group color-group--1">
-                          <modal-opener {% unless block.settings.color_group1_page %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" {{ block.shopify_attributes }}>
-                            {% assign pageId = block.settings.color_group1_page.template_suffix %}
-                            {% style %}
-                              .color-group-legend-1{
-                                color: {{ block.settings.group1_legend_color }};
-                                padding-bottom: {{ block.settings.color_group_1_legend_padding_bottom -}}rem;
-                              }
-                            {% endstyle %}
-                            <{% if pageId %}button{% else %}a{% endif %} role="button" id="ProductPopup-{{ block.id }}" href="{{ block.settings.color_group1_link }}" target="_blank" class="product-popup-modal__button link color-group-legend-btn {% if pageId %}js-pop-up-button{% endif %}" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
-                              <legend class="form__label color-group-legend color-group-legend-1 {{ block.settings.group_1_title_family }}" >{{ block.settings.group_1_title }} <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
-                            </{% if pageId %}button{% else %}a{% endif %}>
-                          </modal-opener>
-                          <modal-dialog id="PopupModal-{{- block.settings.group_1_title | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
-                            <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                              <button id="ModalClose-{{- block.settings.group_1_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                              <div class="product-popup-modal__content-info {% unless block.settings.color_group1_page.content != blank %}js-page-{{- pageId }} js-page-content{% endunless %}">
-                                {% if block.settings.color_group1_page.content != blank %}
-                                  {{ block.settings.color_group1_page.content }}
-                                {% else %}
-                                  {% capture pageStyle %}'pagefly.{{- pageId -}}.css' | asset_url{% endcapture %}
-                                  {% render 'pagefly-settings' %} 
-                                  <link rel="stylesheet" href="{{ pageStyle }}">
-                                {% endif %}
-                              </div>
-                            </div>
-                          </modal-dialog>
-                          <div class="color-options">
-                            {%- for value in option.values -%}
-                              {% capture swatch_idx %}swatch1{{- forloop.index -}}{% endcapture %}
-                              {% capture unavailable_bk %}{{- block.settings[swatch_idx] -}}{{- block.settings[swatch_idx] -}}75!important{% endcapture %}
-                              {% style %}
-                                .{{- swatch_idx -}} {
-                                  background-color: {{- block.settings[swatch_idx] -}};
-                                }
-                                {% comment %}
-                                .{{-swatch_idx-}}.unavailable-swatch {
-                                  {% unless request.design_mode %}
-                                  background-color: {{- block.settings[swatch_idx] -}}75!important;
-                                  {% endunless %}
-                                  border-color: #dddddd40!important;
-                                }
-                                {% endcomment %}
-                                .unavailable-swatch:after {
-                                  content: "";
-                                  font-size: {{- block.settings.swatch_size -}}rem;
-                                  position: absolute;
-                                  display: flex;
-                                  justify-content: center;
-                                  align-items: center;
-                                  color: #dddddd40;
-                                }
-                              {% endstyle %}
-                              {%- capture colorop1 -%}color-1{{- forloop.index -}}{%- endcapture -%}
-                              {% comment %}<p>{{colorop1}}</p>{% endcomment %}
-                              {%- if block.settings[colorop1] -%}
-                                <input class="variant-option-input js-variant-option-color" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                                      name="{{ option.name }}"
-                                      value="{{ value | escape }}"
-                                      form="{{ product_form_id }}"
-                                      {% if option.selected_value == value %}checked{% endif %}
-                                >
-                                <label class="color-swatch__label swatch1{{- forloop.index }} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="1">
-                                  {% render 'icon-close' %}
-                                  <span class="color-swatch__pin">{{ value }}</span>
-                                </label>
-                              {% endif %}
-                            {%- endfor -%}
-                          </div>
+            {%- unless product_option.has_only_default_variant -%}
+            {% style %}
+              {% if block.settings.hide_mobile %}
+                @media screen and (max-width: 750px) {
+                  .accordion--{{- block.id -}} {
+                    display: none;
+                  }
+                }
+              {% endif %}
+              .product__accordion--variant:not(:last-child) {
+                border-top: none!important;
+                border-bottom: 0.1rem solid rgba(18, 18, 18, 0.08);
+              }
+              .accordion--{{block.id}} {
+                padding-top: {{block.settings.padding_top}}rem;
+                padding-bottom: {{block.settings.padding_bottom}}rem;
+              }
+              .accordion__title-{{ block.id }} {
+                width: 100%;
+                font-size: {{ block.settings.accordion_title_size }}rem;
+                font-weight: {{ block.settings.accordion_title_weight }};
+                color: {{ block.settings.accordion_title_color }};
+                text-align: {{ block.settings.accordion_title_align }}
+              }
+              .accordion__content-{{ block.id }} {
+                font-size: {{ block.settings.accordion_content_size }}rem;
+                font-weight: {{ block.settings.accordion_content_weight }};
+                color: {{ block.settings.accordion_content_color }};
+                text-align: {{ block.settings.accordion_content_align }}
+              }
+            {% endstyle %}
+            <bundle-container class="bundle-option">
+              {% for x in (1..3) %}
+                {% assign bundle_step_option = 'bundle_step_option' | append: x  %}
+                {% if block.settings[bundle_step_option] %}
+                  <div class="product__accordion accordion quick-add-hidden accordion--{{- block.id }} product__accordion--variant" {{ block.shopify_attributes }}>
+                    <details class="accordion-details-bundle-options" id="Details-{{ block.id }}-{{ section.id }}">
+                      <summary class="accordion-summary js-accordion-summary">
+                        <div class="summary__title">
+                          {% render 'icon-accordion', icon: block.settings.icon %}
+                          <h2 class="h4 accordion__title accordion__title-{{ block.id }} {{ block.settings.accordion_title_family }} ">
+                            {{ block.settings.heading }}
+                            <p>selection: <span class="selection-span"></span></p>
+                          </h2>
                         </div>
-                        <div class="color-group color-group--2">
-                          {% style %}
-                            .color-options-2__header {
-                              display: flex;
-                              {% if block.settings.pop_up_alignment %}
-                              justify-content: space-between;
-                              {% endif %}
-                              column-gap: {{ block.settings.pop_up_gap }};
-                              align-items: center;
-                            }
-                            .color-group-legend-2 {
-                              color: {{ block.settings.group2_legend_color }};
-                              padding-bottom: {{ block.settings.color_group_2_legend_padding_bottom -}}rem;
-                            }
-                          {% endstyle %}
-                          <div class="color-options-2__header">
-                            <modal-opener {% unless block.settings.color_group2_page %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings.group_2_title | remove: " " -}}" {{ block.shopify_attributes }}>
-                              {% assign pageId2 = block.settings.color_group2_page.template_suffix %}
-                              <{% if pageId2 %}button{% else %}a{% endif %} role="button" id="ProductPopup-{{ block.id }}" href="{{ block.settings.color_group2_link }}" target="_blank" class="product-popup-modal__button link color-group-legend-btn {% if pageId2 %}js-pop-up-button{% endif %}" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
-                                <legend class="form__label color-group-legend color-group-legend-2 {{ block.settings.group_2_title_family }}">{{ block.settings.group_2_title }} <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
-                              </{% if pageId2 %}button{% else %}a{% endif %}>
-                            </modal-opener>
-                            <modal-dialog id="PopupModal-{{- block.settings.group_2_title | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
-                              <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                                <button id="ModalClose-{{- block.settings.group_2_title -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page.content != blank %}js-page-{{- pageId2 }} js-page-content{% endunless %}">
-                                  {% if block.settings.color_group2_page.content != blank %}
-                                    {{ block.settings.color_group2_page.content }}
-                                  {% else %}
-                                    {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture %}
-                                    <link rel="stylesheet" href="{{ pageStyle2 }}">
-                                  {% endif %}
-                                </div>
-                              </div>
-                            </modal-dialog>
-                            <modal-opener {% unless block.settings.color_group2_page2 %}style="pointer-events: none"{% endunless %}class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace: '?', '' }}" {{ block.shopify_attributes }}>
-                              {% assign pageId22 = block.settings.color_group2_page2.template_suffix %}
-                              <{% if pageId22 %}button{% else %}a{% endif %} id="ProductPopup-{{ block.id }}" href="{{ block.settings.color_group2_page2_link }}" target="_blank" class="product-popup-modal__button link color-group2-page2-legend {% if pageId22 %}js-pop-up-button{% endif %} sizes-guide {{ block.settings.color_group_2_popup_title_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings.color_group_2_popup_title | default: block.settings.page.title }}</{% if pageId22 %}button{% else %}a{% endif %}>
-                            </modal-opener>
-                            <modal-dialog id="PopupModal-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace : '?', '' }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-                              <div role="dialog" aria-label="{{ block.settings.color_group_2_popup_title | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                                <button id="ModalClose-{{ block.settings.color_group_2_popup_title | replace: " ", "" | replace: '?', '' }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                                <div class="product-popup-modal__content-info {% unless block.settings.color_group2_page2.content != blank %}js-page-{{- pageId22 }} js-page-content{% endunless %}">
-                                  {% if block.settings.color_group2_page2.content != blank %}
-                                  {{ block.settings.color_group2_page2.content }}
-                                {% else %}
-                                  {% capture color_group2_page2_style %}'pagefly.{{- pageId22 -}}.css' | asset_url{% endcapture %}
-                                  <link rel="stylesheet" href="{{ color_group2_page2_style }}">
-                                {% endif %}
-                                </div>
-                              </div>
-                            </modal-dialog>
-                          </div>
-                          <div class="color-options">
-                            {%- for value in option.values -%}
-                              {% capture swatch_idx %}swatch2{{- forloop.index -}}{% endcapture %}
-                              {% style %}
-                                .{{- swatch_idx -}} {
-                                  background-color: {{- block.settings[swatch_idx] -}};
-                                  {% if block.settings.circle_on %}
-                                  border-radius: 50%;
-                                  {% endif %}
-                                }
-                                {% comment %}
-                                .{{-swatch_idx-}}.unavailable-swatch {
-                                  background-color: {{- block.settings[swatch_idx] -}}75!important;
-                                  border-color: #dddddd40!important;
-                                }
-                                {% endcomment %}
-                              {% endstyle %}
-                              {%- capture colorop2 -%}color-2{{- forloop.index -}}{%- endcapture -%}
-                              {% comment %}<p>{{colorop2}}</p>{% endcomment %}
-                              {%- if block.settings[colorop2] -%}
-                                <input class="variant-option-input js-variant-option-color" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                                      name="{{ option.name }}"
-                                      value="{{ value | escape }}"
-                                      form="{{ product_form_id }}"
-                                      {% if option.selected_value == value %}checked{% endif %}
-                                >
-                                <label class="color-swatch__label swatch2{{- forloop.index }} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="2">
-                                  {% render 'icon-close' %}
-                                  <span class="color-swatch__pin">{{ value }}</span>
-                                </label>
-                              {% endif %}
-                            {%- endfor -%}
-                          </div>
-                        </div>                      
-                      </fieldset>
-                    {% endif %}
-                  {%- endfor -%}   
-                  {%- for option in product.options_with_values -%}
-                    {% if option.name == 'Size' %}
-                      {% style %}
-                        .sizes-guide {
-                          color: {{ block.settings.sizes_guide_color }};
-                          font-size: {{ block.settings.sizes_guide_size -}}rem;
-                          font-weight: {{ block.settings.sizes_guide_weight -}};
-                          {% if block.settings.sizes_guide_underline %}
-                          text-decoration: underline;
-                          {% else %}
-                          text-decoration: none!Important;
-                          {% endif %}
-                        }
-                        .sizes-options__header {
-                          padding-bottom: {{ block.settings.sizes_options_header_padding_bottom -}}rem;
-                        }
-                      {% endstyle %}
-                      <fieldset class="js product-form__input size-options">
-                        <div class="sizes-options__header">
-                          <legend class="form__label sizes-legend">{{ option.name }}</legend>
-                          {% assign pageId3 = block.settings.size_guide_page.template_suffix %}
-                          <modal-opener {% unless block.settings.size_guide_page %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" {{ block.shopify_attributes }}>
-                            <{% if pageId3 %}button{% else %}a{% endif %} id="ProductPopup-{{ block.id }}" href="{{ block.settings.size_guide_link }}" target="_blank" class="product-popup-modal__button link {% if pageId3 %}js-pop-up-button {% endif %}sizes-guide {{ block.settings.size_guide_text_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</{% if pageId3 %}button{% else %}a{% endif %}>
-                          </modal-opener>
-                          <modal-dialog id="PopupModal-{{ block.settings.size_guide_text | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-                            <div role="dialog" aria-label="{{ block.settings.size_guide_text | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-                              <button id="ModalClose-{{ block.settings.size_guide_text | replace: " ", "" }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                              <div class="product-popup-modal__content-info {% unless block.settings.size_guide_page.content != blank %}js-page-{{- pageId3 }} js-page-content{% endunless %}">
-                                {% if block.settings.size_guide_page.content != blank %}
-                                {{ block.settings.size_guide_page.content }}
-                              {% else %}
-                                {% capture pageStyle3 %}'pagefly.{{- pageId3 -}}.css' | asset_url{% endcapture %}
-                                <link rel="stylesheet" href="{{ pageStyle3 }}">
-                              {% endif %}
-                              </div>
-                            </div>
-                          </modal-dialog>
-                        </div>
-                        <div class="sizes-list">
-                          {%- for value in option.values -%}
-                            <input class="variant-option-input js-variant-option-size" type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                                  name="{{ option.name }}"
-                                  value="{{ value | escape }}"
-                                  form="{{ product_form_id }}"
-                                  {% if option.selected_value == value %}checked{% endif %}
-                            >
-                            <label class="product-size-label js-product-size-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                              {{ value }}
-                            </label>
-                          {%- endfor -%}
-                        </div>
-                      </fieldset>
-                    {% endif %}
-                  {%- endfor -%}                                
-                  <script class="js-variants-data" type="application/json">
-                    {{ product.variants | json }}
-                  </script>
-                </variant-radios-bundle>
-              {%- else -%}
-                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-                  {%- for option in product.options_with_values -%}
-                    <div class="product-form__input product-form__input--dropdown">
-                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-                        {{ option.name }}
-                      </label>
-                      <div class="select">
-                        <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                          class="select__select"
-                          name="options[{{ option.name | escape }}]"
-                          form="{{ product_form_id }}"
-                        >
-                          {%- for value in option.values -%}
-                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-                              {{ value }}
-                            </option>
-                          {%- endfor -%}
-                        </select>
                         {% render 'icon-caret' %}
+                      </summary>
+                      <div class="accordion__content accordion__content--bundle accordion__content-{{ block.id }} rte {{ block.settings.accordion_content_family }}" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                      {%- if block.settings.picker_type == 'button' -%}
+                      {% assign select_on = 'bundle_step_option' | append: x | append: '_select' %}
+                      {% if block.settings[bundle_step_option] %}
+                        <div class="product-form__input product-form__input--dropdown">
+                          <div class="select">
+                            <select id="Product_option--{{ forloop.index0 }}"
+                              class="select__select"
+                              name="options[{{ product_option | escape }}]"
+                            >
+                              {% assign bundle_option_variant_select_ph = 'bundle_step_option' | append: x | append: '_select_ph'%}
+                              <option value="" disabled>{{block.settings[bundle_option_variant_select_ph]}}</option>
+                              {%- for j in (1..2) -%}
+                              {% assign bundle_option_variant_name = 'bundle_step_option' | append: x | append: '_variant' | append: j | append: '_name' %}
+                              {% assign bundle_option_variant = 'bundle_step_option' | append: x | append: '_variant' | append: j  %}
+                              {% unless bundle_option_variant_name == blank %}
+                                <option value="{{ block.settings[bundle_option_variant] }}">
+                                  {{  block.settings[bundle_option_variant_name] }}
+                                </option>
+                              {% endunless %}
+                              {%- endfor -%}
+                            </select>
+                            {% render 'icon-caret' %}
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% for i in (1..3) %}
+                        {% assign product_index = 'bundle_step_option' | append: x | append: '_variant' | append: i %}
+                        {% assign product_option = block.settings[product_index] %}
+                        {% unless product_option == blank %}
+                          <variant-radios-bundle class="no-js-hidden color-swatches-block{{block.id}}" data-section="{{ section.id }}" data-url="{{ product_option.url }}" data-product="{{product_option}}" {{ block.shopify_attributes }}>
+                            {%- for option in product_option.options_with_values -%}
+                              {% capture idx_top %}color_group_{{- forloop.index -}}_padding_top{% endcapture %}
+                              {% capture idx_bottom %}color_group_{{- forloop.index -}}_padding_bottom{% endcapture %}
+                              {% style %}
+                              .color-group--{{- forloop.index }}{{block.id}} {
+                                padding-top: {{ block.settings[idx_top] -}}rem;
+                                padding-bottom: {{ block.settings[idx_bottom] -}}rem;
+                              }
+                              {% endstyle %}
+                              {% if option.name == 'Color' %}
+                                <fieldset class="js product-form__input color-swatches">
+                                  <div class="color-group color-group--1{{block.id}}">
+                                    <div class="color-options-1__header">
+                                      {% assign color_group1_page = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group1_page' %}
+                                      {% assign color_group1_link = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group1_link' %}
+                                      {% assign group_1_title = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__group_1_title' %}
+                                      <modal-opener {% unless block.settings[color_group1_page] %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings[group_1_title] | remove: ' ' -}}" {{ block.shopify_attributes }}>
+                                        {% assign pageId = block.settings[color_group1_page].template_suffix %}
+                                        {% style %}
+                                          .color-group-legend-1{{block.id}}{
+                                            color: {{ block.settings.group1_legend_color }};
+                                            padding-bottom: {{ block.settings.color_group_1_legend_padding_bottom -}}rem;
+                                          }
+                                        {% endstyle %}
+                                        <{% if pageId %}button{% else %}a{% endif %} role="button" id="ProductPopup-{{ block.id }}" {% if block.settings[color_group1_link] %}href="{{ block.settings[color_group1_link] }}" target="_blank"{% endif %} class="product-popup-modal__button link color-group-legend-btn {% if pageId %}js-pop-up-button{% endif %}" type="button" aria-haspopup="dialog" page-id="{{pageId}}">
+                                          <legend class="form__label color-group-legend{{block.id}}color-group-legend-1{{block.id}} {{ block.settings.group_1_title_family }}" >{{ block.settings[group_1_title] }} <span id="js-color-group-title1" class="js-color-group-title color-group-title"></span></legend>
+                                        </{% if pageId %}button{% else %}a{% endif %}>
+                                      </modal-opener>
+                                      <modal-dialog id="PopupModal-{{- block.settings[group_1_title] | remove: ' ' -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                                        <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                          <button id="ModalClose-{{- block.settings[group_1_title] -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                          <div class="product-popup-modal__content-info {% unless block.settings[color_group1_page].content != blank %}js-page-{{- pageId }} js-page-content{% endunless %}">
+                                            {% if block.settings[color_group1_page].content != blank %}
+                                              {{ block.settings[color_group1_page].content }}
+                                            {% else %}
+                                              {% capture pageStyle %}'pagefly.{{- pageId -}}.css' | asset_url{% endcapture %}
+                                              {% render 'pagefly-settings' %}
+                                              <link rel="stylesheet" href="{{ pageStyle }}">
+                                            {% endif %}
+                                          </div>
+                                        </div>
+                                      </modal-dialog>
+                                    </div>
+                                    <div class="color-options">
+                                      {%- for value in option.values -%}
+                                        {% capture swatch_idx %}bundle-step-option{{x}}-variant{{i}}__swatch1{{- forloop.index -}}{% endcapture %}
+                                        {% capture unavailable_bk %}{{- block.settings[swatch_idx] -}}{{- block.settings[swatch_idx] -}}75!important{% endcapture %}
+                                        {% style %}
+                                          .{{- swatch_idx -}}--{{block.id}} {
+                                            background-color: {{- block.settings[swatch_idx] -}};
+                                          }
+                                          .unavailable-swatch:after {
+                                            content: "";
+                                            font-size: {{- block.settings.swatch_size -}}rem;
+                                            position: absolute;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            color: #dddddd40;
+                                          }
+                                        {% endstyle %}
+                                        {%- capture colorop1 -%}bundle-step-option{{x}}-variant{{i}}__color-1{{- forloop.index -}}{%- endcapture -%}
+                                        {%- if block.settings[colorop1] -%}
+                                          <input class="variant-option-input js-variant-option-color" type="radio" id="bundle-step-option{{x}}-variant{{i}}__{{ value }}-{{product_option}}"
+                                                name="bundle-step-option{{x}}-variant{{i}}__{{-option.name-}}-{{product_option}}"
+                                                value="{{ value | escape }}"
+                                                form="{{ product_form_id }}"
+                                                {% if forloop.index == 1 %}checked{% endif %}
+                                          >
+                                          <label class="color-swatch__label bundle-step-option{{x}}-variant{{i}}__swatch1{{- forloop.index }}--{{block.id}} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="bundle-step-option{{x}}-variant{{i}}__{{-value-}}-{{product_option}}" swatch-color="{{ value }}" group-number="1" product-title="{{product.title}}">
+                                            {% render 'icon-close' %}
+                                            <span class="color-swatch__pin">{{ value }}</span>
+                                          </label>
+                                        {% endif %}
+                                      {%- endfor -%}
+                                    </div>
+                                  </div>
+                                  <div class="color-group color-group--2{{block.id}}">
+                                    {% style %}
+                                      .color-options-2__header{{block.id}} {
+                                        display: flex;
+                                        {% if block.settings.pop_up_alignment %}
+                                        justify-content: space-between;
+                                        {% endif %}
+                                        column-gap: {{ block.settings.pop_up_gap }};
+                                        align-items: center;
+                                      }
+                                      .color-group-legend-2{{block.id}} {
+                                        color: {{ block.settings.group2_legend_color }};
+                                        padding-bottom: {{ block.settings.color_group_2_legend_padding_bottom -}}rem;
+                                      }
+                                    {% endstyle %}
+                                    <div class="color-options-2__header{{block.id}}">
+                                      {% assign color_group2_page = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_page' %}
+                                      {% assign color_group2_link = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_link' %}
+                                      {% assign group_2_title = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__group_2_title' %}
+                                      <modal-opener {% unless block.settings[color_group2_page] %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings[group_2_title] | remove: " " -}}" {{ block.shopify_attributes }}>
+                                        {% assign pageId2 = block.settings[color_group2_page].template_suffix %}
+                                        <{% if pageId2 %}button{% else %}a{% endif %} role="button" id="ProductPopup-{{ block.id }}" {% if  block.settings[color_group2_link] %}href="{{ block.settings[color_group2_link] }}" target="_blank"{% endif %} class="product-popup-modal__button link color-group-legend-btn {% if pageId2 %}js-pop-up-button{% endif %}" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
+                                          <legend class="form__label color-group-legend{{block.id}}color-group-legend-2{{block.id}} {{ block.settings.group_2_title_family }}">{{ block.settings[group_2_title] }} <span id="js-color-group-title2" class="js-color-group-title color-group-title"></span></legend>
+                                        </{% if pageId2 %}button{% else %}a{% endif %}>
+                                      </modal-opener>
+                                      <modal-dialog id="PopupModal-{{- block.settings[group_2_title] | remove: " " -}}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                                        <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                          <button id="ModalClose-{{- block.settings[group_2_title] -}}}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                          <div class="product-popup-modal__content-info {% unless block.settings[color_group2_page].content != blank %}js-page-{{- pageId2 }} js-page-content{% endunless %}">
+                                            {% if block.settings[color_group2_page].content != blank %}
+                                              {{ block.settings[color_group2_page].content }}
+                                            {% else %}
+                                              {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture %}
+                                              <link rel="stylesheet" href="{{ pageStyle2 }}">
+                                            {% endif %}
+                                          </div>
+                                        </div>
+                                      </modal-dialog>
+                                      {% assign color_group2_page2 = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_page2' %}
+                                      {% assign color_group2_page2_link = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_page2_link' %}
+                                      {% assign color_group_2_popup_title = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group_2_popup_title' %}
+                                      <modal-opener {% unless block.settings.color_group2_page2 %}style="pointer-events: none"{% endunless %}class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings[color_group_2_popup_title] | replace: " ", "" | replace: '?', '' }}" {{ block.shopify_attributes }}>
+                                        {% assign pageId22 = block.settings[color_group2_page2].template_suffix %}
+                                        <{% if pageId22 %}button{% else %}a{% endif %} id="ProductPopup-{{ block.id }}" {%if block.settings[color_group2_page2_link] %}href="{{ block.settings[color_group2_page2_link] }}" target="_blank" {% endif %} class="product-popup-modal__button link color-group2-page2-legend{{block.id}} {% if pageId22 %}js-pop-up-button{% endif %} sizes-guide{{block.id}} {{ block.settings.color_group_2_popup_title_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId22}}">{{ block.settings[color_group_2_popup_title] | default: block.settings.page.title }}</{% if pageId22 %}button{% else %}a{% endif %}>
+                                      </modal-opener>
+                                      <modal-dialog id="PopupModal-{{ block.settings[color_group_2_popup_title] | replace: " ", "" | replace : '?', '' }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                                        <div role="dialog" aria-label="{{ block.settings[color_group_2_popup_title] | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                          <button id="ModalClose-{{ block.settings[color_group_2_popup_title] | replace: " ", "" | replace: '?', '' }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                          <div class="product-popup-modal__content-info {% unless block.settings[color_group2_page2].content != blank %}js-page-{{- pageId22 }} js-page-content{% endunless %}">
+                                            {% if block.settings[color_group2_page2].content != blank %}
+                                            {{ block.settings[color_group2_page2].content }}
+                                          {% else %}
+                                            {% capture color_group2_page2_style %}'pagefly.{{- pageId22 -}}.css' | asset_url{% endcapture %}
+                                            <link rel="stylesheet" href="{{ color_group2_page2_style }}">
+                                          {% endif %}
+                                          </div>
+                                        </div>
+                                      </modal-dialog>
+                                    </div>
+                                    <div class="color-options">
+                                      {%- for value in option.values -%}
+                                        {% capture swatch_idx %}bundle-step-option{{x}}-variant{{i}}__swatch2{{- forloop.index -}}{% endcapture %}
+                                        {% style %}
+                                          .{{- swatch_idx -}}--{{block.id}} {
+                                            background-color: {{- block.settings[swatch_idx] -}};
+                                            {% if block.settings.circle_on %}
+                                            border-radius: 50%;
+                                            {% endif %}
+                                          }
+                                        {% endstyle %}
+                                        {%- capture colorop2 -%}bundle-step-option{{x}}-variant{{i}}__color-2{{- forloop.index -}}{%- endcapture -%}
+                                        {%- if block.settings[colorop2] -%}
+                                          <input class="variant-option-input js-variant-option-color" type="radio" id="bundle-step-option{{x}}-variant{{i}}__{{-value-}}-{{product_option}}"
+                                                name="bundle-step-option{{x}}-variant{{i}}__{{-option.name-}}-{{product_option}}"
+                                                value="{{ value | escape }}"
+                                                form="{{ product_form_id }}"
+                                                {% if option.selected_value == value %}checked{% endif %}
+                                          >
+                                          <label class="color-swatch__label bundle-step-option{{x}}-variant{{i}}__swatch2{{- forloop.index }}--{{block.id}} js-color-label" for="bundle-step-option{{x}}-variant{{i}}__{{ value }}-{{product_option}}" swatch-color="{{ value }}" group-number="2" product-title="{{product.title}}">
+                                            {% render 'icon-close' %}
+                                            <span class="color-swatch__pin">{{ value }}</span>
+                                          </label>
+                                        {% endif %}
+                                      {%- endfor -%}
+                                    </div>
+                                  </div>
+                                </fieldset>
+                              {% endif %}
+                            {%- endfor -%}
+                            {%- for option in product_option.options_with_values -%}
+                              {% if option.name == 'Size' %}
+                                {% style %}
+                                  .sizes-guide{{block.id}}{
+                                    color: {{ block.settings.sizes_guide_color }};
+                                    font-size: {{ block.settings.sizes_guide_size -}}rem;
+                                    font-weight: {{ block.settings.sizes_guide_weight -}};
+                                    {% if block.settings.sizes_guide_underline %}
+                                    text-decoration: underline;
+                                    {% else %}
+                                    text-decoration: none!Important;
+                                    {% endif %}
+                                  }
+                                  .sizes-options__header{{block.id}} {
+                                    padding-bottom: {{ block.settings.sizes_options_header_padding_bottom -}}rem;
+                                  }
+                                {% endstyle %}
+                                <fieldset class="js product-form__input size-options">
+                                  <div class="sizes-options__header{{block.id}} sizes-options__header">
+                                    <legend class="form__label sizes-legend{{block.id}}">{{ option.name }}</legend>
+                                    {% assign size_guide_page = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__size_guide_page' %}
+                                    {% assign size_guide_text = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__size_guide_text' %}
+                                    {% assign size_guide_link = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__size_guide_link' %}
+                                    {% assign pageId3 = block.settings[size_guide_page].template_suffix %}
+                                    <modal-opener {% unless block.settings[size_guide_page] %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden sizes-guide-opener" data-modal="#PopupModal-{{ block.settings[size_guide_text] | replace: " ", "" }}" {{ block.shopify_attributes }}>
+                                      <{% if pageId3 %}button{% else %}a{% endif %} id="ProductPopup-{{ block.id }}" {% if block.settings[size_guide_link] %}href="{{ block.settings[size_guide_link] }}" target="_blank"{% endif %} class="product-popup-modal__button link {% if pageId3 %}js-pop-up-button {% endif %}sizes-guide{{block.id}} {{ block.settings.size_guide_text_family }}" type="button" aria-haspopup="dialog" page-id="{{pageId3}}">{{ block.settings.size_guide_text | default: block.settings.page.title }}</{% if pageId3 %}button{% else %}a{% endif %}>
+                                    </modal-opener>
+                                    <modal-dialog id="PopupModal-{{ block.settings[size_guide_text] | replace: " ", "" }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+                                      <div role="dialog" aria-label="{{ block.settings[size_guide_text] | replace: " ", "" }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+                                        <button id="ModalClose-{{ block.settings[size_guide_text] | replace: " ", "" }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                                        <div class="product-popup-modal__content-info {% unless block.settings[size_guide_page].content != blank %}js-page-{{- pageId3 }} js-page-content{% endunless %}">
+                                          {% if block.settings[size_guide_page].content != blank %}
+                                          {{ block.settings[size_guide_page].content }}
+                                        {% else %}
+                                          {% capture pageStyle3 %}'pagefly.{{- pageId3 -}}.css' | asset_url{% endcapture %}
+                                          <link rel="stylesheet" href="{{ pageStyle3 }}">
+                                        {% endif %}
+                                        </div>
+                                      </div>
+                                    </modal-dialog>
+                                  </div>
+                                  <div class="sizes-list">
+                                    {%- for value in option.values -%}
+                                      <input class="variant-option-input js-variant-option-size" type="radio" id="bundle-step-option{{x}}-variant{{i}}__{{ value }}-{{product_option}}"
+                                            name="bundle-step-option{{x}}-variant{{i}}__{{-option.name-}}-{{product_option}}"
+                                            value="{{ value | escape }}"
+                                            form="{{ product_form_id }}"
+                                            {% if option.selected_value == value %}checked{% endif %}
+                                      >
+                                      <label class="product-size-label js-product-size-label" for="bundle-step-option{{x}}-variant{{i}}__{{ value }}-{{product_option}}">
+                                        {{ value }}
+                                      </label>
+                                    {%- endfor -%}
+                                  </div>
+                                </fieldset>
+                                <button class="button button--picker-next js-btn-bundle-nxt">Next</button>
+                              {% endif %}
+                            {%- endfor -%}
+                            <script class="js-variants-data{{block.id}} js-variants-data" type="application/json">
+                              {{ product_option.variants | json }}
+                            </script>
+                          </variant-radios-bundle>
+                        {% endunless %}
+                      {% endfor %}
+                        {%- else -%}
+                          <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                            {%- for option in product.options_with_values -%}
+                              <div class="product-form__input product-form__input--dropdown">
+                                <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                                  {{ option.name }}
+                                </label>
+                                <div class="select">
+                                  <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                                    class="select__select"
+                                    name="options[{{ option.name | escape }}]"
+                                    form="{{ product_form_id }}"
+                                  >
+                                    {%- for value in option.values -%}
+                                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                        {{ value }}
+                                      </option>
+                                    {%- endfor -%}
+                                  </select>
+                                  {% render 'icon-caret' %}
+                                </div>
+                              </div>
+                            {%- endfor -%}
+                            <script class="js-variants-data" type="application/json">
+                              {{ product.variants | json }}
+                            </script>
+                          </variant-selects>
+                        {%- endif -%}
                       </div>
-                    </div>
-                  {%- endfor -%}
-
-                  <script class="js-variants-data" type="application/json">
-                    {{ product.variants | json }}
-                  </script>
-                </variant-selects>
-              {%- endif -%}
+                    </details>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </bundle-container>
             {%- endunless -%}
 
             <noscript class="product-form__noscript-wrapper-{{ section.id }}">
@@ -1184,14 +1262,13 @@
                     }
                     {% endstyle %}
                     <button
-                      type="submit"
                       name="add"
-                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      class="js-steps-submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
                         <span>
                           {%- if product.selected_or_first_available_variant.available -%}
-                            {{ 'products.product.add_to_cart' | t }}
+                            CONFIRM, NEXTz
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
@@ -1332,7 +1409,7 @@
       if (!isIE()) return;
       const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
       const noScriptInputWrapper = document.createElement('div');
-      const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+      const variantSwitcher = document.querySelector('variant-radios-bundle[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
       noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
       variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
 
@@ -1340,6 +1417,46 @@
         hiddenInput.value = event.currentTarget.value;
       });
     });
+  </script>
+  <script>
+    const bundleStep = function(ev) {
+      const input = ev.currentTarget
+      const stepIndex = input.querySelector('input:checked').value
+      const bundleContainersArray = Array.from(document.querySelectorAll('bundle-container'))
+
+      bundleContainersArray.forEach(b => {
+        b.style.display = 'none'
+      });
+      bundleContainersArray[stepIndex - 1].style.display = 'block'
+
+    }
+    document.querySelector('.bundle-steps').addEventListener('change', bundleStep)
+    const bundleNextButton = function (ev) {
+      if(ev.target.getAttribute('type') == 'submit') {
+        console.log('Add products')
+      } else ev.preventDefault()
+      const input = ev.target
+      const bundleContainersArray = Array.from(document.querySelectorAll('bundle-container'))
+      const stepButtons = document.querySelector('.bundle-steps').querySelectorAll('input')
+      const currentBundle = bundleContainersArray.find(b => {
+        return window.getComputedStyle(b, null).display == 'block'
+      })
+      let currentIndex = bundleContainersArray.indexOf(currentBundle)
+
+      if (currentIndex == bundleContainersArray.length - 2) {
+        input.setAttribute('type', 'submit')
+        input.querySelector('span').innerText = 'ADD TO CART'
+      }
+      if (currentIndex == bundleContainersArray.length - 1) return
+      bundleContainersArray[currentIndex].style.display = 'none'
+      bundleContainersArray[currentIndex + 1].style.display = 'block'
+      bundleContainersArray[currentIndex + 1].querySelectorAll('summary')[0].click()
+      stepButtons[currentIndex + 1].setAttribute('checked', true)
+      stepButtons[currentIndex + 1].nextElementSibling.classList.add('is-complete')
+
+    }
+
+    document.querySelector('.js-steps-submit').addEventListener('click', bundleNextButton)
   </script>
 
   {%- liquid
@@ -2649,8 +2766,485 @@
     {
       "type": "variant_picker",
       "name": "t:sections.main-product.blocks.variant_picker.name",
-      "limit": 1,
+      "limit": 9,
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "bundle_step_option1",
+          "label": "Bundle step option 1",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "steps_amount",
+          "label": "Steps amount",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "unit": "stp",
+          "default": 3
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle_step_option1_select",
+          "label": "bundle step option 1 select on",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option1_select_ph",
+          "label": "bundle step option 1 select placeholder"
+        },
+        {
+          "type": "product",
+          "label": "Bundle Product Option 1 variant 1",
+          "id": "bundle_step_option1_variant1"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option1_variant1_name",
+          "label": "Bundle Product Option 1 variant 1 name"
+        },
+        {
+          "type": "product",
+          "label": "Bundle Product Option 1 variant 2",
+          "id": "bundle_step_option1_variant2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option1_variant2_name",
+          "label": "Bundle Product Option 1 variant 2 name"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle_step_option2",
+          "label": "Bundle step option 2",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle_step_option2_select",
+          "label": "bundle step option 2 select on",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_select_ph",
+          "label": "bundle step option 2 select placeholder"
+        },
+        {
+          "type": "product",
+          "label": "Bundle Product Option 2 variant 1",
+          "id": "bundle_step_option2_variant1"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant1_name",
+          "label": "Bundle Product Option 2 variant 1 name"
+        },
+        {
+          "type": "product",
+          "label": "Bundle Product Option 2 variant 2",
+          "id": "bundle_step_option2_variant2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant2_name",
+          "label": "Bundle Product Option 2 variant 2 name"
+        },
+        {
+          "type": "header",
+          "content": "Product Accordion options"
+        },
+        {
+          "type": "checkbox",
+          "id": "dropdown_options",
+          "label": "Dropdown options",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_mobile",
+          "label": "Hide on mobile",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Product option padding top",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 1,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Product option padding top",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 1,
+          "unit": "rem"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Product option",
+          "info": "Bundle Product Option Title",
+          "label": "Product Option Title"
+        },
+        {
+          "type": "range",
+          "id": "accordion_title_size",
+          "label": "Accordion title font size",
+          "min": 1,
+          "max": 5,
+          "step": 0.1,
+          "default": 1.5,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "accordion_title_weight",
+          "label": "Accordion title weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semibold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "accordion_title_family",
+          "label": "Accordion title font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            },
+            {
+              "value": "montserrat",
+              "label": "Montserrat"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "color",
+          "id": "accordion_title_color",
+          "label": "Accordion title color"
+        },
+        {
+          "type": "select",
+          "id": "accordion_title_align",
+          "label": "Accordion title alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "justify",
+              "label": "Justify"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "check_mark",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "range",
+          "id": "accordion_content_size",
+          "label": "Accordion content font size",
+          "min": 1,
+          "max": 5,
+          "step": 0.1,
+          "default": 1.5,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "accordion_content_weight",
+          "label": "Accordion content weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semibold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "accordion_content_family",
+          "label": "Accordion content font family",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "hind",
+              "label": "Hind"
+            },
+            {
+              "value": "montserrat",
+              "label": "Montserrat"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "color",
+          "id": "accordion_content_color",
+          "label": "Accordion content color"
+        },
+        {
+          "type": "select",
+          "id": "accordion_content_align",
+          "label": "Accordion content alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "justify",
+              "label": "Justify"
+            }
+          ],
+          "default": "left"
+        },
         {
           "type": "header",
           "content": "Swatches block padding"
@@ -2804,22 +3398,22 @@
         },
         {
           "type": "page",
-          "id": "color_group1_page",
+          "id": "bundle_step_option1_variant1__color_group1_page",
           "label": "color-group-page"
         },
         {
           "type": "url",
-          "id": "color_group1_link",
+          "id": "bundle_step_option1_variant1__color_group1_link",
           "label": "color-group1-link"
         },
         {
           "type": "page",
-          "id": "color_group2_page",
+          "id": "bundle_step_option1_variant1__color_group2_page",
           "label": "color-group-page"
         },
         {
           "type": "url",
-          "id": "color_group2_link",
+          "id": "bundle_step_option1_variant1__color_group2_link",
           "label": "color-group2-link"
         },
         {
@@ -2844,7 +3438,7 @@
         },
         {
           "type": "text",
-          "id": "color_group_2_popup_title",
+          "id": "bundle_step_option1_variant1__color_group_2_popup_title",
           "default": "pop-up",
           "label": "Pop-up link text"
         },
@@ -2870,17 +3464,17 @@
         },
         {
           "type": "page",
-          "id": "color_group2_page2",
+          "id": "bundle_step_option1_variant1__color_group2_page2",
           "label": "color group 2 page 2"
         },
         {
           "type": "url",
-          "id": "color_group2_page2_link",
+          "id": "bundle_step_option1_variant1__color_group2_page2_link",
           "label": "color-group2-page2 link"
         },
         {
           "type": "text",
-          "id": "size_guide_text",
+          "id": "bundle_step_option1_variant1__size_guide_text",
           "default": "Size Guide",
           "label": "Pop-up link text"
         },
@@ -2906,14 +3500,72 @@
         },
         {
           "type": "page",
-          "id": "size_guide_page",
+          "id": "bundle_step_option1_variant1__size_guide_page",
           "label": "Page"
         },
         {
           "type": "url",
-          "id": "size_guide_link",
+          "id": "bundle_step_option1_variant1__size_guide_link",
           "label": "size-guide-link"
         },
+        //Bundle step option 2
+        {
+          "type": "page",
+          "id": "bundle_step_option2_variant1__color_group1_page",
+          "label": "color-group-page"
+        },
+        {
+          "type": "url",
+          "id": "bundle_step_option2_variant1__color_group1_link",
+          "label": "color-group1-link"
+        },
+        {
+          "type": "page",
+          "id": "bundle_step_option2_variant1__color_group2_page",
+          "label": "color-group-page"
+        },
+        {
+          "type": "url",
+          "id": "bundle_step_option2_variant1__color_group2_link",
+          "label": "color-group2-link"
+        },
+        {
+          "type": "header",
+          "content": "Second page for color group"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant1__color_group_2_popup_title",
+          "default": "pop-up",
+          "label": "Pop-up link text"
+        },
+        {
+          "type": "page",
+          "id": "bundle_step_option2_variant1__color_group2_page2",
+          "label": "color group 2 page 2"
+        },
+        {
+          "type": "url",
+          "id": "bundle_step_option2_variant1__color_group2_page2_link",
+          "label": "color-group2-page2 link"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant1__size_guide_text",
+          "default": "Size Guide",
+          "label": "Pop-up link text"
+        },
+        {
+          "type": "page",
+          "id": "bundle_step_option2_variant1__size_guide_page",
+          "label": "Page"
+        },
+        {
+          "type": "url",
+          "id": "bundle_step_option2_variant1__size_guide_link",
+          "label": "size-guide-link"
+        },
+        //End Bundle Options
         {
           "type": "select",
           "id": "swatch_display",
@@ -3046,13 +3698,19 @@
           "step": 0.5,
           "default": 3.5
         },
+        /*
+        ##############################################
+                    BUNDLE STEP OPTION 1
+        ##############################################
+        */
+        //Color options bundle step option 1 variant 1
         {
           "type": "header",
           "content": "Color group 1"
         },
         {
           "type": "text",
-          "id": "group_1_title",
+          "id": "bundle_step_option1_variant1__group_1_title",
           "label": "Color group 1 title",
           "default": "Color group 1 title"
         },
@@ -3078,127 +3736,107 @@
         },
         {
           "type": "color",
-          "id": "group1_legend_color",
+          "id": "bundle-step-option1-variant1__group1_legend_color",
           "label": "Color group 1 legend color"
         },
         {
+          "type": "header",
+          "content": "Bundle step option 1 variant 1"
+        },
+        {
           "type": "checkbox",
-          "id": "color-11",
+          "id": "bundle-step-option1-variant1__color-11",
           "label": "Color option 1",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch11",
+          "id": "bundle-step-option1-variant1__swatch11",
           "label": "Swatch 11 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-12",
+          "id": "bundle-step-option1-variant1__color-12",
           "label": "Color option 2",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch12",
+          "id": "bundle-step-option1-variant1__swatch12",
           "label": "Swatch 12 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-13",
+          "id": "bundle-step-option1-variant1__color-13",
           "label": "Color option 3",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch13",
+          "id": "bundle-step-option1-variant1__swatch13",
           "label": "Swatch 13 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-14",
+          "id": "bundle-step-option1-variant1__color-14",
           "label": "Color option 4",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch14",
+          "id": "bundle-step-option1-variant1__swatch14",
           "label": "Swatch 14 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-15",
+          "id": "bundle-step-option1-variant1__color-15",
           "label": "Color option 5",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch15",
+          "id": "bundle-step-option1-variant1__swatch15",
           "label": "Swatch 15 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-16",
+          "id": "bundle-step-option1-variant1__color-16",
           "label": "Color option 6",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch16",
+          "id": "bundle-step-option1-variant1__swatch16",
           "label": "Swatch 16 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-17",
+          "id": "bundle-step-option1-variant1__color-17",
           "label": "Color option 7",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch17",
+          "id": "bundle-step-option1-variant1__swatch17",
           "label": "Swatch 17 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-18",
+          "id": "bundle-step-option1-variant1__color-18",
           "label": "Color option 8",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch18",
+          "id": "bundle-step-option1-variant1__swatch18",
           "label": "Swatch 18 color",
-          "default": "#000000"
-        },
-        {
-          "type": "checkbox",
-          "id": "color-19",
-          "label": "Color option 9",
-          "default": true
-        },
-        {
-          "type": "color",
-          "id": "swatch19",
-          "label": "Swatch 19 color",
-          "default": "#000000"
-        },
-        {
-          "type": "checkbox",
-          "id": "color-110",
-          "label": "Color option 10",
-          "default": true
-        },
-        {
-          "type": "color",
-          "id": "swatch110",
-          "label": "Swatch 110 color",
           "default": "#000000"
         },
         {
@@ -3207,155 +3845,755 @@
         },
         {
           "type": "text",
-          "id": "group_2_title",
+          "id": "bundle_step_option1_variant1__group_2_title",
           "label": "Color group 2 title",
           "default": "Color group 2 title"
         },
         {
-          "type": "select",
-          "id": "group_2_title_family",
-          "label": "Group 1 title font family",
-          "options": [
-            {
-              "value": "default",
-              "label": "Default"
-            },
-            {
-              "value": "hind",
-              "label": "Hind"
-            },
-            {
-              "value": "montserrat",
-              "label": "Montserrat"
-            }
-          ],
-          "default": "default"
-        },
-        {
-          "type": "color",
-          "id": "group2_legend_color",
-          "label": "Color group 2 legend color"
-        },
-        {
           "type": "checkbox",
-          "id": "color-21",
+          "id": "bundle-step-option1-variant1__color-21",
           "label": "Color option 1",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch21",
+          "id": "bundle-step-option1-variant1__swatch21",
           "label": "Swatch 21 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-22",
+          "id": "bundle-step-option1-variant1__color-22",
           "label": "Color option 2",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch22",
+          "id": "bundle-step-option1-variant1__swatch22",
           "label": "Swatch 22 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-23",
+          "id": "bundle-step-option1-variant1__color-23",
           "label": "Color option 3",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch23",
+          "id": "bundle-step-option1-variant1__swatch23",
           "label": "Swatch 23 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-24",
+          "id": "bundle-step-option1-variant1__color-24",
           "label": "Color option 4",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch24",
+          "id": "bundle-step-option1-variant1__swatch24",
           "label": "Swatch 24 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-25",
+          "id": "bundle-step-option1-variant1__color-25",
           "label": "Color option 5",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch25",
+          "id": "bundle-step-option1-variant1__swatch25",
           "label": "Swatch 25 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-26",
+          "id": "bundle-step-option1-variant1__color-26",
           "label": "Color option 6",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch26",
+          "id": "bundle-step-option1-variant1__swatch26",
           "label": "Swatch 26 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-27",
+          "id": "bundle-step-option1-variant1__color-27",
           "label": "Color option 7",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch27",
+          "id": "bundle-step-option1-variant1__swatch27",
           "label": "Swatch 27 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-28",
+          "id": "bundle-step-option1-variant1__color-28",
           "label": "Color option 8",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch28",
+          "id": "bundle-step-option1-variant1__swatch28",
           "label": "Swatch 28 color",
           "default": "#000000"
         },
+        //Color options Bundle option 1 variant 2
+        {
+          "type": "header",
+          "content": "Bundle step option 1 variant 2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option1_variant2__group_1_title",
+          "label": "Color group 1 title",
+          "default": "Color group 1 title"
+        },
         {
           "type": "checkbox",
-          "id": "color-29",
-          "label": "Color option 9",
+          "id": "bundle-step-option1-variant2__color-11",
+          "label": "Color option 1",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch29",
-          "label": "Swatch 29 color",
+          "id": "bundle-step-option1-variant2__swatch11",
+          "label": "Swatch 11 color",
           "default": "#000000"
         },
         {
           "type": "checkbox",
-          "id": "color-210",
-          "label": "Color option 10",
+          "id": "bundle-step-option1-variant2__color-12",
+          "label": "Color option 2",
           "default": true
         },
         {
           "type": "color",
-          "id": "swatch210",
-          "label": "Swatch 210 color",
+          "id": "bundle-step-option1-variant2__swatch12",
+          "label": "Swatch 12 color",
           "default": "#000000"
         },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-13",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch13",
+          "label": "Swatch 13 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-14",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch14",
+          "label": "Swatch 14 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-15",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch15",
+          "label": "Swatch 15 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-16",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch16",
+          "label": "Swatch 16 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-17",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch17",
+          "label": "Swatch 17 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-18",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch18",
+          "label": "Swatch 18 color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Color group 2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option1_variant2__group_2_title",
+          "label": "Color group 2 title",
+          "default": "Color group 2 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-21",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch21",
+          "label": "Swatch 21 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-22",
+          "label": "Color option 2",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch22",
+          "label": "Swatch 22 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-23",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch23",
+          "label": "Swatch 23 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-24",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch24",
+          "label": "Swatch 24 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-25",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch25",
+          "label": "Swatch 25 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-26",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch26",
+          "label": "Swatch 26 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-27",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch27",
+          "label": "Swatch 27 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option1-variant2__color-28",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option1-variant2__swatch28",
+          "label": "Swatch 28 color",
+          "default": "#000000"
+        },
+        /*
+        ##############################################
+                    BUNDLE STEP OPTION 2
+        ##############################################
+        */
+        //Color options bundle step option 2 variant 1
+        {
+          "type": "header",
+          "content": "Color group 1"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant1__group_1_title",
+          "label": "Color group 1 title",
+          "default": "Color group 1 title"
+        },
+        {
+          "type": "header",
+          "content": "Bundle step option 2 variant 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-11",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch11",
+          "label": "Swatch 11 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-12",
+          "label": "Color option 2",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch12",
+          "label": "Swatch 12 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-13",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch13",
+          "label": "Swatch 13 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-14",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch14",
+          "label": "Swatch 14 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-15",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch15",
+          "label": "Swatch 15 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-16",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch16",
+          "label": "Swatch 16 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-17",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch17",
+          "label": "Swatch 17 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-18",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch18",
+          "label": "Swatch 18 color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Color group 2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant1__group_2_title",
+          "label": "Color group 2 title",
+          "default": "Color group 2 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-21",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch21",
+          "label": "Swatch 21 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-22",
+          "label": "Color option 2",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch22",
+          "label": "Swatch 22 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-23",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch23",
+          "label": "Swatch 23 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-24",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch24",
+          "label": "Swatch 24 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-25",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch25",
+          "label": "Swatch 25 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-26",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch26",
+          "label": "Swatch 26 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-27",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch27",
+          "label": "Swatch 27 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant1__color-28",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant1__swatch28",
+          "label": "Swatch 28 color",
+          "default": "#000000"
+        },
+        //Color options bundle step option 2 variant 2
+        {
+          "type": "header",
+          "content": "Bundle step option 2 variant 2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant2__group_1_title",
+          "label": "Color group 1 title",
+          "default": "Color group 1 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-11",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch11",
+          "label": "Swatch 11 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-12",
+          "label": "Color option 2",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch12",
+          "label": "Swatch 12 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-13",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch13",
+          "label": "Swatch 13 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-14",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch14",
+          "label": "Swatch 14 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-15",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch15",
+          "label": "Swatch 15 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-16",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch16",
+          "label": "Swatch 16 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-17",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch17",
+          "label": "Swatch 17 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-18",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle_step_option2_variant2__swatch18",
+          "label": "Swatch 18 color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Color group 2"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_variant2__group_2_title",
+          "label": "Color group 2 title",
+          "default": "Color group 2 title"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-21",
+          "label": "Color option 1",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch21",
+          "label": "Swatch 21 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-22",
+          "label": "Color option 2",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch22",
+          "label": "Swatch 22 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-23",
+          "label": "Color option 3",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch23",
+          "label": "Swatch 23 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-24",
+          "label": "Color option 4",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch24",
+          "label": "Swatch 24 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-25",
+          "label": "Color option 5",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch25",
+          "label": "Swatch 25 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-26",
+          "label": "Color option 6",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch26",
+          "label": "Swatch 26 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-27",
+          "label": "Color option 7",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch27",
+          "label": "Swatch 27 color",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "bundle-step-option2-variant2__color-28",
+          "label": "Color option 8",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bundle-step-option2-variant2__swatch28",
+          "label": "Swatch 28 color",
+          "default": "#000000"
+        },
+        // Color optinons Bundle step finish
         {
           "type": "select",
           "id": "picker_type",

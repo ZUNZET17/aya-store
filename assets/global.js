@@ -970,7 +970,12 @@ class VariantRadiosBundle extends VariantRadios {
     this.filteredArray = this.picturesArray.filter( x => {
       const altArr = x.getAttribute('media-alt').split(' ');
       const pictureColor = altArr.slice(altArr.indexOf('color') + 1).toString().replace(',', ' ').toLowerCase();
-      return pictureColor == this.selectedColor
+      if (x.getAttribute('media-alt').includes('cover')) {
+        return true
+      } else {
+        return pictureColor == this.selectedColor 
+        //&& x.getAttribute('media-alt').split('color')[0] == x.getAttribute('product-title')
+      }
     })
 
     if(this.filteredArray.length > 0 ) {
@@ -987,6 +992,14 @@ class VariantRadiosBundle extends VariantRadios {
 }
 
 customElements.define('variant-radios-bundle', VariantRadiosBundle)
+
+class Bundle extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('bundle-container', Bundle)
 
 let selectedVariants
 
@@ -1005,12 +1018,12 @@ const bundleAccordion = function (ev) {
       }
     })
     
-  }
+  
 
   const displaySelected = this.parentElement.querySelector('.selection-span')
 
   displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
-
+  }
 }
 
 window.addEventListener('load', () => {

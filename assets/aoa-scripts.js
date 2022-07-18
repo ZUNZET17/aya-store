@@ -99,6 +99,20 @@ const RequestPageSection = function (ev) {
   request.send()
 }
 
+const nextBundleOption = function (ev) {
+  console.log('next')
+  const input = ev.target
+  const accordionArr = Array.from(input.closest('.bundle-option').querySelectorAll('.product__accordion'))
+  const thisAccordion = input.closest('.product__accordion')
+  thisAccordion.querySelector('summary').click()
+  accordionArr[(accordionArr.indexOf(thisAccordion) +  1)]?.querySelector('summary').click()
+  
+}
+
+document.querySelectorAll('.js-btn-bundle-nxt').forEach(b => {
+  b.addEventListener('click', nextBundleOption)
+})
+
 /*
 ###################
 Set Event Listeners
@@ -111,7 +125,7 @@ window.addEventListener('load', () => {
   accordionSummaries.forEach(label => {
     label.addEventListener('click', AccordionSolo, false)
   })
-  document.querySelectorAll('.accordion-details-bundle-options')[0].querySelector('summary').click()
+  document.querySelectorAll('.accordion-details-bundle-options')[0]?.querySelector('summary').click()
 })
 
 //TriggerProduct Info

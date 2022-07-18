@@ -3234,3 +3234,92 @@ details-disclosure > details {
   .js-none {
     display: none!important;
   }
+
+  /*Variant picker Next button*/
+  .button--picker-next {
+    display: block;
+    margin: 1.5rem auto 0;
+    min-width: max-content;
+    min-height: 100%;
+    line-height: 3.2rem;
+    padding: 0 1.5rem;
+    border-radius: 2.5rem;
+  }
+
+  .button--picker-next:after,
+  .button--picker-next:before {
+    border-radius: 2.5rem;
+  }
+
+  /*BUNDLE OPTION*/
+  .bundle-option {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .product__info-container bundle-container:not(:first-of-type) {
+    display: none;
+  }
+
+  fieldset.bundle-steps:not(:first-of-type) {
+    display: none;
+  }
+
+  /*Bundle steps button*/
+  .bundle-steps {
+    border: none;
+    margin-top: 2rem;
+    display: flex;
+    padding: 0;
+    column-gap: 0.2rem;
+  }
+
+  .bundle-steps__label {
+    margin-right: 2px;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 0 10px;
+    cursor: pointer;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+    width: 100%;
+    border-radius: 50px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+  }
+
+  .bundle-steps__label.is-complete {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+  }
+
+  .bundle-steps__label:not(.is-complete) {
+    background-color: #d1d1d2;
+    color: #fff;
+    border: 1px solid #d1d1d2;
+    cursor: default;
+  }
+
+  .bundle-steps__input {
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+  }
+
+  .bundle-steps__input:checked + .bundle-steps__label {
+    background: #434442;
+    color: #ffffff;
+  }
+
+  bundle-container .product__accordion--variant:last-child variant-radios-bundle button {
+    display: none;
+  }
