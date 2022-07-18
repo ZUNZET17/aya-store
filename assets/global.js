@@ -973,8 +973,7 @@ class VariantRadiosBundle extends VariantRadios {
       if (x.getAttribute('media-alt').includes('cover')) {
         return true
       } else {
-        return pictureColor == this.selectedColor 
-        //&& x.getAttribute('media-alt').split('color')[0] == x.getAttribute('product-title')
+        return pictureColor == this.selectedColor && x.getAttribute('media-alt').split('color')[0] == x.getAttribute('product-title')
       }
     })
 
