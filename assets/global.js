@@ -1001,6 +1001,14 @@ class Bundle extends HTMLElement {
 
 customElements.define('bundle-container', Bundle)
 
+class BundleSimple extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('bundle-container-simple', BundleSimple)
+
 let selectedVariants
 
 //Product Bundle option accordion

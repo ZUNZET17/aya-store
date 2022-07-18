@@ -106,11 +106,27 @@ const nextBundleOption = function (ev) {
   const thisAccordion = input.closest('.product__accordion')
   thisAccordion.querySelector('summary').click()
   accordionArr[(accordionArr.indexOf(thisAccordion) +  1)]?.querySelector('summary').click()
-  
+
 }
 
 document.querySelectorAll('.js-btn-bundle-nxt').forEach(b => {
   b.addEventListener('click', nextBundleOption)
+})
+
+const nextBundleOptionSimple = function (ev) {
+  console.log('next-simple')
+  const input = ev.target
+  const bundleArr = Array.from(document.querySelectorAll('bundle-container-simple'))
+  const thisBundleContainer = input.closest('bundle-container-simple')
+  const currentIndex = bundleArr.indexOf(thisBundleContainer)
+
+  if (currentIndex == bundleArr.length - 1) return;
+  bundleArr[currentIndex + 1].querySelector('summary').click()
+  
+}
+
+document.querySelectorAll('.js-btn-bundle-simple-nxt').forEach(b => {
+  b.addEventListener('click', nextBundleOptionSimple)
 })
 
 /*

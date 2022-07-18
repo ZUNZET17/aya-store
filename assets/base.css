@@ -3323,3 +3323,7 @@ details-disclosure > details {
   bundle-container .product__accordion--variant:last-child variant-radios-bundle button {
     display: none;
   }
+
+  bundle-container-simple:not(:first-of-type) variant-radios-bundle button {
+    display: none;
+  }

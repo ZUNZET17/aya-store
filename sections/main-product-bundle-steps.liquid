@@ -831,47 +831,46 @@
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
-          <!-- <button class="button button--step">BUNDLE STEP N</button> -->
-          <fieldset class="bundle-steps">
-            {% assign steps_amount = block.settings.steps_amount %}
-            {% for s  in (1..steps_amount) %}
-              <input id="step-{{forloop.index}}"  type="radio" name="bundles-steps" class="bundle-steps__input" value="{{forloop.index}}">
-              <label for="step-{{forloop.index}}" class="bundle-steps__label js-step {% if forloop.index == 1 %}is-complete{% endif %}">Step {{forloop.index}}</label>
-            {% endfor %}
-          </fieldset>
-          {% style %}
-            .color-swatches-block{{block.id}} {
-              padding-top: {{ block.settings.swatches_padding_top -}}rem;
-              padding-bottom: {{ block.settings.swatches_padding_bottom -}}rem;
-            }
-            .color-group-legend{{block.id}}{
-              font-size: {{- block.settings.legend_size -}}rem;
-              font-weight: {{- block.settings.legend_weight -}};
-            }
-            .sizes-legend{{block.id}} {
-              font-size: {{ block.settings.sizes_legend_size -}}rem;
-              font-weight: {{ block.settings.sizes_legend_weight }};
-            }
-            .color-group2-page2-legend{{block.id}} {
-              color: {{ block.settings.group22_legend_color }};
-              font-size: {{ block.settings.color_group2_page2_legend_size -}}rem;
-              font-weight: {{ block.settings.color_group2_page2_weight }};
-            }
-            .color-swatch__label {
-              display: flex!important;
-              justify-content: center;
-              align-items: center;
-              min-width: {{- block.settings.swatch_size -}}rem;
-              min-height: {{- block.settings.swatch_size -}}rem;
-              {% if block.settings.swatch_display == "rectangle" %}
-              min-width: {{- block.settings.swatch_size | times: 1.35 -}}rem;
-              {% endif %}
-              {% if block.settings.swatch_display == "circle" %}
-              border-radius: 50%;
-              {% endif %}
-            }          
-          {% endstyle %}
-          <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
+            <fieldset class="bundle-steps">
+              {% assign steps_amount = block.settings.steps_amount %}
+              {% for s  in (1..steps_amount) %}
+                <input id="step-{{forloop.index}}"  type="radio" name="bundles-steps" class="bundle-steps__input" value="{{forloop.index}}">
+                <label for="step-{{forloop.index}}" class="bundle-steps__label js-step {% if forloop.index == 1 %}is-complete{% endif %}">Step {{forloop.index}}</label>
+              {% endfor %}
+            </fieldset>
+            {% style %}
+              .color-swatches-block{{block.id}} {
+                padding-top: {{ block.settings.swatches_padding_top -}}rem;
+                padding-bottom: {{ block.settings.swatches_padding_bottom -}}rem;
+              }
+              .color-group-legend{{block.id}}{
+                font-size: {{- block.settings.legend_size -}}rem;
+                font-weight: {{- block.settings.legend_weight -}};
+              }
+              .sizes-legend{{block.id}} {
+                font-size: {{ block.settings.sizes_legend_size -}}rem;
+                font-weight: {{ block.settings.sizes_legend_weight }};
+              }
+              .color-group2-page2-legend{{block.id}} {
+                color: {{ block.settings.group22_legend_color }};
+                font-size: {{ block.settings.color_group2_page2_legend_size -}}rem;
+                font-weight: {{ block.settings.color_group2_page2_weight }};
+              }
+              .color-swatch__label {
+                display: flex!important;
+                justify-content: center;
+                align-items: center;
+                min-width: {{- block.settings.swatch_size -}}rem;
+                min-height: {{- block.settings.swatch_size -}}rem;
+                {% if block.settings.swatch_display == "rectangle" %}
+                min-width: {{- block.settings.swatch_size | times: 1.35 -}}rem;
+                {% endif %}
+                {% if block.settings.swatch_display == "circle" %}
+                border-radius: 50%;
+                {% endif %}
+              }          
+            {% endstyle %}
+            <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
             {%- unless product_option.has_only_default_variant -%}
             {% style %}
               {% if block.settings.hide_mobile %}
@@ -1262,13 +1261,12 @@
                     }
                     {% endstyle %}
                     <button
-                      name="add"
                       class="js-steps-submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
                         <span>
                           {%- if product.selected_or_first_available_variant.available -%}
-                            CONFIRM, NEXTz
+                            CONFIRM, NEXT
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
@@ -1431,6 +1429,7 @@
 
     }
     document.querySelector('.bundle-steps').addEventListener('change', bundleStep)
+    
     const bundleNextButton = function (ev) {
       if(ev.target.getAttribute('type') == 'submit') {
         console.log('Add products')
