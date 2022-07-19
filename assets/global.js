@@ -912,6 +912,7 @@ class VariantRadiosBundle extends VariantRadios {
     super.getVariantData()
     this.existingVariant = location.href.split('variant=')[1]
     this.existingColor = this.variantData.find(v => v.id == this.existingVariant)?.option1.toLowerCase() || null
+    this.imagesProduct = 'cover'
     super.updateOptions()
     super.updateMasterId()
     this.onChangeHandler()
@@ -973,10 +974,12 @@ class VariantRadiosBundle extends VariantRadios {
       if (x.getAttribute('media-alt').includes('cover')) {
         return true
       } else {
-        return pictureColor == this.selectedColor && x.getAttribute('media-alt').split('color')[0] == x.getAttribute('product-title')
+        console.log('image product title', x.getAttribute('media-alt').split('color')[0])
+        console.log('imagesProduct', this.imagesProduct)
+        return pictureColor == this.selectedColor && x.getAttribute('media-alt').split('color')[0].trim() == this.imagesProduct.trim()
       }
     })
-
+    console.log(this.filteredArray)
     if(this.filteredArray.length > 0 ) {
       this.picturesArray.map(x => {
         if( this.filteredArray.includes(x) ) {
@@ -986,6 +989,8 @@ class VariantRadiosBundle extends VariantRadios {
         x.style.display = 'none'
       })
     }
+    this.imagesProduct = this.querySelectorAll('fieldset.color-swatches input:checked + label')[0].getAttribute('product-title')
+
   };
 
 }
