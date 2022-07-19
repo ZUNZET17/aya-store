@@ -201,6 +201,12 @@
         "disabled": true,
         "settings": {
         }
+      },
+      "6097499278999377719": {
+        "type": "shopify:\/\/apps\/mega-menu\/blocks\/app-embed\/7a00835e-fe40-45a5-a615-2eb4ab697b58",
+        "disabled": false,
+        "settings": {
+        }
       }
     }
   },
