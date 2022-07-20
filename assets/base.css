@@ -3202,7 +3202,8 @@ details-disclosure > details {
 
   /*Product option accordion*/
 
-  variant-radios-bundle {
+  variant-radios-bundle,
+  variant-radios-simple {
     display: block!important
   }
 

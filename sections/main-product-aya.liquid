@@ -877,7 +877,7 @@
           <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
-                <variant-radios-bundle class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                <variant-radios-simple class="no-js-hidden color-swatches-block" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     {% capture idx_top %}color_group_{{- forloop.index -}}_padding_top{% endcapture %}
                     {% capture idx_bottom %}color_group_{{- forloop.index -}}_padding_bottom{% endcapture %}
@@ -951,7 +951,7 @@
                                       form="{{ product_form_id }}"
                                       {% if option.selected_value == value %}checked{% endif %}
                                 >
-                                <label class="color-swatch__label swatch1{{- forloop.index }} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="1">
+                                <label class="color-swatch__label swatch1{{- forloop.index }} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="1" product-title="{{product.title}}">
                                   {% render 'icon-close' %}
                                   <span class="color-swatch__pin">{{ value }}</span>
                                 </label>
@@ -1038,7 +1038,7 @@
                                       form="{{ product_form_id }}"
                                       {% if option.selected_value == value %}checked{% endif %}
                                 >
-                                <label class="color-swatch__label swatch2{{- forloop.index }} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="2">
+                                <label class="color-swatch__label swatch2{{- forloop.index }} js-color-label" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" swatch-color="{{ value }}" group-number="2" product-title="{{product.title}}">
                                   {% render 'icon-close' %}
                                   <span class="color-swatch__pin">{{ value }}</span>
                                 </label>
@@ -1106,7 +1106,7 @@
                   <script class="js-variants-data" type="application/json">
                     {{ product.variants | json }}
                   </script>
-                </variant-radios-bundle>
+                </variant-radios-simple>
               {%- else -%}
                 <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
