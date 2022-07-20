@@ -3328,3 +3328,9 @@ details-disclosure > details {
   bundle-container-simple:not(:first-of-type) variant-radios-bundle button {
     display: none;
   }
+
+  .bundle-option__title,
+  .bundle-option__title p {
+    font-language-override: 1;
+    margin-bottom: 0!important;
+  }
