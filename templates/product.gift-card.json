@@ -128,6 +128,7 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
+          "disabled": true,
           "settings": {
           }
         },
@@ -137,6 +138,38 @@
             "show_dynamic_checkout": false,
             "button_bk": "#434442",
             "button_color": "#ffffff"
+          }
+        },
+        "7432a9af-0705-4f40-92f1-2074055942ed": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "hide_mobile": false,
+            "text": "<p>LET'S REDEFINE FASHION<\/p>",
+            "text_color": "",
+            "padding_top": 0,
+            "padding_bottom": 0.7,
+            "text_family": "hind",
+            "text_style": "uppercase",
+            "text_weight": "regular",
+            "text_size": 1.3,
+            "text_justify": "left"
+          }
+        },
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "hide_mobile": false,
+            "text": "<p>Be Part of the Change<\/p>",
+            "text_color": "",
+            "padding_top": 0,
+            "padding_bottom": 2.7,
+            "text_family": "default",
+            "text_style": "uppercase",
+            "text_weight": "bold",
+            "text_size": 1.9,
+            "text_justify": "left"
           }
         },
         "tabs": {
@@ -242,6 +275,26 @@
             "accordion_content_align": "left",
             "page": ""
           }
+        },
+        "f5560f9d-89a0-4ec4-aa6c-19512d115e33": {
+          "type": "collapsible_tab",
+          "settings": {
+            "hide_mobile": false,
+            "heading": "Sustainable Materials",
+            "accordion_title_size": 1.6,
+            "accordion_title_weight": "400",
+            "accordion_title_family": "default",
+            "accordion_title_color": "",
+            "accordion_title_align": "left",
+            "icon": "none",
+            "content": "<p>Our Men's Organic Pima Cotton Long Sleeve Shirt is made using sustainable practices and materials.<\/p><p><strong>Fiber: <\/strong>100% Organic Pima Cotton<\/p><p><strong>Thread:<\/strong>100% Cotton<\/p><p><strong>Label:<\/strong>100% Organic Cotton + GOTS Certified Ink<\/p><p><strong>Dyes:<\/strong>Low Impact Dyes (GOTS) & 100% Natural Dyes<\/p><p><strong>Finishing:<\/strong>OEKO-TEX Certified<\/p><p><strong>Care:<\/strong> Tumble dry low. Machine wash cold.<\/p>",
+            "accordion_content_size": 1.4,
+            "accordion_content_weight": "400",
+            "accordion_content_family": "default",
+            "accordion_content_color": "",
+            "accordion_content_align": "left",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -251,8 +304,11 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "7432a9af-0705-4f40-92f1-2074055942ed",
+        "1b2deae3-1f76-4ad2-a78a-11f88fe8b9d1",
         "tabs",
-        "8cb1b144-d047-4453-9184-59446ed8e9f7"
+        "8cb1b144-d047-4453-9184-59446ed8e9f7",
+        "f5560f9d-89a0-4ec4-aa6c-19512d115e33"
       ],
       "settings": {
         "enable_sticky_info": true,
