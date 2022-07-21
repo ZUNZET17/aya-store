@@ -1061,7 +1061,6 @@ const bundleAccordion = function (ev) {
   
 
   const displaySelected = this.parentElement.querySelector('.selection-span')
-
   displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
   }
 }
@@ -1078,6 +1077,7 @@ window.addEventListener('load', () => {
 const bundleItems = function (ev) {
   const input = ev.currentTarget
   selectedVariants = Array.from(document.querySelectorAll('variant-radios-bundle')).filter(x => !x.classList.contains('js-none')).map(x => x.currentVariant)
+  console.log(selectedVariants)
   const productForm = document.getElementById(`product-form-${input.dataset?.section || dataSection}`);
 
   if (!productForm) return;
