@@ -182,7 +182,7 @@ fieldset.product-form__input .form__label {
   width: 1px;
 }
 
-.product-form__input input[type='radio'] + label{
+.product-form__input input[type='radio'] + label:not(.product-size-label) {
   background-color: rgb(var(--color-background));
   color: rgba(var(--color-foreground));
   border-radius: var(--variant-pills-radius);
