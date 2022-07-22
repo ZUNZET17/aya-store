@@ -862,6 +862,7 @@
                 align-items: center;
                 min-width: {{- block.settings.swatch_size -}}rem;
                 min-height: {{- block.settings.swatch_size -}}rem;
+                padding: 0!important;
                 {% if block.settings.swatch_display == "rectangle" %}
                 min-width: {{- block.settings.swatch_size | times: 1.35 -}}rem;
                 {% endif %}
@@ -924,25 +925,27 @@
                       {% assign select_on = 'bundle_step_option' | append: x | append: '_select' %}
                       {% if block.settings[bundle_step_option] %}
                         <div class="product-form__input product-form__input--dropdown">
-                          <div class="select">
-                            <select id="Product_option--{{ forloop.index0 }}"
-                              class="select__select"
-                              name="options[{{ product_option | escape }}]"
-                            >
-                              {% assign bundle_option_variant_select_ph = 'bundle_step_option' | append: x | append: '_select_ph'%}
-                              <option value="" disabled>{{block.settings[bundle_option_variant_select_ph]}}</option>
-                              {%- for j in (1..2) -%}
-                              {% assign bundle_option_variant_name = 'bundle_step_option' | append: x | append: '_variant' | append: j | append: '_name' %}
-                              {% assign bundle_option_variant = 'bundle_step_option' | append: x | append: '_variant' | append: j  %}
-                              {% unless bundle_option_variant_name == blank %}
-                                <option value="{{ block.settings[bundle_option_variant] }}">
-                                  {{  block.settings[bundle_option_variant_name] }}
-                                </option>
-                              {% endunless %}
-                              {%- endfor -%}
-                            </select>
-                            {% render 'icon-caret' %}
-                          </div>
+                          {% if select_on %}
+                            <div class="select">
+                              <select id="Product_option--{{ forloop.index0 }}"
+                                class="select__select"
+                                name="options[{{ product_option | escape }}]"
+                              >
+                                {% assign bundle_option_variant_select_ph = 'bundle_step_option' | append: x | append: '_select_ph'%}
+                                <option value="" disabled>{{block.settings[bundle_option_variant_select_ph]}}</option>
+                                {%- for j in (1..2) -%}
+                                {% assign bundle_option_variant_name = 'bundle_step_option' | append: x | append: '_variant' | append: j | append: '_name' %}
+                                {% assign bundle_option_variant = 'bundle_step_option' | append: x | append: '_variant' | append: j  %}
+                                {% unless bundle_option_variant_name == blank %}
+                                  <option value="{{ block.settings[bundle_option_variant] }}">
+                                    {{  block.settings[bundle_option_variant_name] }}
+                                  </option>
+                                {% endunless %}
+                                {%- endfor -%}
+                              </select>
+                              {% render 'icon-caret' %}
+                            </div>
+                          {% endif %}
                         </div>
                       {% endif %}
                       {% for i in (1..3) %}
@@ -999,7 +1002,7 @@
                                         {% capture unavailable_bk %}{{- block.settings[swatch_idx] -}}{{- block.settings[swatch_idx] -}}75!important{% endcapture %}
                                         {% style %}
                                           .{{- swatch_idx -}}--{{block.id}} {
-                                            background-color: {{- block.settings[swatch_idx] -}};
+                                            background-color: {{- block.settings[swatch_idx] -}}!important;
                                           }
                                           .unavailable-swatch:after {
                                             content: "";
@@ -1091,7 +1094,7 @@
                                         {% capture swatch_idx %}bundle-step-option{{x}}-variant{{i}}__swatch2{{- forloop.index -}}{% endcapture %}
                                         {% style %}
                                           .{{- swatch_idx -}}--{{block.id}} {
-                                            background-color: {{- block.settings[swatch_idx] -}};
+                                            background-color: {{- block.settings[swatch_idx] -}}!important;
                                             {% if block.settings.circle_on %}
                                             border-radius: 50%;
                                             {% endif %}
