@@ -860,8 +860,8 @@
                 display: flex!important;
                 justify-content: center;
                 align-items: center;
-                min-width: {{- block.settings.swatch_size -}}rem;
-                min-height: {{- block.settings.swatch_size -}}rem;
+                min-width: {{- block.settings.swatch_size -}}rem!important;
+                min-height: {{- block.settings.swatch_size -}}rem!important;
                 padding: 0!important;
                 {% if block.settings.swatch_display == "rectangle" %}
                 min-width: {{- block.settings.swatch_size | times: 1.35 -}}rem;
