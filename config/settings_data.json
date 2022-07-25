@@ -1,12 +1,12 @@
 {
   "current": {
     "colors_solid_button_labels": "#ffffff",
-    "colors_accent_1": "#434442",
+    "colors_accent_1": "#3d4b4e",
     "gradient_accent_1": "",
-    "colors_accent_2": "#eeebe3",
+    "colors_accent_2": "#d5cfc1",
     "gradient_accent_2": "",
-    "colors_text": "#121212",
-    "colors_outline_button_labels": "#434442",
+    "colors_text": "#2b3537",
+    "colors_outline_button_labels": "#3d4b4e",
     "colors_background_1": "#ffffff",
     "gradient_background_1": "",
     "colors_background_2": "#eeebe3",
@@ -105,7 +105,7 @@
             "type": "announcement",
             "settings": {
               "text": "Unbelievably Soft Pima Cotton | Free Shipping & Returns*",
-              "color_scheme": "inverse",
+              "color_scheme": "accent-1",
               "link": "shopify:\/\/policies\/shipping-policy"
             }
           }
