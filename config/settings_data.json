@@ -125,7 +125,7 @@
           "logo_position": "middle-left",
           "menu": "main-menu",
           "menu_type_desktop": "dropdown",
-          "show_line_separator": true,
+          "show_line_separator": false,
           "enable_sticky_header": true,
           "margin_bottom": 0
         }
@@ -139,19 +139,10 @@
               "heading": "Support",
               "menu": "footer"
             }
-          },
-          "footer-2": {
-            "type": "text",
-            "disabled": true,
-            "settings": {
-              "heading": "Our mission",
-              "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
-            }
           }
         },
         "block_order": [
-          "footer-0",
-          "footer-2"
+          "footer-0"
         ],
         "settings": {
           "color_scheme": "accent-1",
