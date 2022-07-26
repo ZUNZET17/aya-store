@@ -984,9 +984,11 @@ class VariantRadiosBundle extends VariantRadios {
     this.filteredArray = this.picturesArray.filter( x => {
       const altArr = x.getAttribute('media-alt').split(' ');
       const pictureColor = altArr.slice(altArr.indexOf('color') + 1).toString().replace(',', ' ').toLowerCase();
+      console.log('pictureTItle', x.getAttribute('media-alt').split('color')[0].trim())
       return pictureColor == this.selectedColor && x.getAttribute('media-alt').split('color')[0].trim() == this.selectedProductTitle.trim()
     })
-
+    console.log(this.selectedProductTitle)
+    console.log(this.filteredArray)
     if(this.filteredArray.length > 0 ) {
       this.picturesArray.forEach(x => {
         if( this.filteredArray.includes(x) ) {
@@ -1079,10 +1081,8 @@ window.addEventListener('load', () => {
 //Set button availabitlity
 
 const bundleItems = function (ev) {
-  console.log('bundle')
   const input = ev.currentTarget
   selectedVariants = Array.from(document.querySelectorAll('.variant-picker')).filter(x => !x.classList.contains('js-none')).map(x => x.currentVariant)
-  console.log(selectedVariants)
   const productForm = document.getElementById(`product-form-${input.dataset?.section || dataSection}`);
 
   if (!productForm) return;

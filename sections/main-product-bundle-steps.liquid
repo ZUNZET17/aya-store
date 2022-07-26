@@ -925,7 +925,7 @@
                       {% assign select_on = 'bundle_step_option' | append: x | append: '_select' %}
                       {% if block.settings[bundle_step_option] %}
                         <div class="product-form__input product-form__input--dropdown">
-                          {% if select_on %}
+                          {% if block.settings[select_on] %}
                             <div class="select">
                               <select id="Product_option--{{ forloop.index0 }}"
                                 class="select__select"
