@@ -984,11 +984,9 @@ class VariantRadiosBundle extends VariantRadios {
     this.filteredArray = this.picturesArray.filter( x => {
       const altArr = x.getAttribute('media-alt').split(' ');
       const pictureColor = altArr.slice(altArr.indexOf('color') + 1).toString().replace(',', ' ').toLowerCase();
-      console.log('pictureTItle', x.getAttribute('media-alt').split('color')[0].trim())
       return pictureColor == this.selectedColor && x.getAttribute('media-alt').split('color')[0].trim() == this.selectedProductTitle.trim()
     })
-    console.log(this.selectedProductTitle)
-    console.log(this.filteredArray)
+
     if(this.filteredArray.length > 0 ) {
       this.picturesArray.forEach(x => {
         if( this.filteredArray.includes(x) ) {
@@ -1052,6 +1050,7 @@ let selectedVariants
 //Product Bundle option accordion
 
 const bundleAccordion = function (ev) {
+  console.log('bundlezzz', this)
   if (this.querySelector('select')) {
     const selectValue = this.querySelector('select').value
     const variantRadios = this.querySelectorAll('variant-radios-bundle')
@@ -1063,12 +1062,11 @@ const bundleAccordion = function (ev) {
         v.classList.remove('js-none')
       }
     })
-    
+  }
   
-
   const displaySelected = this.parentElement.querySelector('.selection-span')
   displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
-  }
+
 }
 
 window.addEventListener('load', () => {

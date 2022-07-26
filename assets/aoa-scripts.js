@@ -114,7 +114,6 @@ document.querySelectorAll('.js-btn-bundle-nxt').forEach(b => {
 })
 
 const nextBundleOptionSimple = function (ev) {
-  console.log('next-simple')
   const input = ev.target
   const bundleArr = Array.from(document.querySelectorAll('bundle-container-simple'))
   const thisBundleContainer = input.closest('bundle-container-simple')
