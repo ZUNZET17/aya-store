@@ -273,7 +273,7 @@
             "bundle_step_option1_variant2": "mens-organic-pima-cotton-t-shirt",
             "bundle_step_option1_variant2_name": "Crew Neck",
             "bundle_step_option2": true,
-            "bundle_step_option2_select": false,
+            "bundle_step_option2_select": true,
             "bundle_step_option2_select_ph": "Select shirt:",
             "bundle_step_option2_variant1": "mens-organic-pima-cotton-v-neck-t-shirt",
             "bundle_step_option2_variant1_name": "V-Neck",
