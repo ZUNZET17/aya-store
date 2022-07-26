@@ -265,7 +265,7 @@
           "settings": {
             "bundle_step_option1": true,
             "steps_amount": 3,
-            "bundle_step_title": "<p>Bundle step<\/p>",
+            "bundle_step_title": "",
             "bundle_step_option1_select": true,
             "bundle_step_option1_select_ph": "Select shirt:",
             "bundle_step_option1_variant1": "mens-organic-pima-cotton-v-neck-t-shirt",
@@ -486,7 +486,7 @@
           "settings": {
             "bundle_step_option1": true,
             "steps_amount": 3,
-            "bundle_step_title": "<p>Bundle step<\/p>",
+            "bundle_step_title": "",
             "bundle_step_option1_select": false,
             "bundle_step_option1_select_ph": "",
             "bundle_step_option1_variant1": "organic-pima-cotton-gloves",
