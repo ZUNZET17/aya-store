@@ -1050,7 +1050,6 @@ let selectedVariants
 //Product Bundle option accordion
 
 const bundleAccordion = function (ev) {
-  console.log('bundlezzz', this)
   if (this.querySelector('select')) {
     const selectValue = this.querySelector('select').value
     const variantRadios = this.querySelectorAll('variant-radios-bundle')
@@ -1063,7 +1062,7 @@ const bundleAccordion = function (ev) {
       }
     })
   }
-  
+
   const displaySelected = this.parentElement.querySelector('.selection-span')
   displaySelected.textContent = this.querySelectorAll('variant-radios-bundle:not(.js-none)')[0].currentVariant.title
 
