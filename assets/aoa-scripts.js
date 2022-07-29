@@ -106,6 +106,8 @@ const nextBundleOption = function (ev) {
   const thisAccordion = input.closest('.product__accordion')
   thisAccordion.querySelector('summary').click()
   accordionArr[(accordionArr.indexOf(thisAccordion) +  1)]?.querySelector('summary').click()
+  accordionArr[(accordionArr.indexOf(thisAccordion) +  1)].querySelectorAll('variant-radios-bundle')[0].dispatchEvent(new Event('change'))
+  window.scrollBy(0, 175)
 
 }
 
@@ -121,6 +123,7 @@ const nextBundleOptionSimple = function (ev) {
 
   if (currentIndex == bundleArr.length - 1) return;
   bundleArr[currentIndex + 1].querySelector('summary').click()
+  window.scrollBy(0, 175)
   
 }
 

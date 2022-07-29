@@ -834,7 +834,7 @@
             <fieldset class="bundle-steps">
               {% assign steps_amount = block.settings.steps_amount %}
               {% for s  in (1..steps_amount) %}
-                <input id="step-{{forloop.index}}"  type="radio" name="bundles-steps" class="bundle-steps__input" value="{{forloop.index}}">
+                <input id="step-{{forloop.index}}"  type="radio" name="bundles-steps" class="bundle-steps__input" value="{{forloop.index}}" {% if forloop.index == 1 %}checked="true"{% endif %} {% unless forloop.index == 1 %}disabled{% endunless %}>
                 <label for="step-{{forloop.index}}" class="bundle-steps__label js-step {% if forloop.index == 1 %}is-complete{% endif %}">Step {{forloop.index}}</label>
               {% endfor %}
             </fieldset>
@@ -914,7 +914,8 @@
                         <div class="summary__title">
                           {% render 'icon-accordion', icon: block.settings.icon %}
                           <h2 class="h4 accordion__title accordion__title-{{ block.id }} {{ block.settings.accordion_title_family }} ">
-                            {{ block.settings.heading }}
+                            {% assign accordion_title = 'bundle_step_option' | append: x | append: '_heading' %}
+                            {{ block.settings[accordion_title] }}
                             <p>selection: <span class="selection-span"></span></p>
                           </h2>
                         </div>
@@ -1022,7 +1023,9 @@
                                                 name="bundle-step-option{{x}}-variant{{i}}__{{-option.name-}}-{{product_option}}-{{block.id}}"
                                                 value="{{ value | escape }}"
                                                 form="{{ product_form_id }}"
-                                                {% if forloop.index == 1 %}checked{% endif %}
+                                                {% unless x == 1 %}
+                                                  {% if forloop.index == 1 %}checked{% endif %}
+                                                {% endunless %}
                                           >
                                           <label class="color-swatch__label bundle-step-option{{x}}-variant{{i}}__swatch1{{- forloop.index }}--{{block.id}} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="bundle-step-option{{x}}-variant{{i}}__{{-value-}}-{{product_option}}-{{block.id}}" swatch-color="{{ value }}" group-number="1" product-title="{{product_option.title}}">
                                             {% render 'icon-close' %}
@@ -1048,9 +1051,9 @@
                                       }
                                     {% endstyle %}
                                     <div class="color-options-2__header{{block.id}}">
-                                      {% assign color_group2_page = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_page' %}
-                                      {% assign color_group2_link = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__color_group2_link' %}
-                                      {% assign group_2_title = 'bundle_step_option' | append: x | append: '_variant' | append: i | append: '__group_2_title' %}
+                                      {% assign color_group2_page = 'bundle_step_option' | append: x | append: '_variant1__color_group2_page' %}
+                                      {% assign color_group2_link = 'bundle_step_option' | append: x | append: '_variant1__color_group2_link' %}
+                                      {% assign group_2_title = 'bundle_step_option' | append: x | append: '_variant1__group_2_title' %}
                                       <modal-opener {% unless block.settings[color_group2_page] %}style="pointer-events: none"{% endunless %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{- block.settings[group_2_title] | remove: " " -}}" {{ block.shopify_attributes }}>
                                         {% assign pageId2 = block.settings[color_group2_page].template_suffix %}
                                         <{% if pageId2 %}button{% else %}a{% endif %} role="button" id="ProductPopup-{{ block.id }}" {% if  block.settings[color_group2_link] %}href="{{ block.settings[color_group2_link] }}" target="_blank"{% endif %} class="product-popup-modal__button link color-group-legend-btn {% if pageId2 %}js-pop-up-button{% endif %}" type="button" aria-haspopup="dialog" page-id="{{pageId2}}">
@@ -1440,7 +1443,11 @@
       bundleContainersArray[stepIndex - 1].style.display = 'block'
 
     }
+
     document.querySelector('.bundle-steps').addEventListener('change', bundleStep)
+    window.addEventListener('load', () => {
+      document.querySelector('.bundle-steps .js-step').click()
+    })
     
     const bundleNextButton = function (ev) {
       if(ev.target.getAttribute('type') == 'submit') {
@@ -1462,7 +1469,10 @@
       bundleContainersArray[currentIndex].style.display = 'none'
       bundleContainersArray[currentIndex + 1].style.display = 'block'
       bundleContainersArray[currentIndex + 1].querySelectorAll('summary')[0].click()
+      bundleContainersArray[currentIndex + 1].querySelectorAll('variant-radios-bundle')[0].querySelectorAll('input.js-variant-option-color')[0].setAttribute('checked', true)
+      bundleContainersArray[currentIndex + 1].querySelectorAll('variant-radios-bundle')[0].dispatchEvent(new Event('change'))
       stepButtons[currentIndex + 1].setAttribute('checked', true)
+      stepButtons[currentIndex + 1].removeAttribute('disabled')
       stepButtons[currentIndex + 1].nextElementSibling.classList.add('is-complete')
 
     }
@@ -2907,10 +2917,24 @@
         },
         {
           "type": "text",
-          "id": "heading",
+          "id": "bundle_step_option1_heading",
           "default": "Product option",
           "info": "Bundle Product Option Title",
           "label": "Product Option Title"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option2_heading",
+          "default": "Product option",
+          "info": "Bundle Product Option Title",
+          "label": "Product Option Title3"
+        },
+        {
+          "type": "text",
+          "id": "bundle_step_option3_heading",
+          "default": "Product option",
+          "info": "Bundle Product Option Title",
+          "label": "Product Option Title3"
         },
         {
           "type": "range",
