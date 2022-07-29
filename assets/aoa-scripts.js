@@ -35,6 +35,8 @@ const AccordionSolo = function (ev) {
       a.closest('details').classList.remove('open');
     })
   }
+
+  input.nextElementSibling.querySelector('variant-radios-bundle').dispatchEvent(new Event('change'))
   
 }
 
@@ -123,6 +125,8 @@ const nextBundleOptionSimple = function (ev) {
 
   if (currentIndex == bundleArr.length - 1) return;
   bundleArr[currentIndex + 1].querySelector('summary').click()
+  Array.from(bundleArr[currentIndex + 1].querySelector('variant-radios-bundle').querySelectorAll('input.js-variant-option-color')).some(i => i.getAttribute('checked')) || bundleArr[currentIndex + 1].querySelector('variant-radios-bundle').querySelectorAll('input.js-variant-option-color')[0].setAttribute('checked', true)
+  bundleArr[currentIndex + 1].querySelector('variant-radios-bundle').dispatchEvent(new Event('change'))
   window.scrollBy(0, 175)
   
 }

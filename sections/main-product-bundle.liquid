@@ -971,9 +971,11 @@
                                         {% if block.settings.color_group1_page.content != blank %}
                                           {{ block.settings.color_group1_page.content }}
                                         {% else %}
-                                          {% capture pageStyle %}'pagefly.{{- pageId -}}.css' | asset_url{% endcapture %}
-                                          {% render 'pagefly-settings' %}
-                                          <link rel="stylesheet" href="{{ pageStyle }}">
+                                          {% if pageId %}
+                                            {% capture pageStyle %}'pagefly.{{- pageId -}}.css' | asset_url{% endcapture %}
+                                            {% render 'pagefly-settings' %}
+                                            <link rel="stylesheet" href="{{ pageStyle }}">
+                                          {% endif pageId %}
                                         {% endif %}
                                       </div>
                                     </div>
@@ -1003,7 +1005,9 @@
                                             name="{{ option.name }}-{{product_option}}-{{block.id}}"
                                             value="{{ value | escape }}"
                                             form="{{ product_form_id }}"
-                                            {% if forloop.index == 1 %}checked{% endif %}
+                                            {% unless i == 1 %}
+                                              {% if forloop.index == 1 %}checked{% endif %}
+                                            {% endunless %}
                                       >
                                       <label zxc class="color-swatch__label swatch1{{- forloop.index }}{{block.id}} js-color-label {% if forloop.index == 1 %}selected{% endif %}" for="{{ value }}-{{product_option}}-{{block.id}}" swatch-color="{{ value }}" group-number="1" product-title="{{product_option.title}}">
                                         {% render 'icon-close' %}
@@ -1042,8 +1046,10 @@
                                         {% if block.settings.color_group2_page.content != blank %}
                                           {{ block.settings.color_group2_page.content }}
                                         {% else %}
-                                          {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture %}
-                                          <link rel="stylesheet" href="{{ pageStyle2 }}">
+                                          {% if pageId2 %}
+                                            {% capture pageStyle2 %}'pagefly.{{- pageId2 -}}.css' | asset_url{% endcapture %}
+                                            <link rel="stylesheet" href="{{ pageStyle2 }}">
+                                          {% endif %} 
                                         {% endif %}
                                       </div>
                                     </div>
@@ -1059,8 +1065,10 @@
                                         {% if block.settings.color_group2_page2.content != blank %}
                                         {{ block.settings.color_group2_page2.content }}
                                       {% else %}
-                                        {% capture color_group2_page2_style %}'pagefly.{{- pageId22 -}}.css' | asset_url{% endcapture %}
-                                        <link rel="stylesheet" href="{{ color_group2_page2_style }}">
+                                        {% if pageId22 %}
+                                          {% capture color_group2_page2_style %}'pagefly.{{- pageId22 -}}.css' | asset_url{% endcapture %}
+                                          <link rel="stylesheet" href="{{ color_group2_page2_style }}">
+                                        {% endif %}
                                       {% endif %}
                                       </div>
                                     </div>
@@ -1133,8 +1141,10 @@
                                       {% if block.settings.size_guide_page.content != blank %}
                                       {{ block.settings.size_guide_page.content }}
                                     {% else %}
-                                      {% capture pageStyle3 %}'pagefly.{{- pageId3 -}}.css' | asset_url{% endcapture %}
-                                      <link rel="stylesheet" href="{{ pageStyle3 }}">
+                                      {% if pageId3 %}
+                                        {% capture pageStyle3 %}'pagefly.{{- pageId3 -}}.css' | asset_url{% endcapture %}
+                                        <link rel="stylesheet" href="{{ pageStyle3 }}">
+                                      {% endif %}
                                     {% endif %}
                                     </div>
                                   </div>
